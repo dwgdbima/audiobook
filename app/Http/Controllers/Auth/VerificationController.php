@@ -75,27 +75,10 @@ class VerificationController extends Controller
 
     public function verify(Request $request)
     {
-        $this->authService->verifyUrl($request->route('id'), $request->route('hash'));
+        $this->authService->verifyEmail($request->route('id'), $request->route('hash'));
 
         if ($request->user()->hasVerifiedEmail()) {
             return redirect($this->redirectByRole($request->user()));
         }
-        
-        if(Auth::user()->hasRole('merchant')){
-            return view('web.merchant.verify.verify', ['action' => url()->full()]);
-        }
-
-        if(Auth::user()->hasRole('promoter')){
-            return view('web.promoter.verify.verify', ['action' => url()->full()]);
-        }
-    }
-
-    public function verifyConfirmation(Request $request)
-    {
-        $this->authService->verifyUrl($request->route('id'), $request->route('hash'));
-
-        $this->authService->verifyConfirmation($request->input('password'));
-
-        return redirect()->back();
     }
 }

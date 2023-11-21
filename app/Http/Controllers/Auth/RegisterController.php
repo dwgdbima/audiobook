@@ -68,12 +68,10 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        if($user->hasRole('merchant')){
-            return redirect()->route('merchant.index');
-        }elseif($user->hasRole('promotor')){
-            return redirect()->route('promotor.index');
-        }else{
+        if($user->hasRole('admin')){
             return redirect()->route('admin.index');
+        }else{
+            return redirect()->route('customer.index');
         }
     }
 }

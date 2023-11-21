@@ -18,14 +18,7 @@ interface AuthServiceInterface
      * @param string $hash
      * @return void
      */
-    public function verifyUrl($id, $hash);
-
-    /**
-     * Update a model
-     * @param string $password
-     * @return void
-     */
-    public function verifyConfirmation($password);
+    public function verifyEmail($id, $hash);
 
     public function test();
 }
