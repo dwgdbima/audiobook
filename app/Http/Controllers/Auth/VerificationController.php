@@ -65,11 +65,7 @@ class VerificationController extends Controller
         if($request->user()->hasVerifiedEmail()){
             return redirect($this->redirectPath());
         }else{
-            if($request->user()->hasRole('merchant')){
-                return view('web.merchant.verify.index');
-            }else{
-                return view('web.promoter.verify.index');
-            }
+            return view('web.customer.verify');
         }
     }
 

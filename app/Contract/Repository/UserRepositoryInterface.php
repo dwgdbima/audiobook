@@ -11,7 +11,6 @@ interface UserRepositoryInterface extends BaseRepositoryInterface
      * 
      * @return bool
      */
-    public function checkReferral($referral_code) : bool;
 
     public function test();
 }

@@ -25,10 +25,9 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name'              => 'required',
-            'phone'             => 'required|numeric|unique:merchants|unique:users',
+            'phone'             => 'required|numeric|unique:users',
             'email'             => 'required|email|unique:users',
             'password'          => 'required|min:8|confirmed',
-            'term_and_service'  => 'accepted',
         ];
     }
 }

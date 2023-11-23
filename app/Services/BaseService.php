@@ -19,14 +19,14 @@ abstract class BaseService implements BaseServiceInterface
     /**
      * @var BaseRepositoryInterface
      */
-    protected $mainRepository;
+    protected $repository;
 
     /**
      * BaseService constructor.
      */
     public function __construct()
     {
-        $this->mainRepository = resolve($this->mainRepository);
+        $this->repository = resolve($this->repository);
     }
 
     /**
@@ -38,7 +38,7 @@ abstract class BaseService implements BaseServiceInterface
      */
     public function getAllPaginated(array $search = [], int $pageSize = 15): LengthAwarePaginator
     {
-        return $this->mainRepository->getAllPaginated($search, $pageSize);
+        return $this->repository->getAllPaginated($search, $pageSize);
     }
 
     /**
@@ -49,7 +49,7 @@ abstract class BaseService implements BaseServiceInterface
      */
     public function getAll(array $search = []): EloquentCollection
     {
-        return $this->mainRepository->getAll($search);
+        return $this->repository->getAll($search);
     }
 
     /**
@@ -60,7 +60,7 @@ abstract class BaseService implements BaseServiceInterface
      */
     public function getAllAsCursor(array $search = []): LazyCollection
     {
-        return $this->mainRepository->getAllCursor($search);
+        return $this->repository->getAllCursor($search);
     }
 
     /**
@@ -71,7 +71,7 @@ abstract class BaseService implements BaseServiceInterface
      */
     public function findOrFail($key): Model
     {
-        return $this->mainRepository->findOrFail($key);
+        return $this->repository->findOrFail($key);
     }
 
     /**
@@ -83,7 +83,7 @@ abstract class BaseService implements BaseServiceInterface
      */
     public function create(array $data): ?Model
     {
-        if (is_null($model = $this->mainRepository->create($data))) {
+        if (is_null($model = $this->repository->create($data))) {
             throw new ServiceException('Error while creating model');
         }
 
@@ -124,7 +124,7 @@ abstract class BaseService implements BaseServiceInterface
      */
     public function updateOrCreate(array $attributes, array $data): ?Model
     {
-        if (is_null($model = $this->mainRepository->updateOrCreate($attributes, $data))) {
+        if (is_null($model = $this->repository->updateOrCreate($attributes, $data))) {
             throw new ServiceException('Error while creating or updating the model');
         }
 
@@ -140,7 +140,7 @@ abstract class BaseService implements BaseServiceInterface
      */
     public function update($keyOrModel, array $data): ?Model
     {
-        return $this->mainRepository->update($keyOrModel, $data);
+        return $this->repository->update($keyOrModel, $data);
     }
 
     /**
@@ -152,7 +152,7 @@ abstract class BaseService implements BaseServiceInterface
      */
     public function delete($keyOrModel): bool
     {
-        if (!$this->mainRepository->delete($keyOrModel)) {
+        if (!$this->repository->delete($keyOrModel)) {
             throw new ServiceException('Error while deleting model');
         }
 
