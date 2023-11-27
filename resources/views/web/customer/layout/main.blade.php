@@ -17,7 +17,7 @@
             <div class="logo-wrapper"><a href="home.html"><img src="{{asset('dist/img/core-img/logo-small.png')}}" alt=""></a></div>
             <div class="navbar-logo-container d-flex align-items-center">
                 <!-- Cart Icon -->
-                <div class="cart-icon-wrap"><a href="cart.html"><i
+                <div class="cart-icon-wrap"><a href="{{route('customer.carts.index')}}"><i
                             class="fa-solid fa-bag-shopping"></i><span>{{$cartCount}}</span></a></div>
                 <!-- User Profile Icon -->
                 <div class="user-profile-icon ms-2"><a href="profile.html"><img src="{{asset('dist/img/bg-img/9.jpg')}}" alt=""></a></div>
