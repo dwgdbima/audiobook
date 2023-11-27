@@ -1,6 +1,7 @@
 <?php
 
 use App\Contract\Service\BookServiceInterface;
+use App\Http\Controllers\Sidebar\SidebarController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('test', function(BookServiceInterface $bookServiceInterface){
     $result = $bookServiceInterface->getAllWithReviewCount();
     dd($result);
+});
+
+// sidebar route
+Route::controller(SidebarController::class)->group(function() {
+    Route::get('/pages' , 'pages')->name('pages');
 });
