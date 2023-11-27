@@ -21,7 +21,9 @@
     <script src="{{ asset('dist/js/jquery.countdown.min.js') }}"></script>
     <script src="{{ asset('dist/js/jquery.passwordstrength.js') }}"></script>
     <script src="{{ asset('dist/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('dist/js/custom.js') }}"></script>
     <script src="{{ asset('dist/js/theme-switching.js') }}"></script>
     <script src="{{ asset('dist/js/no-internet.js') }}"></script>
     <script src="{{ asset('dist/js/active.js') }}"></script>
     <script src="{{ asset('dist/js/pwa.js') }}"></script>
+    @stack('scripts')

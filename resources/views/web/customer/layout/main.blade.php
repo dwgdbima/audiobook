@@ -18,7 +18,7 @@
             <div class="navbar-logo-container d-flex align-items-center">
                 <!-- Cart Icon -->
                 <div class="cart-icon-wrap"><a href="cart.html"><i
-                            class="fa-solid fa-bag-shopping"></i><span>2</span></a></div>
+                            class="fa-solid fa-bag-shopping"></i><span>{{$cartCount}}</span></a></div>
                 <!-- User Profile Icon -->
                 <div class="user-profile-icon ms-2"><a href="profile.html"><img src="{{asset('dist/img/bg-img/9.jpg')}}" alt=""></a></div>
                 <!-- Navbar Toggler -->

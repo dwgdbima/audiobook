@@ -10,6 +10,7 @@ use App\Contract\Service\AuthServiceInterface;
 use App\Contract\Service\BookServiceInterface;
 use App\Contract\Service\ReviewServiceInterface;
 use App\Contract\Service\ProductServiceInterface;
+use App\Contract\Service\CartServiceInterface;
 
 // Implement
 use App\Services\BaseService;
@@ -17,6 +18,7 @@ use App\Services\AuthService;
 use App\Services\BookService;
 use App\Services\ReviewService;
 use App\Services\ProductService;
+use App\Services\CartService;
 
 use Carbon\Carbon;
 
@@ -34,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(BookServiceInterface::class, BookService::class);
         $this->app->bind(ReviewServiceInterface::class, ReviewService::class);
         $this->app->bind(ProductServiceInterface::class, ProductService::class);
+        $this->app->bind(CartServiceInterface::class, CartService::class);
     }
 
     /**

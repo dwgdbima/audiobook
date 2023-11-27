@@ -12,6 +12,11 @@ class Book extends Model
 
     protected $fillable = ['title', 'author', 'desc', 'cover'];
 
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public function chapters(): HasMany
     {
         return $this->hasMany(Chapter::class);

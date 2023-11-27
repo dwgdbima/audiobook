@@ -75,32 +75,30 @@
             <div class="container">
                 <h6>Beli Audio Book</h6>
                 <div class="accordion" id="accordionExample">
-                    @for ($i = 0; $i < 4; $i++)
+                    @foreach ($products as $product)
                     <div class="accordion-item">
-                        <div class="accordion-header" id="heading-{{$i}}">
-                            <h2 style="margin-bottom: 0;">Judul Paket Apapun Itu</h2>
-                            <span class="text-success"><strong>Rp. 80.000</strong></span> &minus; <span>5 Chapter</span>
+                        <div class="accordion-header" id="heading-{{$product->id}}">
+                            <h2 style="margin-bottom: 0;">{{$product->name}}</h2>
+                            <span class="text-success"><strong>@money($product->price, 'IDR', true)</strong></span> &minus; <span>{{$product->chapters->count()}} Chapter</span>
                             <div class="d-flex justify-content-end">
                                 <button class="btn btn-info" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapse-{{$i}}" aria-expanded="true" aria-controls="collapse-{{$i}}">
                                     Detail</button>
-                                <button class="btn btn-success ms-1">Beli</button>
+                                <button class="btn btn-success ms-1" onclick="addToCart({{$product->id}})"><i class="fas fa-shopping-cart"></i></button>
                             </div>
                         </div>
                         <div id="collapse-{{$i}}" style="border-top:1px solid #dee2e6" class="accordion-collapse collapse {{$i == 0 ? 'show' : ''}}" aria-labelledby="heading-{{$i}}"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">An item</li>
-                                    <li class="list-group-item">A second item</li>
-                                    <li class="list-group-item">A third item</li>
-                                    <li class="list-group-item">A fourth item</li>
-                                    <li class="list-group-item">And a fifth one</li>
+                                    @foreach ($product->chapters as $chapter)
+                                    <li class="list-group-item">{{$chapter->title}}</li>
+                                    @endforeach
                                   </ul>
                             </div>
                         </div>
                     </div>
-                    @endfor
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -160,3 +158,15 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+    <script>
+
+        function addToCart(product_id)
+        {
+            $.post("{{route('customer.carts.store')}}", {product_id: product_id}, function(data){
+                console.log(data);
+            })
+        }
+
+    </script>
+@endpush
