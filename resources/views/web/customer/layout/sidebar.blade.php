@@ -26,7 +26,7 @@ aria-labelledby="suhaOffcanvasLabel">
                     <li><a href="flash-sale.html">Flash Sale</a></li>
                 </ul>
             </li>
-            <li><a href="pages.html"><i class="fa-solid fa-file-code"></i>All Pages</a></li>
+            <li><a href="/pages"><i class="fa-solid fa-file-code"></i>All Pages</a></li>
             <li class="suha-dropdown-menu"><a href="wishlist-grid.html"><i class="fa-solid fa-heart"></i>My
                     Wishlist</a>
                 <ul>

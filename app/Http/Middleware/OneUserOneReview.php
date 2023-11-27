@@ -18,10 +18,12 @@ class OneUserOneReview
      */
     public function handle(Request $request, Closure $next)
     {
-        $isExist = Review::where('user_id' , auth()->user()->id)->where('book_id' , $request->book)->first();
+        $isExists = Review::where('user_id' , auth()->user()->id)
+        ->where('book_id' , $request->book)
+        ->first();
 
-        if($isExist){
-            Alert::info('Info', 'Kamu sudah membuat review');
+        if($isExists){
+            Alert::info('Oops', 'Kamu sudah membuat review');
             return back();
         }
 
