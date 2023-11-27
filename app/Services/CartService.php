@@ -10,7 +10,7 @@ class CartService extends BaseService implements CartServiceInterface
 
     public function getAllWithUserId($id)
     {
-        $products = $this->repository->with(['products'])->findMany([['user_id', $id]]);
+        $products = $this->repository->with(['product'])->findMany([['user_id', $id]]);
 
         return $products;
     }

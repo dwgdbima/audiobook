@@ -17,26 +17,22 @@ class CartController extends Controller
         $this->cartService = $cartServiceInterface;
     }
 
-    public function getCartByUserId($id)
+    public function index()
     {
-
+        return view('web.customer.cart.index', ['carts' => $this->cartService->getAllWithUserId(auth()->id())]);
     }
 
     public function store(Request $request)
     {
-        try{
-            $data = $this->cartService->addToCart(auth()->id(), $request->input('product_id'));
-            $result = [
-                'status' => 200,
-                'data' => $data
-            ];
-        }catch(Exception $e){
-            $result = [
-                'status' => 422,
-                'error' => $e->getMessage()
-            ];
-        }
+        $this->cartService->addToCart(auth()->id(), $request->input('product_id'));
 
-        return response()->json($result);
+        return redirect()->back();
+    }
+
+    public function destroy($cart_id)
+    {
+        $this->cartService->delete($cart_id);
+
+        return redirect()->back();
     }
 }

@@ -84,7 +84,11 @@
                                 <button class="btn btn-info" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapse-{{$i}}" aria-expanded="true" aria-controls="collapse-{{$i}}">
                                     Detail</button>
-                                <button class="btn btn-success ms-1" onclick="addToCart({{$product->id}})"><i class="fas fa-shopping-cart"></i></button>
+                                <form action="{{route('customer.carts.store')}}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                                    <button type="submit" class="btn btn-success ms-1"><i class="fas fa-shopping-cart"></i></button>
+                                </form>
                             </div>
                         </div>
                         <div id="collapse-{{$i}}" style="border-top:1px solid #dee2e6" class="accordion-collapse collapse {{$i == 0 ? 'show' : ''}}" aria-labelledby="heading-{{$i}}"

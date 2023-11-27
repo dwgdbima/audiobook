@@ -25,7 +25,7 @@ class HomeController extends Controller
     {
         return view('web.customer.home.index', [
             'book' => $this->bookService->findWithReviewCount(1),
-            'products' => $this->productService->getProductByBookId(1),
+            'products' => $this->productService->displayProduct(1),
             'reviews' => $this->reviewService->getReviewByBookId(1)
         ]);
     }
