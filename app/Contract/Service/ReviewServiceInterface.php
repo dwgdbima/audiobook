@@ -17,7 +17,5 @@ interface ReviewServiceInterface extends BaseServiceInterface
      */
     public function storeReviewComment(array $data);
 
-
-    public function expandReview($id);
     
 }
