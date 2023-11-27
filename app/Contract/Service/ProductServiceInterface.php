@@ -11,4 +11,6 @@ interface ProductServiceInterface extends BaseServiceInterface
      * @return Model
      */
     public function getProductByBookId($id);
+
+    public function displayProduct($id);
 }

@@ -18,6 +18,8 @@ Route::middleware(['auth'])->group(function() {
 
 
 Route::prefix('carts/')->name('carts.')->group(function(){
+    Route::get('/', [CartController::class, 'index'])->name('index');
     Route::post('/', [CartController::class, 'store'])->name('store');
+    Route::delete('/{cart_id}', [CartController::class, 'destroy'])->name('destroy');
 });
 
