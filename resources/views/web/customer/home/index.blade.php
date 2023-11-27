@@ -111,26 +111,57 @@
                 <h6>Rating &amp; Reviews</h6>
                 <div class="rating-review-content">
                     <ul class="ps-0">
-                        @foreach ($reviews as $review)
+                        @foreach ($reviews as $key => $review)
                         <!-- Single User Review -->
-                        <li class="single-user-review d-flex">
+
+                        <li class="single-user-review d-flex" id="single-user-review{{ $key }}">
                             <div class="user-thumbnail"><img src="{{asset('dist/img/bg-img/7.jpg')}}" alt=""></div>
                             <div class="rating-comment">
                                 <span class="name-date"><strong>{{$review->user->name}}</strong>, {{$review->created_at->format('d M Y')}}</span>
                                 <div class="rating">
                                     @for ($i = 1; $i <= 5; $i++)
-                                    @if ($i <= $review->point)
-                                    <i class="fa-solid fa-star"></i>
-                                    @else
-                                    <i class="fa-regular fa-star"></i>
-                                    @endif
+                                        @if ($i <= $review->point)
+                                        <i class="fa-solid fa-star"></i>
+                                        @else
+                                        <i class="fa-regular fa-star"></i>
+                                        @endif
                                     @endfor
-                                </div>                                
-                                <p class="comment mb-0">{{$review->comment}}</p>
+                                </div>                            
+                                <p id="excerpt{{ $review->id }}" class="comment mb-0" style="display: block">{{ Str::limit($review->comment, 50, '....') }}</p>
+                                <p id="commentText{{ $review->id }}" class="comment mb-0" style="display: none">{{ $review->comment }}</p>
+                              
+                                @if (strlen($review->comment) > 50)
+                                    <a type="button" id="read-more{{ $review->id }}" class=" text-decoration-none">Read more...</a>
+                                    <a type="button" id="read-all{{ $review->id }}" class=" text-decoration-none" style="display:none;">Show less...</a>
+                                @endif
+
+                                {{-- Script excerpt review comment --}}
+                                    <script>
+                                        $(document).ready(function() {
+                                        $('#read-more{{ $review->id }}, #read-all{{ $review->id }}').on('click', function(e) {
+                                        e.preventDefault();
+                                        $('#excerpt{{ $review->id }}, #commentText{{ $review->id }}').toggle();
+                                        $('#read-more{{ $review->id }}, #read-all{{ $review->id }}').toggle();
+                                        });
+                                    });
+                                   </script>
+                                   
                             </div>
                         </li>
+                        @php
+                            $reviewId = $key;
+                        @endphp
+
                         @endforeach
+
+                        <li class="expanded-review-lists" id="expanded-review-lists">
+
+                        </li>
+
                     </ul>
+                   
+                    
+                    <button id="load-more" class="btn btn-primary mt-3">Load More</button>
                 </div>
             </div>
         </div>
@@ -138,7 +169,8 @@
         <div class="ratings-submit-form bg-white py-3 dir-rtl">
             <div class="container">
                 <h6>Tulis Review Anda</h6>
-                <form action="#" method="">
+                <form action="/customer/comment" method="POST">
+                    @csrf
                     <div class="stars mb-3">
                         <input class="star-1" type="radio" name="star" id="star1" value="1">
                         <label class="star-1" for="star1"></label>
@@ -150,6 +182,7 @@
                         <label class="star-4" for="star4"></label>
                         <input class="star-5" type="radio" name="star" id="star5" value="5">
                         <label class="star-5" for="star5"></label><span></span>
+                        <input type="hidden" name="book" value="{{ $book->id }}" readonly>
                     </div>
                     <textarea class="form-control mb-3" id="comments" name="comment" cols="30" rows="10"
                         data-max-length="200" placeholder="Tulis review anda..."></textarea>
@@ -159,4 +192,55 @@
         </div>
     </div>
 </div>
+
+<script>
+
+$(document).ready(function() {
+
+   /*  let current = {{ $reviewId }}
+    $('#load-more').on('click' , function() {
+        // jika id li yang single-user-review{{ $key }} nya lebih besar dari current kasi style display hidden dan sebaliknya
+    }) */
+
+    $('#load-more').on('click', async function() {
+        console.log('ada');
+        const data = await loadMoreReviews();
+        console.log(data);
+    });
+
+    const loadMoreReviews = async () => {
+        try {
+            const response = await $.ajax({
+                url: '/customer/expand?review_id=' + {{ $reviewId }},
+                method: 'GET',
+                dataType: 'json',
+            });
+
+            if (response.length > 0) {
+                // Jika ada data tambahan, tambahkan ke dalam daftar
+                $.each(response, function(index, review) {
+                    // Buat elemen HTML baru dan tambahkan ke dalam daftar
+                    const newReviewElement = `
+                        <li class="single-user-review d-flex">
+                           ${review.comment}
+                        </li>`;
+                    $('#expanded-review-lists').append(newReviewElement);
+                });
+            } else {
+                // Jika tidak ada data lagi, sembunyikan tombol "Load More"
+                $('#load-more').hide();
+            }
+
+            return response;
+        } catch (error) {
+            console.error('Error loading more reviews:', error);
+            throw error;
+        }
+    };
+});
+
+</script>
+
+
+
 @endsection
