@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangePasswordRequest;
 use App\Providers\RouteServiceProvider;
 use App\Traits\RedirectsAuth;
 use Illuminate\Foundation\Auth\ResetsPasswords;

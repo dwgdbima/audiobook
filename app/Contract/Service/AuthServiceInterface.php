@@ -20,5 +20,11 @@ interface AuthServiceInterface
      */
     public function verifyEmail($id, $hash);
 
+
+    /**
+     * Change password
+     */
+    public function changePassword(array $data);
+
     public function test();
 }

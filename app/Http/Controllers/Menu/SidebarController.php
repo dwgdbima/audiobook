@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Sidebar;
+namespace App\Http\Controllers\Menu;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -12,6 +12,6 @@ class SidebarController extends Controller
      */
     public function pages()
     {
-        return view('web.customer.sidebar-menu.pages');
+        return view('web.customer.menu.sidebar-menu.pages');
     }
 }
