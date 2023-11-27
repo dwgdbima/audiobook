@@ -10,7 +10,7 @@ class ProductService extends BaseService implements ProductServiceInterface
 
     public function getProductByBookId($id)
     {
-        $products = $this->repository->findMany([['book_id', $id]]);
+        $products = $this->repository->with(['chapters'])->findMany([['book_id', $id]]);
 
         return $products;
     }

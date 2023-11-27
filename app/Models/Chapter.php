@@ -18,8 +18,8 @@ class Chapter extends Model
         return $this->belongsTo(Book::class);
     }
 
-    public function products(): BelongsToMany
+    public function product(): BelongsTo
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }

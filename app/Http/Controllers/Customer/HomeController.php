@@ -23,9 +23,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        // dd($this->productService->getProductByBookId(1));
         return view('web.customer.home.index', [
             'book' => $this->bookService->findWithReviewCount(1),
+            'products' => $this->productService->getProductByBookId(1),
             'reviews' => $this->reviewService->getReviewByBookId(1)
         ]);
     }
