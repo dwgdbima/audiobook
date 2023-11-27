@@ -13,17 +13,9 @@ class ReviewService extends BaseService implements ReviewServiceInterface
     {
         $reviews = $this->repository->getReviewByBookId($id);
 
+        $reviews = $reviews->chunk(5);
         return $reviews;
     }
-
-
-    public function expandReview($reviewId)
-    {
-        $reviews = $this->repository->expandReview($reviewId);
-
-        return $reviews;
-    }
-
 
     public function storeReviewComment(array $data)
     {

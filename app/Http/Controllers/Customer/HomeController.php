@@ -47,14 +47,4 @@ class HomeController extends Controller
         return back();
     }
 
-
-    /**
-     * 
-     */
-    public function expandReview(Request $request)
-    {
-        $result = $this->reviewService->expandReview($request->review_id);
-
-       return response()->json($result);
-    }
 }
