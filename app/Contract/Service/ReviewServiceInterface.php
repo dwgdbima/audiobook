@@ -11,4 +11,13 @@ interface ReviewServiceInterface extends BaseServiceInterface
      * @return Model
      */
     public function getReviewByBookId($id);
+
+    /**
+     * Store any review comment
+     */
+    public function storeReviewComment(array $data);
+
+
+    public function expandReview($id);
+    
 }
