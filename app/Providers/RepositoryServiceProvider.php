@@ -9,11 +9,15 @@ use App\Contract\Repository\BaseCachableRepositoryInterface;
 use App\Contract\Repository\BaseRepositoryInterface;
 use App\Contract\Repository\UserRepositoryInterface;
 use App\Contract\Repository\BookRepositoryInterface;
+use App\Contract\Repository\ReviewRepositoryInterface;
+use App\Contract\Repository\ProductRepositoryInterface;
 
 // Implement
 use App\Repositories\BaseRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\BookRepository;
+use App\Repositories\ReviewRepository;
+use App\Repositories\ProductRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -27,6 +31,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(BaseRepositoryInterface::class, BaseRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(BookRepositoryInterface::class, BookRepository::class);
+        $this->app->bind(ReviewRepositoryInterface::class, ReviewRepository::class);
+        $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
     }
 
     /**

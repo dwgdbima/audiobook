@@ -1,31 +1,161 @@
 @extends('web.customer.layout.main')
+@push('styles')
+<style>
+    .accordion-item{
+        margin-bottom: 15px;
+        border-radius: 0.375rem;
+    }
+    .accordion-item:first-of-type {
+        border-radius: 0.375rem;
+    }
+
+    .accordion-item:not(:first-of-type) {
+        border-radius: 0.375rem;
+        border: var(--bs-accordion-border-width) solid var(--bs-accordion-border-color);
+    }
+
+    .accordion-header{
+        padding: 1rem 1.23rem;
+    }
+</style>
+@endpush
 @section('content')
 <div class="page-content-wrapper">
-    <!-- Search Form-->
-    <div class="container">
-        {{-- <div class="section-heading d-flex align-items-center justify-content-between dir-rtl">
-            <h6>Weekly Best Sellers</h6><a class="btn p-0" href="shop-list.html">
-               View All<i class="ms-1 fa-solid fa-arrow-right-long"></i></a>
-        </div> --}}
-        <div class="row g-2" style="margin-top: 60px !important;">
-            @foreach ($books as $book)
-            <div class="col-12">
-                <div class="horizontal-product-card">
-                    <div class="d-flex align-items-center">
-                        <div class="product-thumbnail-side">
-                            <a class="product-thumbnail shadow-sm d-block" style="background-image: url({{$book->cover}})"
-                                href="single-product.html"></a>
-                        </div>
-                        <div class="product-description">
-                            <a class="product-title d-block" href="single-product.html">{{$book->title}}</a>
-                            <p class="sale-price"><strong>Author:</strong>  {{$book->author}}</p>
-                            <div class="product-rating"><i class="fa-solid fa-star"></i>{{$book->review_point}} <span class="ms-1">({{$book->review_amount}}
-                                    review)</span></div>
-                        </div>
-                    </div>
+    <div class="product-slide-wrapper">
+        <!-- Product Slides-->
+        <div class="product-slides owl-carousel">
+            <!-- Single Hero Slide-->
+            <div class="single-product-slide" style="background-image: url({{$book->cover}})"></div>
+        </div>
+    </div>
+    <div class="product-description pb-3">
+        <!-- Product Title & Meta Data-->
+        <div class="product-title-meta-data bg-white mb-3 py-3">
+            <div class="container d-flex justify-content-between rtl-flex-d-row-r">
+                <div class="p-title-price">
+                    <h5 class="mb-1">{{$book->title}}</h5>
+                    {{-- <p class="sale-price mb-0 lh-1">$38<span>$41</span></p> --}}
+                    <span><strong>Author</strong> &minus; {{$book->author}}</span>
                 </div>
             </div>
-            @endforeach
+            <!-- Ratings-->
+            <div class="product-ratings">
+                <div class="container d-flex align-items-center justify-content-between rtl-flex-d-row-r">
+                    <div class="ratings">
+                        @for ($i = 1; $i <= 5; $i++)
+                        @if($i <= floor($book->review_point))
+                        <i class="fa-solid fa-star"></i>
+                        @elseif ($i == floor($book->review_point) + 1)
+                        @if(($book->review_point - floor($book->review_point)) < 0.3)
+                        <i class="fa-regular fa-star"></i>
+                        @elseif(($book->review_point - floor($book->review_point)) < 0.7)
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                        @else
+                        <i class="fa-solid fa-star"></i>
+                        @endif
+                        @else
+                        <i class="fa-regular fa-star"></i>
+                        @endif
+                        @endfor
+                        <span class="ps-1">{{$book->review_amount}} ratings</span>
+                    </div>
+                    <div class="total-result-of-ratings"><span>{{$book->review_point}}</span><span>Very Good </span></div>
+                </div>
+            </div>
+        </div>
+        <!-- Product Specification-->
+        <div class="p-specification bg-white mb-3 py-3">
+            <div class="container">
+                <h6>Deskripsi</h6>
+                {!! $book->desc !!}
+            </div>
+        </div>
+        
+        <div class="p-specification bg-white mb-3 py-3">
+            <div class="container">
+                <h6>Beli Audio Book</h6>
+                <div class="accordion" id="accordionExample">
+                    @for ($i = 0; $i < 4; $i++)
+                    <div class="accordion-item">
+                        <div class="accordion-header" id="heading-{{$i}}">
+                            <h2 style="margin-bottom: 0;">Judul Paket Apapun Itu</h2>
+                            <span class="text-success"><strong>Rp. 80.000</strong></span> &minus; <span>5 Chapter</span>
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-info" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse-{{$i}}" aria-expanded="true" aria-controls="collapse-{{$i}}">
+                                    Detail</button>
+                                <button class="btn btn-success ms-1">Beli</button>
+                            </div>
+                        </div>
+                        <div id="collapse-{{$i}}" style="border-top:1px solid #dee2e6" class="accordion-collapse collapse {{$i == 0 ? 'show' : ''}}" aria-labelledby="heading-{{$i}}"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">An item</li>
+                                    <li class="list-group-item">A second item</li>
+                                    <li class="list-group-item">A third item</li>
+                                    <li class="list-group-item">A fourth item</li>
+                                    <li class="list-group-item">And a fifth one</li>
+                                  </ul>
+                            </div>
+                        </div>
+                    </div>
+                    @endfor
+                </div>
+            </div>
+        </div>
+
+        <!-- Rating & Review Wrapper -->
+        <div class="rating-and-review-wrapper bg-white py-3 mb-3 dir-rtl">
+            <div class="container">
+                <h6>Rating &amp; Reviews</h6>
+                <div class="rating-review-content">
+                    <ul class="ps-0">
+                        @foreach ($reviews as $review)
+                        <!-- Single User Review -->
+                        <li class="single-user-review d-flex">
+                            <div class="user-thumbnail"><img src="{{asset('dist/img/bg-img/7.jpg')}}" alt=""></div>
+                            <div class="rating-comment">
+                                <span class="name-date"><strong>{{$review->user->name}}</strong>, {{$review->created_at->format('d M Y')}}</span>
+                                <div class="rating">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $review->point)
+                                    <i class="fa-solid fa-star"></i>
+                                    @else
+                                    <i class="fa-regular fa-star"></i>
+                                    @endif
+                                    @endfor
+                                </div>                                
+                                <p class="comment mb-0">{{$review->comment}}</p>
+                            </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Ratings Submit Form-->
+        <div class="ratings-submit-form bg-white py-3 dir-rtl">
+            <div class="container">
+                <h6>Tulis Review Anda</h6>
+                <form action="#" method="">
+                    <div class="stars mb-3">
+                        <input class="star-1" type="radio" name="star" id="star1" value="1">
+                        <label class="star-1" for="star1"></label>
+                        <input class="star-2" type="radio" name="star" id="star2" value="2">
+                        <label class="star-2" for="star2"></label>
+                        <input class="star-3" type="radio" name="star" id="star3" value="3">
+                        <label class="star-3" for="star3"></label>
+                        <input class="star-4" type="radio" name="star" id="star4" value="4">
+                        <label class="star-4" for="star4"></label>
+                        <input class="star-5" type="radio" name="star" id="star5" value="5">
+                        <label class="star-5" for="star5"></label><span></span>
+                    </div>
+                    <textarea class="form-control mb-3" id="comments" name="comment" cols="30" rows="10"
+                        data-max-length="200" placeholder="Tulis review anda..."></textarea>
+                    <button class="btn btn-primary" type="submit">Simpan Review</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>

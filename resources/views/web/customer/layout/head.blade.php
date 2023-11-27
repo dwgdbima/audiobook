@@ -37,5 +37,5 @@
     <link rel="stylesheet" href="{{ asset('dist/style.css') }}">
     <!-- Web App Manifest -->
     <link rel="manifest" href="{{ asset('dist/manifest.json') }}">
-    @yield('styles')
+    @stack('styles')
 </head>

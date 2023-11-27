@@ -19,6 +19,10 @@ return new class extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->foreignId('product_id')->nullable()
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('title');
             $table->string('sub_title')->nullable();
             $table->text('desc')->nullable();

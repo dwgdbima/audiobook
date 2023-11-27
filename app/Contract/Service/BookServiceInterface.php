@@ -10,4 +10,15 @@ interface BookServiceInterface extends BaseServiceInterface
      * @return LengthAwarePaginator
      */
     public function getAllWithReviewCount();
+
+    /**
+     * Get all Book with reviews
+     *
+     * @param $id
+     * 
+     * @return Model
+     */
+    public function findWithReviewCount($id);
+
+    
 }
