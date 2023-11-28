@@ -12,7 +12,7 @@
         <ul class="sidebar-menu">
             <li class="{{ Route::is('dashboard') ? 'active' : '' }}">
                 <a class="nav-link"
-                    href="/admin"><i class="fas fa-th"></i> <span>User Management</span></a>
+                    href="/admin"><i class="fas fa-th"></i> <span>Dashboard</span></a>
             </li>
             <li class="menu-header">Management</li>
             
