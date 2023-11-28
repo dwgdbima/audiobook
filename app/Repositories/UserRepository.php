@@ -45,4 +45,13 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         }
         return $customers;
     }
+
+
+    public function update_profile(array $data)
+    {
+        auth()->user()->update($data);
+
+        return true;
+        
+    }
 }

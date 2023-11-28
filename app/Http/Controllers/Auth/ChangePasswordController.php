@@ -29,10 +29,10 @@ class ChangePasswordController extends Controller
       
         if($result == true){
             Alert::success('Sukses' , 'Password berhasil dirubah');
-            return redirect('/change-password');
+            return redirect('/customer/change-password');
         }else{
             Alert::error('Terjadi Kesalahan' , $result);
-            return redirect('/change-password');
+            return redirect('/customer/change-password');
         }
 
     

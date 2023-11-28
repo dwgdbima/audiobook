@@ -14,7 +14,7 @@ aria-labelledby="suhaOffcanvasLabel">
         </div>
         <!-- Sidenav Nav-->
         <ul class="sidenav-nav ps-0">
-            <li><a href="profile.html"><i class="fa-solid fa-user"></i>My Profile</a></li>
+            <li><a href="/customer/profile"><i class="fa-solid fa-user"></i>My Profile</a></li>
             <li><a href="notifications.html"><i class="fa-solid fa-bell lni-tada-effect"></i>Notifications<span
                         class="ms-1 badge badge-warning">3</span></a></li>
             <li class="suha-dropdown-menu"><a href="#"><i class="fa-solid fa-store"></i>Shop Pages</a>
@@ -26,7 +26,7 @@ aria-labelledby="suhaOffcanvasLabel">
                     <li><a href="flash-sale.html">Flash Sale</a></li>
                 </ul>
             </li>
-            <li><a href="/pages"><i class="fa-solid fa-file-code"></i>All Pages</a></li>
+            <li><a href="/customer/pages"><i class="fa-solid fa-file-code"></i>All Pages</a></li>
             <li class="suha-dropdown-menu"><a href="wishlist-grid.html"><i class="fa-solid fa-heart"></i>My
                     Wishlist</a>
                 <ul>

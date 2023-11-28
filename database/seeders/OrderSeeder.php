@@ -21,11 +21,14 @@ class OrderSeeder extends Seeder
            $order =  Order::create([
                 'code' => "ORD-" .  Str::random(10),
                 'user_id' => rand(3 , 10),
-                'status' => rand(0,1)
+                'status' => rand(0,1),
+                'session_id' => Str::random(10),
+                'payment_url' => fake()->url(),
+                'expired' => now()->addHour()
             ]);
 
             for($k = 1; $k <= 2; $k++){
-                $order->orderDetail()->create([
+                $order->orderDetails()->create([
                     'product_id' => rand(1, 14)
                 ]);
             }

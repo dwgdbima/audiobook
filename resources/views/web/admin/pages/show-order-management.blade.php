@@ -58,7 +58,7 @@
                                                 {{ $data->user->name }}
                                             </td>
                                             <td>
-                                               {{ $data->user->email }}/{{ $data->user->phone }}
+                                               {{ $data->user->email }} / {{ $data->user->phone }}
                                             </td>
                                             <td><a type="button"
                                                     data-toggle="modal"
@@ -89,7 +89,7 @@ id="orderModal{{ $orderDetail->id }}">
     role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title">Detail Order</h5>
+            <h5 class="modal-title">Detail Order ({{ $orderDetail->code }})</h5>
             <button type="button"
                 class="close"
                 data-dismiss="modal"
@@ -118,6 +118,10 @@ id="orderModal{{ $orderDetail->id }}">
                            <strong>Harga</strong>
                             <span>@money($detail->product->price , 'IDR' , true)</span>
                         </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            <strong>Status</strong>
+                             <span>{{ $orderDetail->status ? 'Terbayar' : 'Belum Terbayar' }}</span>
+                         </li>
                     </ul>
                 </div>
             </div>
