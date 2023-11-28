@@ -8,7 +8,7 @@
         <!-- User Information-->
         <div class="card user-info-card">
           <div class="card-body p-4 d-flex align-items-center">
-            <div class="user-profile me-3"><img src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('dist/img/human/subiakto-intro.jpg') }}" alt=""></div>
+            <div class="user-profile me-3"><img src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt="" style="width: 75px; height:75px;"></div>
             <div class="user-info">
               <p class="mb-0 text-dark">@designing-world</p>
               <h5 class="mb-0">{{ $user->name }}</h5>

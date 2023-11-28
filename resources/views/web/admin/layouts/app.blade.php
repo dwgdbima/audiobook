@@ -20,9 +20,23 @@
 
     <!-- Template CSS -->
     <link rel="stylesheet"
-        href="{{ asset('dist/admin/css/style.css') }}">
+        href="{{ asset('dist/admin/css/style-admin.css') }}">
     <link rel="stylesheet"
         href="{{ asset('dist/admin/css/components.css') }}">
+    
+
+       
+        <link rel="stylesheet" href="{{ asset('dist/css/animate.css') }}">
+       
+        <link rel="stylesheet" href="{{ asset('dist/css/brands.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('dist/css/solid.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('dist/css/owl.carousel.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('dist/css/magnific-popup.css') }}">
+        <link rel="stylesheet" href="{{ asset('dist/css/nice-select.css') }}">
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="{{ asset('dist/style.css') }}">
+        <!-- Web App Manifest -->
+        <link rel="manifest" href="{{ asset('dist/manifest.json') }}">
 
     <!-- Start GA -->
     <script async
@@ -66,7 +80,15 @@
     <script src="{{ asset('dist/admin/library/jquery.nicescroll/dist/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('dist/admin/library/moment/min/moment.min.js') }}"></script>
     <script src="{{ asset('dist/admin/js/stisla.js') }}"></script>
+    
+    @include('sweetalert::alert')
 
+    {{-- pwa --}}
+    
+    
+    <script src="{{ asset('dist/js/theme-switching.js') }}"></script>
+
+    <script src="{{ asset('dist/js/pwa.js') }}"></script>
     @stack('scripts')
 
     <!-- Template JS File -->

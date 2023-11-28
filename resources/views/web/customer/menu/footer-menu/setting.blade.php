@@ -67,7 +67,7 @@
         <div class="card-body">
           <!-- Single Settings-->
           <div class="single-settings d-flex align-items-center justify-content-between">
-            <div class="title"><i class="fa-solid fa-key"></i><span>Password<span>Updated 1 month ago</span></span></div>
+            <div class="title"><i class="fa-solid fa-key"></i><span>Password</span></div>
             <div class="data-content"><a href="/customer/change-password">Change<i class="fa-solid fa-angle-right"></i></a></div>
           </div>
         </div>

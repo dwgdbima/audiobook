@@ -68,7 +68,9 @@
                                         @endforeach
                                     </table>
 
-                                    {{ $orders->links() }}
+                                    <div class="p-4">
+                                        {{ $orders->links() }}
+                                    </div>
                                 </div>
                             </div>
                         </div>

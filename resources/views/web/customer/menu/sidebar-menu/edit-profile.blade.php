@@ -12,7 +12,7 @@
         <div class="card user-info-card">
           <div class="card-body p-4 d-flex align-items-center">
            <div class="user-profile me-3">
-            <img id="profile-pic" src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('dist/img/human/subiakto-intro.jpg') }}" alt="" style="height: 75px;">
+            <img id="profile-pic" src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt="" style="height: 75px; width:75px">
             
               <div class="change-user-thumb">
                 
@@ -25,7 +25,13 @@
               <p class="mb-0 text-dark">@designing-world</p>
               <h5 class="mb-0">Suha Jannat</h5>
             </div>
+            @error('profile_picture')
+           
           </div>
+          <div class="text-danger mx-auto">
+            {{ $message }}
+          </div>
+      @enderror
         </div>
         <!-- User Meta Data-->
         <div class="card user-data-card">
@@ -35,14 +41,18 @@
                 <div class="title mb-2"><i class="fa-solid fa-user"></i><span>Nama Kamu</span></div>
                 <input class="form-control" type="text" value="{{ $user->name }}" name="name">
                 @error('name')
-                    {{ $message }}
+                    <div class="text-danger">
+                      {{ $message }}
+                    </div>
                 @enderror
               </div>
               <div class="mb-3">
                 <div class="title mb-2"><i class="fa-solid fa-phone"></i><span>No.Handphone</span></div>
                 <input class="form-control" type="text" value="{{ $user->phone }}" name="phone">
                 @error('phone')
-                {{ $message }}
+                <div class="text-danger">
+                  {{ $message }}
+                </div>
                 @enderror
               </div>
               <div class="mb-3">
@@ -53,15 +63,15 @@
                 <div class="title mb-2"><i class="fa-solid fa-location-arrow"></i><span>Alamat</span></div>
                 <input class="form-control" type="text" value="{{ $user->address }}" name="address">
                 @error('address')
-                {{ $message }}
+                <div class="text-danger">
+                  {{ $message }}
+                </div>
                
                 @enderror
 
-                @error('profile_picture')
-                {{ $message }}
-            @enderror
+             
               </div>
-              <button class="btn btn-success w-100" type="submit">Save All Changes</button>
+              <button class="btn btn-success w-100" type="submit">Simpan Perubahan</button>
             </form>
           </div>
         </div>

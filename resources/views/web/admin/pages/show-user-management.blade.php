@@ -48,7 +48,7 @@
                                             <th>No.Handphone</th>
                                             <th>Total Review</th>
                                             <th>Total Order</th>
-                                            <th>Action</th>
+                                           
                                         </tr>
                                         @foreach ($customers as $data)
                                         <tr>
@@ -69,13 +69,14 @@
                                             <td>
                                                 {{ $data->total_orders }}
                                             </td>
-                                            <td><a href="#"
-                                                    class="btn btn-secondary">Detail</a></td>
+                                           
                                         </tr>
                                         @endforeach
                                     </table>
 
-                                    {{ $customers->links() }}
+                                    <div class="p-4">
+                                        {{ $customers->links() }}
+                                    </div>
                                 </div>
                             </div>
                         </div>

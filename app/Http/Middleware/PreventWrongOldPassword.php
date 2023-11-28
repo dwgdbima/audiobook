@@ -20,7 +20,7 @@ class PreventWrongOldPassword
     {
         if(! Hash::check($request->old_password , auth()->user()->password)){
             Alert::error('Terjadi Kesalahan' , 'Password lama tidak sesuai');
-            return redirect('/customer/change-password');
+            return back();
         }
 
         return $next($request);

@@ -20,7 +20,7 @@
                 <div class="cart-icon-wrap"><a href="{{route('customer.carts.index')}}"><i
                             class="fa-solid fa-bag-shopping"></i><span>{{$cartCount}}</span></a></div>
                 <!-- User Profile Icon -->
-                <div class="user-profile-icon ms-2"><a href="profile.html"><img src="{{asset('dist/img/bg-img/9.jpg')}}" alt=""></a></div>
+                <div class="user-profile-icon ms-2"><a href="/customer/profile"><img style="width:30px; height:30px" src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt=""></a></div>
                 <!-- Navbar Toggler -->
                 <div class="suha-navbar-toggler ms-2" data-bs-toggle="offcanvas" data-bs-target="#suhaOffcanvas"
                     aria-controls="suhaOffcanvas">
