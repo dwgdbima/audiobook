@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
         'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
-        'one_user_one_review' => \App\Http\Middleware\OneUserOneReview::class
+        'one_user_one_review' => \App\Http\Middleware\OneUserOneReview::class,
+        'prevent_wrong_old_password' => \App\Http\Middleware\PreventWrongOldPassword::class,
     ];
 }

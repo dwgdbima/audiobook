@@ -9,6 +9,7 @@ use App\Contract\Service\AuthServiceInterface;
 use App\Ipaymu\Ipaymu;
 use App\Ipaymu\IpaymuRegister;
 use App\Models\User;
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Events\Verified;
@@ -66,6 +67,20 @@ class AuthService implements AuthServiceInterface
 
         return $user;
     }
+
+
+    public function changePassword(array $data)
+    {
+       try {
+            $data['password'] = Hash::make($data['password']);
+            auth()->user()->update(['password' => $data['password']]);
+
+            return true;
+       } catch (Exception $e) {
+            return $e->getMessage();
+       }
+    }
+
 
     public function test()
     {

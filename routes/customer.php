@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Customer\CartController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\OrderController;
@@ -8,7 +10,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
-Route::post('/comment', [HomeController::class, 'storeComment'])->middleware('one_user_one_review')->name('store.comment');
+
+Route::middleware(['auth'])->group(function() {
+    Route::post('/comment', [HomeController::class, 'storeComment'])->middleware('one_user_one_review')->name('store.comment');
+
+    //change password
+    Route::put('/change-password' , [ChangePasswordController::class , 'changePassword'])->middleware('prevent_wrong_old_password')->name('change.password');
+});
+
 
 Route::prefix('carts/')->name('carts.')->group(function(){
     Route::get('/', [CartController::class, 'index'])->name('index');
@@ -25,3 +34,4 @@ Route::prefix('orders/')->name('orders.')->group(function(){
 Route::prefix('playlists/')->name('playlists.')->group(function(){
     Route::get('/{id}', [PlaylistController::class, 'show'])->name('show');
 });
+
