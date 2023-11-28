@@ -82,9 +82,7 @@
                 <div class="title mb-2"><i class="fa-solid fa-key"></i><span>New Password</span></div>
                 <input class="input-psswd form-control @error('email') is-invalid @enderror" id="registerPassword" type="password" placeholder="Password" name="password">
                 @error('password')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+                {{ $message }}
             @enderror
               </div>
               <div class="mb-3">

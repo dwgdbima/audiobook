@@ -12,7 +12,7 @@ use App\Contract\Repository\BookRepositoryInterface;
 use App\Contract\Repository\ReviewRepositoryInterface;
 use App\Contract\Repository\ProductRepositoryInterface;
 use App\Contract\Repository\CartRepositoryInterface;
-
+use App\Contract\Repository\OrderRepositoryInterface;
 // Implement
 use App\Repositories\BaseRepository;
 use App\Repositories\UserRepository;
@@ -20,6 +20,7 @@ use App\Repositories\BookRepository;
 use App\Repositories\ReviewRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\CartRepository;
+use App\Repositories\OrderRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ReviewRepositoryInterface::class, ReviewRepository::class);
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(CartRepositoryInterface::class, CartRepository::class);
+        $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
     }
 
     /**

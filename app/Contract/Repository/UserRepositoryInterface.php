@@ -13,4 +13,8 @@ interface UserRepositoryInterface extends BaseRepositoryInterface
      */
 
     public function test();
+
+    public function getAllCustomer();
+
+    public function searchByName(string $name);
 }
