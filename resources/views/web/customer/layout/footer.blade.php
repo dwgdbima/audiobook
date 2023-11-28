@@ -3,10 +3,10 @@
         <div class="suha-footer-nav">
             <ul class="h-100 d-flex align-items-center justify-content-between ps-0 d-flex rtl-flex-d-row-r">
                 <li><a href="{{route('customer.index')}}"><i class="fa-solid fa-house"></i>Home</a></li>
-                <li><a href="message.html"><i class="fa-solid fa-comment-dots"></i>Chat</a></li>
+                <li><a href="{{route('customer.orders.index')}}"><i class="fas fa-file-invoice"></i>Transaksi</a></li>
                 <li><a href="{{route('customer.carts.index')}}"><i class="fa-solid fa-bag-shopping"></i>Basket</a></li>
                 <li><a href="/setting"><i class="fa-solid fa-gear"></i>Settings</a></li>
-                <li><a href="pages.html"><i class="fa-solid fa-heart"></i>Pages</a></li>
+                <li><a href="{{route('customer.playlists.show', 1)}}"><i class="fa-solid fa-heart"></i>Playlist</a></li>
             </ul>
         </div>
     </div>
@@ -29,6 +29,6 @@
     <script src="{{ asset('dist/js/no-internet.js') }}"></script>
     <script src="{{ asset('dist/js/active.js') }}"></script>
     <script src="{{ asset('dist/js/pwa.js') }}"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    {{-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> --}}
     @stack('scripts')

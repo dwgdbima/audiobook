@@ -47,7 +47,7 @@
             <div class="card cart-amount-area">
                 <div class="card-body d-flex align-items-center justify-content-between">
                     <h5 class="total-price mb-0">@money($carts->sum('product.price'), 'IDR', true)</h5><a class="btn btn-warning"
-                        href="checkout.html">Checkout Now</a>
+                        href="{{route('customer.carts.checkout')}}">Checkout Now</a>
                 </div>
             </div>
         </div>

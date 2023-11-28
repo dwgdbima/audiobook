@@ -2,11 +2,20 @@
 
 namespace App\Services;
 
+use App\Contract\Repository\CartRepositoryInterface;
 use App\Contract\Service\CartServiceInterface;
+use App\Contract\Service\OrderServiceInterface;
 
 class CartService extends BaseService implements CartServiceInterface
 {
-    protected $repository = \App\Repositories\CartRepository::class;
+    // protected $repository = \App\Repositories\CartRepository::class;
+    protected $orderService;
+
+    public function __construct(CartRepositoryInterface $cartRepositoryInterface, OrderServiceInterface $orderServiceInterface)
+    {
+        $this->repository = $cartRepositoryInterface;
+        $this->orderService = $orderServiceInterface;
+    }
 
     public function getAllWithUserId($id)
     {
@@ -25,11 +34,20 @@ class CartService extends BaseService implements CartServiceInterface
         return $cart;
     }
 
-    public function removeFromCart($user_id, $product_id)
+    public function checkOut()
     {
-        $cart = $this->repository->findFirst([['user_id', $user_id], ['product_id', $product_id]]);
-        $this->repository->delete($cart);
+        $carts = $this->getAllWithUserId(auth()->id());
+        $products = [];
+        foreach($carts as $cart){
+            array_push($products, ['id' => $cart->product_id]);
+        }
 
-        return true;
+        $makeOrder = $this->orderService->makeOrder($products);
+
+        foreach($carts as $cart){
+            $this->delete($cart);
+        }
+
+        return $makeOrder;
     }
 }

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
-    public $cartService;
+    protected $cartService;
 
     public function __construct(CartServiceInterface $cartServiceInterface)
     {
@@ -34,5 +34,12 @@ class CartController extends Controller
         $this->cartService->delete($cart_id);
 
         return redirect()->back();
+    }
+
+    public function checkOut()
+    {
+        $order = $this->cartService->checkOut();
+
+        return redirect()->route('customer.orders.show', $order->id);
     }
 }
