@@ -20,6 +20,9 @@ return new class extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->string('session_id')->nullable();
+            $table->string('payment_url')->nullable();
+            $table->dateTimeTz('expired')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
         });

@@ -6,4 +6,7 @@ interface OrderRepositoryInterface extends BaseRepositoryInterface
 {
     public function getAllOrders();
     public function searchByCode(string $code);
+    public function getFirst();
+
+    public function getLatest();
 }

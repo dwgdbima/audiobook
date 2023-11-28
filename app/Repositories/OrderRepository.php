@@ -3,20 +3,14 @@
 namespace App\Repositories;
 
 use App\Contract\Repository\OrderRepositoryInterface;
-use App\Models\Order;
 
 class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 {
-    protected $modelClass;
-
-    public function __construct(Order $order)
-    {
-        $this->modelClass = $order;
-    }
+    protected $modelClass = \App\Models\Order::class;
 
     public function getAllOrders()
     {
-        $orders = $this->modelClass::with(['user' , 'orderDetail.product.book'])
+        $orders = $this->modelClass::with(['user' , 'orderDetails.product.book'])
         ->paginate(5)
         ->withQueryString();
 
@@ -26,11 +20,21 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 
     public function searchByCode(string $code)
     {
-        $orders = $this->modelClass::with(['user' , 'orderDetail.product.book'])
+        $orders = $this->modelClass::with(['user' , 'orderDetails.product.book'])
         ->where('code' , 'like' , '%' . $code . '%')
         ->paginate(5)
         ->withQueryString();
 
         return $orders;
+    }
+
+    public function getFirst()
+    {
+        return $this->getQuery()->first();
+    }
+
+    public function getLatest()
+    {
+        return $this->getQuery()->latest()->first();
     }
 }

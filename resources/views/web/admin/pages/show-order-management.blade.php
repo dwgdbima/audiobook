@@ -98,7 +98,7 @@ id="orderModal{{ $orderDetail->id }}">
             </button>
         </div>
         <div class="modal-body">
-            @foreach ($orderDetail->orderDetail as $detail)
+            @foreach ($orderDetail->orderDetails as $detail)
             <div class="card">
                 <div class="card-header">
                     <h4>Informasi Order {{ $loop->iteration }}</h4>
