@@ -5,7 +5,7 @@
                 <li><a href="{{route('customer.index')}}"><i class="fa-solid fa-house"></i>Home</a></li>
                 <li><a href="message.html"><i class="fa-solid fa-comment-dots"></i>Chat</a></li>
                 <li><a href="{{route('customer.carts.index')}}"><i class="fa-solid fa-bag-shopping"></i>Basket</a></li>
-                <li><a href="settings.html"><i class="fa-solid fa-gear"></i>Settings</a></li>
+                <li><a href="/setting"><i class="fa-solid fa-gear"></i>Settings</a></li>
                 <li><a href="pages.html"><i class="fa-solid fa-heart"></i>Pages</a></li>
             </ul>
         </div>
