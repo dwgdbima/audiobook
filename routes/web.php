@@ -1,6 +1,7 @@
 <?php
 
 use App\Contract\Service\BookServiceInterface;
+use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\Menu\FooterController;
 use App\Http\Controllers\Menu\SidebarController;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,8 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('test', function(BookServiceInterface $bookServiceInterface){
-    $result = $bookServiceInterface->getAllWithReviewCount();
-    dd($result);
+    dd(asset('dist'));
 });
+
+Route::post('webhook-ipaymu', [OrderController::class, 'webhookIpaymu'])->name('webhook.ipaymu');
 

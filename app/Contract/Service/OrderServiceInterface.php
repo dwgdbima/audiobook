@@ -5,6 +5,7 @@ namespace App\Contract\Service;
 interface OrderServiceInterface extends BaseServiceInterface
 {
     public function getAllOrders();
+
     public function searchByCode(string $code);
     
     public function makeOrder($products);
@@ -14,4 +15,8 @@ interface OrderServiceInterface extends BaseServiceInterface
     public function findOrderWithOrderDetails($order_id);
 
     public function getOrderWithOrderDetailsByUser($user_id);
+
+    public function getSuccessOrderByUser($user_id);
+
+    public function updateStatusPayment($order_id, $status);
 }
