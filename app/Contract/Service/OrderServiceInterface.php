@@ -11,4 +11,6 @@ interface OrderServiceInterface extends BaseServiceInterface
     public function findOrderWithOrderDetails($order_id);
 
     public function getOrderWithOrderDetailsByUser($user_id);
+
+    public function getSuccessOrderByUser($user_id);
 }

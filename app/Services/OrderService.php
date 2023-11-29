@@ -128,4 +128,9 @@ class OrderService extends BaseService implements OrderServiceInterface
     {
         return $this->repository->with(['orderDetails.product'])->findMany([['user_id', $user_id]]);
     }
+
+    public function getSuccessOrderByUser($user_id)
+    {
+        return $this->repository->with(['orderDetails'])->findMany([['user_id', $user_id], ['status', 1]]);
+    }
 }

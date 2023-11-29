@@ -1,8 +1,9 @@
 @extends('web.customer.layout.main')
 @push('styles')
 <style>
-    .player {
+.player {
   position: relative;
+  margin-top: 50px;
   max-width: 480px;
   margin: 0 auto;
 }
@@ -20,6 +21,7 @@
 }
 
 .dashboard {
+  margin-top: 50px;
   padding: 16px 16px 14px;
   background-color: #fff;
   position: fixed;
@@ -36,7 +38,7 @@
 }
 
 .header-players h4 {
-  color: var(--primary-color);
+  color: #ea4c62;
   font-size: 12px;
 }
 
@@ -76,7 +78,7 @@
 }
 
 .control .btn.active {
-  color: var(--primary-color);
+  color: #ea4c62;
 }
 
 .control .btn-toggle-play {
@@ -88,7 +90,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--primary-color);
+  background-color: #ea4c62;
 }
 
 .progress {
@@ -107,13 +109,13 @@
   appearance: none;
   width: 12px;
   height: 6px;
-  background-color: var(--primary-color);
+  background-color: #ea4c62;
   cursor: pointer;
 }
 
 /* PLAYLIST */
 .playlist {
-  margin-top: 408px;
+  margin-top: 435px;
   padding: 12px;
 }
 
@@ -128,7 +130,7 @@
 }
 
 .song.active {
-  background-color: var(--primary-color);
+  background-color: #ea4c62;
 }
 
 .song:active {
@@ -218,9 +220,11 @@
 </div>
 @endsection
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+$(document).ready(function(){
+
 const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
 
 const PlAYER_STORAGE_KEY = "F8_PLAYER";
 
@@ -245,20 +249,17 @@ const app = {
   config: {},
   // (1/2) Uncomment the line below to use localStorage
   // config: JSON.parse(localStorage.getItem(PlAYER_STORAGE_KEY)) || {},
-  songs: [
-    {
-      name: "Click Pow Get Down",
-      singer: "Raftaar x Fortnite",
-      path: "/storage/bisa-bikin-brand/chapter-1.mp3",
-      image: "/storage/bisabikinbrand.jpg"
-    },
-    {
-      name: "Tu Phir Se Aana",
-      singer: "Raftaar x Salim Merchant x Karma",
-      path: "/storage/bisa-bikin-brand/chapter-1.mp3",
-      image: "/storage/bisabikinbrand.jpg"
-    },
-  ],
+  songs: {{ Js::from($chapters) }},
+  setSongs: function(){
+    let songs = [];
+    axios.get(routeParam("{{route('customer.playlists.show', ':id')}}", 1)).then(function(response){
+        let data = response.data;
+        Object.keys(data).forEach(key => {
+            songs.push({name: data[key].title, singer: 'Subiakto Priosoedarsono', path: '/'+ data[key].audio, image: '/storage/bisabikinbrand.jpg'})
+        });
+    })
+    this.songs = songs;
+  },
   setConfig: function (key, value) {
     this.config[key] = value;
     // (2/2) Uncomment the line below to use localStorage
@@ -442,8 +443,11 @@ const app = {
     this.currentIndex = newIndex;
     this.loadCurrentSong();
   },
-  start: function () {
+  start: function () { 
+      
     this.loadConfig();
+    
+    console.log(this.songs);
 
     this.defineProperties();
 
@@ -451,7 +455,6 @@ const app = {
 
     this.loadCurrentSong();
 
-    // Render playlist
     this.render();
 
     randomBtn.classList.toggle("active", this.isRandom);
@@ -460,5 +463,6 @@ const app = {
 };
 
 app.start();
+})
 </script>
 @endpush

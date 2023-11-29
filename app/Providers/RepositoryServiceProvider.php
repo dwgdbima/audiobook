@@ -14,6 +14,7 @@ use App\Contract\Repository\ProductRepositoryInterface;
 use App\Contract\Repository\CartRepositoryInterface;
 use App\Contract\Repository\OrderRepositoryInterface;
 use App\Contract\Repository\OrderDetailRepositoryInterface;
+use App\Contract\Repository\ChapterRepositoryInterface;
 
 // Implement
 use App\Repositories\BaseRepository;
@@ -24,6 +25,7 @@ use App\Repositories\ProductRepository;
 use App\Repositories\CartRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\OrderDetailRepository;
+use App\Repositories\ChapterRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -42,6 +44,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CartRepositoryInterface::class, CartRepository::class);
         $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
         $this->app->bind(OrderDetailRepositoryInterface::class, OrderDetailRepository::class);
+        $this->app->bind(ChapterRepositoryInterface::class, ChapterRepository::class);
     }
 
     /**
