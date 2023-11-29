@@ -21,8 +21,6 @@ class UserSeeder extends Seeder
             'email' => 'admin@admin.com',
             'phone' => '08123728382',
             'password' => Hash::make('password'),
-            'profile_picture' => fake()->url(),
-            'address' => fake()->address(),
             'email_verified_at' => now(),
         ]);
 
@@ -33,8 +31,6 @@ class UserSeeder extends Seeder
             'email' => 'user@example.com',
             'phone' => '028392392732',
             'password' => Hash::make('password'),
-            'profile_picture' => fake()->url(),
-            'address' => fake()->address(),
             'email_verified_at' => now(),
         ]);
 

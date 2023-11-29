@@ -66,7 +66,7 @@ class OrderService extends BaseService implements OrderServiceInterface
             'env'               => env('IPAYMU_ENV'),
             'virtual_account'   => env('IPAYMU_VA'),
             'api_key'           => env('IPAYMU_KEY'),
-            'notify_uri'        => route('customer.index'),
+            'notify_uri'        => route('customer.orders.webhook.ipaymu'),
             'cancel_uri'        => route('customer.index'),
             'return_uri'        => route('customer.index'),
         ];
@@ -142,5 +142,10 @@ class OrderService extends BaseService implements OrderServiceInterface
     public function getSuccessOrderByUser($user_id)
     {
         return $this->repository->with(['orderDetails'])->findMany([['user_id', $user_id], ['status', 1]]);
+    }
+
+    public function updateStatusPayment($order_id, $status)
+    {
+        return $this->repository->update($order_id, ['status' => $status]);
     }
 }

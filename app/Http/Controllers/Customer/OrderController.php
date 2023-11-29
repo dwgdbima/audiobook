@@ -25,4 +25,10 @@ class OrderController extends Controller
     {
         return view('web.customer.order.show', ['order' => $this->orderService->findOrderWithOrderDetails($id)]);
     }
+
+    public function webhookIpaymu(Request $request){
+        $order = $this->orderService->updateStatusPayment($request->input('reference_id'), $request->input('status_code'));
+    
+        return response()->json($order, 200);
+    }
 }

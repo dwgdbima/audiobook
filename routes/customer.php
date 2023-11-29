@@ -23,7 +23,6 @@ Route::put('/change-password' , [ChangePasswordController::class , 'changePasswo
 Route::put('/profile/edit' , [ProfileController::class , 'edit_profile'])->name('edit.profile');
 
 
-
 // sidebar route
 Route::controller(SidebarController::class)->group(function() {
     Route::get('/pages' , 'pages')->name('pages');
@@ -50,6 +49,7 @@ Route::prefix('carts/')->name('carts.')->group(function(){
 Route::prefix('orders/')->name('orders.')->group(function(){
     Route::get('/', [OrderController::class, 'index'])->name('index');
     Route::get('/{id}', [OrderController::class, 'show'])->name('show');
+    Route::post('webhook-ipaymu', [OrderController::class, 'webhookIpaymu'])->name('webhook.ipaymu');
 });
 
 Route::prefix('playlists/')->name('playlists.')->group(function(){

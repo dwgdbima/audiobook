@@ -14,13 +14,13 @@
     <div class="header-area" id="headerArea">
         <div class="container h-100 d-flex align-items-center justify-content-between d-flex rtl-flex-d-row-r">
             <!-- Logo Wrapper -->
-            <div class="logo-wrapper"><a href="home.html"><img src="{{asset('dist/img/core-img/logo-small.png')}}" alt=""></a></div>
+            <div class="logo-wrapper"><a href="{{route('customer.index')}}"><img src="{{asset('dist/img/core-img/logo-small.png')}}" alt=""></a></div>
             <div class="navbar-logo-container d-flex align-items-center">
                 <!-- Cart Icon -->
                 <div class="cart-icon-wrap"><a href="{{route('customer.carts.index')}}"><i
                             class="fa-solid fa-bag-shopping"></i><span>{{$cartCount}}</span></a></div>
                 <!-- User Profile Icon -->
-                <div class="user-profile-icon ms-2"><a href="/customer/profile"><img style="width:30px; height:30px" src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt=""></a></div>
+                <div class="user-profile-icon ms-2"><a href="{{route('customer.profile')}}"><img src="{{ asset(auth()->user()->profile_picture) }}" alt=""></a></div>
                 <!-- Navbar Toggler -->
                 <div class="suha-navbar-toggler ms-2" data-bs-toggle="offcanvas" data-bs-target="#suhaOffcanvas"
                     aria-controls="suhaOffcanvas">
