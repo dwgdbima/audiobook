@@ -1,6 +1,5 @@
 @extends('web.admin.layouts.app')
 
-@section('title', 'Change Password')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -15,7 +14,7 @@
                 <!-- User Information-->
                 <div class="card user-info-card">
                   <div class="card-body p-4 d-flex align-items-center mx-auto">
-                    <div class="user-profile me-3"><img id="profile-pic" src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt="" style="height: 75px;"></div>
+                    <div class="user-profile me-3"><img class="object-fit-cover" id="profile-pic" src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt="" style="height: 75px;"></div>
                    
                   </div>
                 </div>

@@ -6,21 +6,19 @@
         <div class="sidebar-brand sidebar-brand-sm">
             <a href="index.html">Suha</a>
         </div>
-        @php
-            $type_menu = 'dashboard'
-        @endphp
+       
         <ul class="sidebar-menu">
-            <li class="{{ Route::is('dashboard') ? 'active' : '' }}">
+            <li class="{{ request()->is('admin') ? 'active' : '' }}">
                 <a class="nav-link"
                     href="/admin"><i class="fas fa-th"></i> <span>Dashboard</span></a>
             </li>
             <li class="menu-header">Management</li>
             
-            <li class="{{ Route::is('show.users') ? 'active' : '' }}">
+            <li class="{{ request()->is('admin/users') ? 'active' : '' }}">
                 <a class="nav-link"
                     href="/admin/users"><i class="fas fa-th"></i> <span>User Management</span></a>
             </li>
-            <li class="{{ Route::is('show.orders') ? 'active' : '' }}">
+            <li class="{{ request()->is('admin/orders') ? 'active' : '' }}">
                 <a class="nav-link"
                     href="/admin/orders"><i class="fas fa-th"></i> <span>Order Management</span></a>
             </li>

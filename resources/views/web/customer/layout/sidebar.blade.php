@@ -34,7 +34,7 @@ aria-labelledby="suhaOffcanvasLabel">
                     <li><a href="wishlist-list.html">Wishlist List</a></li>
                 </ul>
             </li>
-            <li><a href="settings.html"><i class="fa-solid fa-sliders"></i>Settings</a></li>
+            <li><a href="/customer/setting"><i class="fa-solid fa-sliders"></i>Settings</a></li>
             <li><a href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();"><i class="fa-solid fa-toggle-off"></i>Sign Out</a></li>
