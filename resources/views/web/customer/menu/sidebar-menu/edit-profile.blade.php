@@ -12,7 +12,7 @@
         <div class="card user-info-card">
           <div class="card-body p-4 d-flex align-items-center">
            <div class="user-profile me-3">
-            <img id="profile-pic" src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt="" style="height: 75px; width:75px">
+            <img id="profile-pic" src="{{ asset($user->profile_picture) }}" alt="" style="height: 75px; width:75px">
             
               <div class="change-user-thumb">
                 
@@ -22,8 +22,8 @@
               </div>
             </div>
             <div class="user-info">
-              <p class="mb-0 text-dark">@designing-world</p>
-              <h5 class="mb-0">Suha Jannat</h5>
+              {{-- <p class="mb-0 text-dark">@designing-world</p> --}}
+              <h5 class="mb-0">{{$user->name}}</h5>
             </div>
             @error('profile_picture')
            

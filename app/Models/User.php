@@ -64,4 +64,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function getProfilePictureAttribute($value)
+    {
+        return $value ?? 'dist/img/human/default-profile.png';
+    }
 }
