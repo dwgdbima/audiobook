@@ -21,6 +21,16 @@ class OrderService extends BaseService implements OrderServiceInterface
         $this->orderDetailRepository = $orderDetailRepositoryInterface;
     }
 
+    public function getAllOrders()
+    {
+        return $this->repository->getAllOrders();
+    }
+
+    public function searchByCode(string $code)
+    {
+        return $this->repository->searchByCode($code);
+    }
+
     public function makeOrder($products)
     {
         $order = $this->repository->create([

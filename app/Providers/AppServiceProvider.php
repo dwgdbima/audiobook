@@ -25,6 +25,7 @@ use App\Services\OrderService;
 use App\Services\ChapterService;
 
 use Carbon\Carbon;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -52,6 +53,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::useBootstrap();
         config(['app.locale' => 'id']);
         Carbon::setLocale('id');
     }
