@@ -49,7 +49,7 @@ Route::prefix('carts/')->name('carts.')->group(function(){
 Route::prefix('orders/')->name('orders.')->group(function(){
     Route::get('/', [OrderController::class, 'index'])->name('index');
     Route::get('/{id}', [OrderController::class, 'show'])->name('show');
-    Route::post('webhook-ipaymu', [OrderController::class, 'webhookIpaymu'])->name('webhook.ipaymu');
+    // Route::post('webhook-ipaymu', [OrderController::class, 'webhookIpaymu'])->name('webhook.ipaymu');
 });
 
 Route::prefix('playlists/')->name('playlists.')->group(function(){
