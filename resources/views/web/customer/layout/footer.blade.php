@@ -1,5 +1,5 @@
     <!-- Footer Nav-->
-    <div class="footer-nav-area" id="footerNav">
+    <div class="footer-nav-area" style="max-width: 480px; left:50%; transform:translate(-50%);" id="footerNav">
         <div class="suha-footer-nav">
             <ul class="h-100 d-flex align-items-center justify-content-between ps-0 d-flex rtl-flex-d-row-r">
                 <li><a href="{{route('customer.index')}}"><i class="fa-solid fa-house"></i>Home</a></li>
