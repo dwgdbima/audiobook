@@ -35,7 +35,7 @@
     <!-- Web App Manifest -->
     <link rel="manifest" href="{{asset('dist/manifest.json')}}">
   </head>
-  <body style="max-width: 480px; margin:auto;">
+  <body style="max-width: 480px; margin:auto; height:100%; min-height:100vh; background-color: #e4eaff;"">
     <!-- Preloader-->
     <div class="preloader" id="preloader">
       <div class="spinner-grow text-secondary" role="status">
