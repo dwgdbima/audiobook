@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Customer;
 use App\Contract\Service\OrderServiceInterface;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -28,7 +29,7 @@ class OrderController extends Controller
 
     public function webhookIpaymu(Request $request){
         $order = $this->orderService->updateStatusPayment($request->input('reference_id'), $request->input('status_code'));
-    
+        Log::info($order);
         return response()->json($order, 200);
     }
 }
