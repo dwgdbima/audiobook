@@ -30,15 +30,3 @@ Route::get('test', function(BookServiceInterface $bookServiceInterface){
     dd($result);
 });
 
-// sidebar route
-Route::controller(SidebarController::class)->group(function() {
-    Route::get('/pages' , 'pages')->name('pages');
-});
-
-// footer route
-Route::controller(FooterController::class)->group(function() {
-    Route::get('/setting' , 'setting')->name('setting');
-    Route::get('/support' , 'support')->name('support');
-    Route::get('/privacy-policy' , 'privacy_policy')->name('privacy.policy');
-    Route::get('/change-password' , 'change_password')->name('change.password');
-});

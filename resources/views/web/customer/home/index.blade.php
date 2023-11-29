@@ -75,8 +75,9 @@
             <div class="container">
                 <h6>Beli Audio Book</h6>
                 <div class="accordion" id="accordionExample">
-                    @foreach ($products as $product)
-                    <div class="accordion-item">
+                    @foreach ($products as $prodKey => $product)
+                  
+                    <div class="accordion-item" id="each-bundle{{ $prodKey }}" style="{{ $prodKey <= 3 ? 'display: block;' : 'display: none;' }}">
                         <div class="accordion-header" id="heading-{{$product->id}}">
                             <h2 style="margin-bottom: 0;">{{$product->name}}</h2>
                             <span class="text-success"><strong>@money($product->price, 'IDR', true)</strong></span> &minus; <span>{{$product->chapters->count()}} Chapter</span>
@@ -103,6 +104,9 @@
                         </div>
                     </div>
                     @endforeach
+                    <div class="d-flex justify-content-center align-items-center w-100">
+                        <button id="load-more-bundle" class="btn btn-secondary mt-3 w-75">Show More Bundles</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -153,6 +157,8 @@
                         {{-- parameter current chunk id to display --}}
                         @php
                             $chunkId = 0;
+                            $eachBundles = 3;
+                            $totalBundles = $prodKey;
                         @endphp
 
                     </ul>
@@ -221,11 +227,31 @@
        
         showedChunk += 1;
         for (let i = 1; i <= showedChunk; i++) {
+           setTimeout(() => {
             document.querySelector('#each-review-chunk' + i).style.display = 'block';
+           }, 100);
         }
 
         
     });
 
+    // show more bundles
+
+    let eachBundles = {{ $eachBundles }}
+    const totalBundles = {{ $totalBundles }}    
+        $('#load-more-bundle').on('click', async function() {
+           
+            eachBundles += 3;
+        
+            for (let k = 1; k <= eachBundles; k++) {
+                setTimeout(() => {
+                    document.querySelector('#each-bundle' + k).style.display = 'block';
+                },100); //
+            }
+           
+            if (eachBundles >= totalBundles)
+            document.querySelector('#load-more-bundle').style.display = 'none';
+            
+        });
     </script>
 @endpush

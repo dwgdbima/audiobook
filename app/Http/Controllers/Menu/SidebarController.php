@@ -14,4 +14,26 @@ class SidebarController extends Controller
     {
         return view('web.customer.menu.sidebar-menu.pages');
     }
+
+    /**
+     * Profile view
+     */
+    public function profile()
+    {
+
+        return view('web.customer.menu.sidebar-menu.profile' , [
+            'user' => auth()->user()
+        ]);
+    }
+
+
+    /**
+     * Edit profile view
+     */
+    public function edit_profile()
+    {
+        return view('web.customer.menu.sidebar-menu.edit-profile' , [
+            'user' => auth()->user()
+        ]);
+    }
 }
