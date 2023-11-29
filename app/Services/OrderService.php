@@ -66,7 +66,7 @@ class OrderService extends BaseService implements OrderServiceInterface
             'env'               => env('IPAYMU_ENV'),
             'virtual_account'   => env('IPAYMU_VA'),
             'api_key'           => env('IPAYMU_KEY'),
-            'notify_uri'        => route('customer.orders.webhook.ipaymu'),
+            'notify_uri'        => route('webhook.ipaymu'),
             'cancel_uri'        => route('customer.index'),
             'return_uri'        => route('customer.index'),
         ];
