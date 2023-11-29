@@ -22,7 +22,16 @@
                 <a class="nav-link"
                     href="/admin/orders"><i class="fas fa-th"></i> <span>Order Management</span></a>
             </li>
+            <li class="{{ request()->is('admin/product') ? 'active' : '' }}">
+                <a class="nav-link"
+                    href="/admin/product"><i class="fas fa-th"></i> <span>Single Product</span></a>
+            </li>
             
+            <li class="menu-header">Book</li>
+            <li class="{{ request()->is('admin/book/create') ? 'active' : '' }}">
+                <a class="nav-link"
+                    href="/admin/book/create"><i class="fas fa-th"></i> <span>Posting Buku</span></a>
+            </li>
             
         </ul>
 

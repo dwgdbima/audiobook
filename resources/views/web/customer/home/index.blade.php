@@ -38,6 +38,7 @@
                     <span><strong>Author</strong> &minus; {{$book->author}}</span>
                 </div>
             </div>
+            
             <!-- Ratings-->
             <div class="product-ratings">
                 <div class="container d-flex align-items-center justify-content-between rtl-flex-d-row-r">
@@ -135,7 +136,7 @@
                                     {{-- Review section --}}
                                    <div class="d-flex flex-column">
                                     <div class="d-flex">
-                                        <div class="user-thumbnail"><img src="{{ $review->user->profile_picture ? asset('storage/' . $review->user->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt=""></div>
+                                        <div class="user-thumbnail"><img src="{{ asset($review->user->profile_picture) }}" alt="" style="width:40px; height:40px"></div>
                                     <div class="rating-comment">
                                         <span class="name-date"><strong>{{$review->user->name == auth()->user()->name ? 'Review kamu' : $review->user->name}}</strong>, {{$review->created_at->format('d M Y')}} 
                                         @if (auth()->user()->hasRole('admin') && !$review->comments)
@@ -170,7 +171,7 @@
                                     
                                     @if ($review->comments)
                                     <div class="d-flex ms-5 mt-3">
-                                        <div class="user-thumbnail"><img src="{{ $review->comments->user->profile_picture ? asset('storage/' . $review->comments->user->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt=""></div>
+                                        <div class="user-thumbnail"><img src="{{ auth()->user()->profile_picture }}" alt="" style="width:40px; height:40px"></div>
                                         <div class="rating-comment">
                                             <span class="name-date"><strong>Admin</strong>, {{$review->comments->created_at->format('d M Y')}}</span>
                                             

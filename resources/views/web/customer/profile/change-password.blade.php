@@ -7,7 +7,7 @@
       <!-- User Information-->
       <div class="card user-info-card">
         <div class="card-body p-4 d-flex align-items-center">
-          <div class="user-profile me-3"><img class="object-fit-cover" id="profile-pic" src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt="" style="height: 75px; width:75px"></div>
+          <div class="user-profile me-3"><img class="object-fit-cover" id="profile-pic" src="{{ auth()->user()->profile_picture }}" alt="" style="height: 75px; width:75px"></div>
           <div class="user-info">
             <p class="mb-0 text-dark">@designing-world</p>
             <h5 class="mb-0">Suha Jannat</h5>

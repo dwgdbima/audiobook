@@ -94,7 +94,7 @@
         data-toggle="dropdown"
         class="nav-link dropdown-toggle nav-link-lg nav-link-user">
         <img alt="image"
-            src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('dist/img/human/default-profile.png') }}"
+            src="{{ auth()->user()->profile_picture }}"
             class="rounded-circle mr-1 object-fit-cover" style="height: 40px; width:40px">
         <div class="d-sm-none d-lg-inline-block">Hi, {{ auth()->user()->name }}</div>
     </a>

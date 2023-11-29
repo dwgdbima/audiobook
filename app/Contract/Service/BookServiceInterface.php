@@ -21,4 +21,13 @@ interface BookServiceInterface extends BaseServiceInterface
     public function findWithReviewCount($id);
 
     
+    /**
+     * Store book for admin
+     */
+    public function storeBook(array $data);
+
+    /**
+     * Get all books
+     */
+    public function getAllBook();
 }

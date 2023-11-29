@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Menu\NavbarController;
 use App\Http\Controllers\Admin\ProductController;
@@ -24,8 +25,11 @@ Route::controller(ProfileController::class)->group(function() {
 });
 
 
-Route::controller(NavbarController::class)->group(function() {
-  
+Route::controller(BookController::class)->group(function() {
+    Route::get('/book/create' , 'createBookView')->name('create.book.view');
+    Route::post('/book' , 'storeBook')->name('store.book');
+    Route::get('/chapter' , 'assignChapterView')->name('assign.chapter.view');
+    Route::post('/chapter' , 'assignChapter')->name('assign.chapter');
 });
 
 

@@ -9,4 +9,6 @@ interface ChapterServiceInterface extends BaseServiceInterface
     public function getDataForPlayListByBook($book_id);
 
     public function getPlaylist($book_id);
+
+    public function storeBulkChapters(array $data);
 }

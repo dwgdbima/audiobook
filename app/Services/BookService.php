@@ -31,4 +31,22 @@ class BookService extends BaseService implements BookServiceInterface
 
         return $book;
     }
+
+
+    public function storeBook(array $data)
+    {
+        if(isset($data['cover'])){
+            $data['cover'] = $data['cover']->storeAs('Book/Cover/' . $data['title'] , 'cover-' . $data['title'] . '.jpg');
+        }
+
+        $book = $this->repository->storeBook($data);
+
+        return $book;
+
+    }
+
+    public function getAllBook()
+    {
+        return $this->repository->getAll();
+    }
 }

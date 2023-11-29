@@ -8,4 +8,10 @@ class ChapterRepository extends BaseRepository implements ChapterRepositoryInter
 {
     protected $modelClass = \App\Models\Chapter::class;
 
+    public function storeBulkChapters(array $data)
+    {
+        $chapters = $this->modelClass::insert($data);
+
+        return $chapters;
+    }
 }
