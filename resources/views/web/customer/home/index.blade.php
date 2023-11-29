@@ -28,7 +28,7 @@
             <div class="single-product-slide" style="background-image: url({{$book->cover}})"></div>
         </div>
     </div>
-    <div class="product-description pb-3">
+    <div class="product-description">
         <!-- Product Title & Meta Data-->
         <div class="product-title-meta-data bg-white mb-3 py-3">
             <div class="container d-flex justify-content-between rtl-flex-d-row-r">

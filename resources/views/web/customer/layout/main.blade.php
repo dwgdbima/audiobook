@@ -3,7 +3,7 @@
 
 @include('web.customer.layout.head')
 
-<body>
+<body style="max-width: 480px; margin:auto; height:100%; min-height:100vh; background-color: #e4eaff;">
     <!-- Preloader-->
     <div class="preloader" id="preloader">
         <div class="spinner-grow text-secondary" role="status">
@@ -11,7 +11,7 @@
         </div>
     </div>
     <!-- Header Area -->
-    <div class="header-area {{ auth()->user()->hasRole('customer') ? : 'd-none' }}" id="headerArea">
+    <div class="header-area {{ auth()->user()->hasRole('customer') ? : 'd-none' }}" style="max-width: 480px; margin:auto;" id="headerArea">
         <div class="container h-100 d-flex align-items-center justify-content-between d-flex rtl-flex-d-row-r">
             <!-- Logo Wrapper -->
             <div class="logo-wrapper"><a href="{{route('customer.index')}}"><img class="rounded-circle object-fit-cover" src="{{asset('dist/img/core-img/small-subiakto.jpg')}}" alt=""></a></div>
