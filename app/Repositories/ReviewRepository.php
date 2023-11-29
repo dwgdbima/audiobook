@@ -11,7 +11,7 @@ class ReviewRepository extends BaseRepository implements ReviewRepositoryInterfa
     public function getReviewByBookId($id)
     {
         //$reviews = $this->repository->findMany([['book_id', $id]]);
-        $reviews = $this->modelClass::where('book_id', $id)
+        $reviews = $this->modelClass::with(['comments.user' , 'user'])->where('book_id', $id)
         ->orderByRaw('user_id = ' . auth()->user()->id . ' DESC')
         ->get();
 

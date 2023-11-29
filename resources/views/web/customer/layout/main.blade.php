@@ -11,7 +11,7 @@
         </div>
     </div>
     <!-- Header Area -->
-    <div class="header-area" id="headerArea">
+    <div class="header-area {{ auth()->user()->hasRole('customer') ? : 'd-none' }}" id="headerArea">
         <div class="container h-100 d-flex align-items-center justify-content-between d-flex rtl-flex-d-row-r">
             <!-- Logo Wrapper -->
             <div class="logo-wrapper"><a href="{{route('customer.index')}}"><img src="{{asset('dist/img/core-img/logo-small.png')}}" alt=""></a></div>
@@ -29,7 +29,10 @@
             </div>
         </div>
     </div>
-    @include('web.customer.layout.sidebar')
+   
+    <div class="{{ auth()->user()->hasRole('customer') ? : 'd-none' }}">
+        @include('web.customer.layout.sidebar')
+    </div>
     <!-- PWA Install Alert -->
     <div class="toast pwa-install-alert shadow bg-white" role="alert" aria-live="assertive" aria-atomic="true"
         data-bs-delay="5000" data-bs-autohide="true">
@@ -45,7 +48,9 @@
     <!-- Internet Connection Status-->
     <div class="internet-connection-status" id="internetStatus"></div>
 
-@include('web.customer.layout.footer')
+    <div class="{{ auth()->user()->hasRole('customer') ? : 'd-none' }}">
+        @include('web.customer.layout.footer')
+    </div>
 
 </body>
 

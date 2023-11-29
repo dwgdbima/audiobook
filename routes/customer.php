@@ -11,31 +11,21 @@ use App\Http\Controllers\Menu\FooterController;
 use App\Http\Controllers\Menu\SidebarController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index'])->name('index');
-
-
-Route::post('/comment', [HomeController::class, 'storeComment'])->middleware('one_user_one_review')->name('store.comment');
-
-//change password
-Route::put('/change-password' , [ChangePasswordController::class , 'changePassword'])->middleware('prevent_wrong_old_password')->name('change.password');
-
-// edit profile
-Route::put('/profile/edit' , [ProfileController::class , 'edit_profile'])->name('edit.profile');
-
-
-// sidebar route
-Route::controller(SidebarController::class)->group(function() {
-    Route::get('/pages' , 'pages')->name('pages');
-    Route::get('/profile' , 'profile')->name('profile');
-    Route::get('/profile/edit' , 'edit_profile')->name('edit.profile');
-});
-
-// footer route
-Route::controller(FooterController::class)->group(function() {
+Route::controller(HomeController::class)->group(function() {
+    Route::get('/' , 'index')->name('index');
     Route::get('/setting' , 'setting')->name('setting');
     Route::get('/support' , 'support')->name('support');
     Route::get('/privacy-policy' , 'privacy_policy')->name('privacy.policy');
-    Route::get('/change-password' , 'change_password')->name('change.password');
+    Route::get('/pages' , 'pages')->name('pages');
+    Route::post('/comment' , 'storeComment')->middleware('one_user_one_review')->name('store.comment');
+});
+
+Route::controller(ProfileController::class)->group(function() {
+    Route::get('/change-password' , 'changePasswordView')->name('change.password');
+    Route::get('/profile' , 'profile')->name('profile');
+    Route::get('/profile/edit' , 'editProfileView')->name('edit.profile.view');
+    Route::put('/profile/edit' , 'editProfile')->name('edit.profile');
+    Route::put('/change-password' , 'changePassword')->middleware('prevent_wrong_old_password')->name('change.password');
 });
 
 

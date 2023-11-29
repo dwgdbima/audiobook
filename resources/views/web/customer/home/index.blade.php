@@ -75,9 +75,14 @@
             <div class="container">
                 <h6>Beli Audio Book</h6>
                 <div class="accordion" id="accordionExample">
+                    @php
+                        $currentLoopProduct = 0
+                    @endphp
                     @foreach ($products as $prodKey => $product)
-                  
-                    <div class="accordion-item" id="each-bundle{{ $prodKey }}" style="{{ $prodKey <= 3 ? 'display: block;' : 'display: none;' }}">
+                    @php
+                        $currentLoopProduct += 1
+                    @endphp
+                    <div class="accordion-item" id="each-bundle{{ $currentLoopProduct }}" style="{{ $currentLoopProduct <= 3 ? 'display: block;' : 'display: none;' }}">
                         <div class="accordion-header" id="heading-{{$product->id}}">
                             <h2 style="margin-bottom: 0;">{{$product->name}}</h2>
                             <span class="text-success"><strong>@money($product->price, 'IDR', true)</strong></span> &minus; <span>{{$product->chapters->count()}} Chapter</span>
@@ -85,11 +90,13 @@
                                 <button class="btn btn-info" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapse-{{$i}}" aria-expanded="true" aria-controls="collapse-{{$i}}">
                                     Detail</button>
+                                @if (auth()->user()->hasRole('customer'))
                                 <form action="{{route('customer.carts.store')}}" method="post">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{$product->id}}">
                                     <button type="submit" class="btn btn-success ms-1"><i class="fas fa-shopping-cart"></i></button>
                                 </form>
+                                @endif
                             </div>
                         </div>
                         <div id="collapse-{{$i}}" style="border-top:1px solid #dee2e6" class="accordion-collapse collapse {{$i == 0 ? 'show' : ''}}" aria-labelledby="heading-{{$i}}"
@@ -124,10 +131,18 @@
                                 {{-- Each chunked review --}}
 
                                 @foreach ($reviewChunk as $key => $review)
-                                <li class="single-user-review d-flex">
-                                    <div class="user-thumbnail"><img src="{{asset('dist/img/bg-img/7.jpg')}}" alt=""></div>
+                                <li class="single-user-review d-flex flex-column justify-content-between">
+                                    {{-- Review section --}}
+                                   <div class="d-flex flex-column">
+                                    <div class="d-flex">
+                                        <div class="user-thumbnail"><img src="{{ $review->user->profile_picture ? asset('storage/' . $review->user->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt=""></div>
                                     <div class="rating-comment">
-                                        <span class="name-date"><strong>{{$review->user->name == auth()->user()->name ? 'Review kamu' : $review->user->name}}</strong>, {{$review->created_at->format('d M Y')}}</span>
+                                        <span class="name-date"><strong>{{$review->user->name == auth()->user()->name ? 'Review kamu' : $review->user->name}}</strong>, {{$review->created_at->format('d M Y')}} 
+                                        @if (auth()->user()->hasRole('admin') && !$review->comments)
+                                        <strong class="ms-3"><a type="button" data-bs-toggle="modal" data-bs-review="{{ $review->id }}" data-bs-target="#modalComment">Beri Komentar</a></strong>
+                                        @endif
+                                            
+                                        </span> 
                                         <div class="rating">
                                             @for ($i = 1; $i <= 5; $i++)
                                                 @if ($i <= $review->point)
@@ -148,6 +163,34 @@
                                         @endif
                                         
                                     </div>
+                                    </div>
+
+
+                                     {{-- Comment section --}}
+                                    
+                                    @if ($review->comments)
+                                    <div class="d-flex ms-5 mt-3">
+                                        <div class="user-thumbnail"><img src="{{ $review->comments->user->profile_picture ? asset('storage/' . $review->comments->user->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt=""></div>
+                                        <div class="rating-comment">
+                                            <span class="name-date"><strong>Admin</strong>, {{$review->comments->created_at->format('d M Y')}}</span>
+                                            
+                                            <p id="excerpt-comment{{ $review->comments->id }}" class="comment mb-0" style="display: block">{{ Str::limit($review->comments->comment, 50, '....') }}</p>
+                                            <p id="full-text-comment{{ $review->comments->id }}" class="comment mb-0" style="display: none">{{ $review->comments->comment }}</p>
+                                          
+                                            @if (strlen($review->comments->comment) > 50)
+                                              <div onclick="toggleExcerptComment({{ $review->comments->id }})">
+                                                <a type="button" id="read-more-comment{{ $review->comments->id }}" class=" text-decoration-none">Lebih banyak...</a>
+                                                <a type="button" id="read-all-comment{{ $review->comments->id }}" class=" text-decoration-none" style="display:none;">Lebih sedikit...</a>
+                                              </div>
+                                            @endif
+                                            
+                                        </div>
+                                       </div>
+                                    @endif
+
+                                   </div>
+
+                                  
                                 </li>
                                 @endforeach
                             </div>
@@ -158,7 +201,7 @@
                         @php
                             $chunkId = 0;
                             $eachBundles = 3;
-                            $totalBundles = $prodKey;
+                            $totalBundles = $currentLoopProduct
                         @endphp
 
                     </ul>
@@ -170,32 +213,56 @@
             </div>
         </div>
         <!-- Ratings Submit Form-->
-        <div class="ratings-submit-form bg-white py-3 dir-rtl">
-            <div class="container">
-                <h6>Tulis Review Anda</h6>
-                <form action="/customer/comment" method="POST">
-                    @csrf
-                    <div class="stars mb-3">
-                        <input class="star-1" type="radio" name="star" id="star1" value="1">
-                        <label class="star-1" for="star1"></label>
-                        <input class="star-2" type="radio" name="star" id="star2" value="2">
-                        <label class="star-2" for="star2"></label>
-                        <input class="star-3" type="radio" name="star" id="star3" value="3">
-                        <label class="star-3" for="star3"></label>
-                        <input class="star-4" type="radio" name="star" id="star4" value="4">
-                        <label class="star-4" for="star4"></label>
-                        <input class="star-5" type="radio" name="star" id="star5" value="5">
-                        <label class="star-5" for="star5"></label><span></span>
-                        <input type="hidden" name="book" value="{{ $book->id }}" readonly>
-                    </div>
-                    <textarea class="form-control mb-3" id="comments" name="comment" cols="30" rows="10"
-                        data-max-length="200" placeholder="Tulis review anda..."></textarea>
-                    <button class="btn btn-primary" type="submit">Simpan Review</button>
-                </form>
-            </div>
+       @if (auth()->user()->hasRole('customer'))
+       <div class="ratings-submit-form bg-white py-3 dir-rtl">
+        <div class="container">
+            <h6>Tulis Review Anda</h6>
+            <form action="/customer/comment" method="POST">
+                @csrf
+                <div class="stars mb-3">
+                    <input class="star-1" type="radio" name="star" id="star1" value="1">
+                    <label class="star-1" for="star1"></label>
+                    <input class="star-2" type="radio" name="star" id="star2" value="2">
+                    <label class="star-2" for="star2"></label>
+                    <input class="star-3" type="radio" name="star" id="star3" value="3">
+                    <label class="star-3" for="star3"></label>
+                    <input class="star-4" type="radio" name="star" id="star4" value="4">
+                    <label class="star-4" for="star4"></label>
+                    <input class="star-5" type="radio" name="star" id="star5" value="5">
+                    <label class="star-5" for="star5"></label><span></span>
+                    <input type="hidden" name="book" value="{{ $book->id }}" readonly>
+                </div>
+                <textarea class="form-control mb-3" id="comments" name="comment" cols="30" rows="10"
+                    data-max-length="200" placeholder="Tulis review anda..."></textarea>
+                <button class="btn btn-primary" type="submit">Simpan Review</button>
+            </form>
         </div>
     </div>
+       @endif
+    </div>
 </div>
+
+{{-- Modal Section for comment --}}
+<div class="modal fade" id="modalComment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <form method="POST" action="/admin/comment" class="modal-content">
+        @csrf
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Berikan Komentar pada Review</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="commentModalBody">
+            <input type="number" class="d-none" name="review_id" value="" id="reviewId">
+            <textarea class="form-control" id="comments" name="comment" cols="30" rows="10"
+            data-max-length="200" placeholder="Tulis comment anda..."></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+          <button type="submit" class="btn btn-primary">Kirim</button>
+        </div>
+    </form>
+    </div>
+  </div>
 
 @endsection
 @push('scripts')
@@ -218,6 +285,14 @@
             $('#read-more' + reviewId + ', #read-all' + reviewId).toggle();
         });
     }
+
+    const toggleExcerptComment = (commentId) => {
+     
+     $(document).ready(function() {
+         $('#excerpt-comment' + commentId + ', #full-text-comment' + commentId).toggle();
+         $('#read-more-comment' + commentId + ', #read-all-comment' + commentId).toggle();
+     });
+ }
 
 
     //show more
@@ -253,5 +328,18 @@
             document.querySelector('#load-more-bundle').style.display = 'none';
             
         });
+
+
+        $(document).ready(function () {
+        const modalComment = new bootstrap.Modal(document.getElementById('modalComment'));
+
+        // Menangkap nilai data-bs-review saat tombol di klik
+        $('[data-bs-toggle="modal"]').on('click', function () {
+            const reviewId = $(this).data('bs-review');
+            // Menampilkan nilai di dalam modal body
+            $('#reviewId').val(reviewId)
+           
+        });
+    });
     </script>
 @endpush

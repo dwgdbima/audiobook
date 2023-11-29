@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Contract\Repository\UserRepositoryInterface;
+use App\Contract\Service\CommentServiceInterface;
 use App\Contract\Service\OrderServiceInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CommentRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,11 +14,13 @@ class DashboardController extends Controller
 {
     protected $userRepositoryInterface;
     protected $orderServiceInterface;
+    protected $commentServiceInterface;
 
-    public function __construct(UserRepositoryInterface $userRepositoryInterface , OrderServiceInterface $orderServiceInterface)
+    public function __construct(UserRepositoryInterface $userRepositoryInterface , OrderServiceInterface $orderServiceInterface, CommentServiceInterface $commentServiceInterface)
     {
         $this->userRepositoryInterface = $userRepositoryInterface;
         $this->orderServiceInterface = $orderServiceInterface;
+        $this->commentServiceInterface = $commentServiceInterface;
     }
 
 
@@ -44,4 +48,22 @@ class DashboardController extends Controller
             'orders' => $orders
         ]);
     }
+
+
+    public function storeComment(CommentRequest $request)
+    {
+        $validatedData = $request->validated();
+        $validatedData['user_id'] = auth()->user()->id;
+
+        $this->commentServiceInterface->storeReviewComment($validatedData);
+
+        return back();
+    }
+
+
+    public function setting()
+    {
+        return view('web.admin.pages.setting');
+    }
+
 }

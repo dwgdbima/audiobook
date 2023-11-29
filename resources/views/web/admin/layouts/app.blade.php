@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no"
         name="viewport">
-    <title>@yield('title') &mdash; Stisla</title>
+        <title>Audio Book - Admin - Subiakto Priosoedarsono</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet"
@@ -15,7 +15,7 @@
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous"
         referrerpolicy="no-referrer" />
-
+    <link rel="icon" href="{{ asset('dist/img/icons/icon-72x72.png') }}">
     @stack('style')
 
     <!-- Template CSS -->
@@ -67,8 +67,7 @@
             <!-- Content -->
             @yield('main')
 
-            <!-- Footer -->
-            @include('web.admin.components.footer')
+            
         </div>
     </div>
 
@@ -83,9 +82,7 @@
     
     @include('sweetalert::alert')
 
-    {{-- pwa --}}
-    
-    
+    {{-- Pwa --}}
     <script src="{{ asset('dist/js/theme-switching.js') }}"></script>
 
     <script src="{{ asset('dist/js/pwa.js') }}"></script>
