@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Comment;
 use App\Models\Review;
 use Closure;
 use Illuminate\Http\Request;
@@ -18,12 +19,18 @@ class OneUserOneReview
      */
     public function handle(Request $request, Closure $next)
     {
-        $isExists = Review::where('user_id' , auth()->user()->id)
-        ->where('book_id' , $request->book)
-        ->first();
+        if(auth()->user()->hasRole('customer')){
+            $isExists = Review::where('user_id' , auth()->user()->id)
+            ->where('book_id' , $request->book)
+            ->first();
+        }else{
+            $isExists = Comment::where('user_id' , auth()->user()->id)
+            ->where('review_id' , $request->review_id)
+            ->first();
+        }
 
         if($isExists){
-            Alert::info('Oops', 'Kamu sudah membuat review');
+            Alert::info('Oops', 'Kamu sudah membuat komentar');
             return back();
         }
 

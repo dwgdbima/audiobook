@@ -47,4 +47,36 @@ class HomeController extends Controller
         return back();
     }
 
+
+    /**
+     * Setting view
+     */
+    public function setting()
+    {
+        return view('web.customer.home.setting');
+    }
+
+     /**
+     * Support view
+     */
+    public function support()
+    {
+        return view('web.customer.home.support');
+    }
+
+
+     /**
+     * Pricacy & policy view
+     */
+    public function privacy_policy()
+    {
+        return view('web.customer.home.privacy-policy');
+    }
+
+    public function pages()
+    {
+        return view('web.customer.home.pages');
+    }
+
+
 }

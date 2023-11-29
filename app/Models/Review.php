@@ -23,7 +23,7 @@ class Review extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function comment() : HasOne
+    public function comments() : HasOne
     {
         return $this->hasOne(Comment::class);
     }
