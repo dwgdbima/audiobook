@@ -54,6 +54,13 @@ html {
   letter-spacing: -0.5px;
 }
 
+body{
+  max-width: 480px;
+  margin:auto; height:100%;
+  min-height:100vh;
+  background-color: #e4eaff;
+}
+
 h1,
 h2,
 h3,
@@ -4534,6 +4541,10 @@ li.suha-dropdown-menu .dropdown-trigger-btn.active i {
 [theme-color=dark] body,
 [theme-color=dark] #preloader {
   background-color: #0C153B;
+}
+[theme-color=dark] body {
+  border-color: #242644;
+  background-color: #242644;
 }
 [theme-color=dark] a,
 [theme-color=dark] a:hover,
