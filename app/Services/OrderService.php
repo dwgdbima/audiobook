@@ -144,8 +144,9 @@ class OrderService extends BaseService implements OrderServiceInterface
         return $this->repository->with(['orderDetails'])->findMany([['user_id', $user_id], ['status', 1]]);
     }
 
-    public function updateStatusPayment($order_id, $status)
+    public function updateStatusPayment($code, $status)
     {
-        return $this->repository->update($order_id, ['status' => $status]);
+        $order = $this->repository->findFirst([['code', $code]]);
+        return $this->repository->update($order, ['status' => $status]);
     }
 }

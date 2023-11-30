@@ -28,8 +28,8 @@ class OrderController extends Controller
     }
 
     public function webhookIpaymu(Request $request){
-        // $order = $this->orderService->updateStatusPayment($request->input('reference_id'), $request->input('status_code'));
-        // Log::info($order);
-        return response()->json($request->all(), 200);
+        $order = $this->orderService->updateStatusPayment($request->input('reference_id'), $request->input('status_code'));
+        Log::info($order);
+        return response()->json($order, 200);
     }
 }
