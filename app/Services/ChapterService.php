@@ -85,11 +85,11 @@ class ChapterService extends BaseService implements ChapterServiceInterface
         $chapterName = [];
         $book = $this->bookRepository->find($validatedData['book_id']);
 
-        $currentChapters = $this->repository->getOrderedChapterDependOnBookId($book->id)[0];
+        $currentChapters = $this->repository->getOrderedChapterDependOnBookId($book->id);
         
         
         $currentChaptersKey = 0;
-        if($currentChapters){
+        if(isset($currentChapters[0])){
             $explode = explode(' ' , $currentChapters->title);
             $currentChaptersKey = explode('.' , implode('.' , $explode))[1];
         }      

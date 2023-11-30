@@ -89,8 +89,8 @@
             </div>
         </div>
     </form>
-   <ul>
-    <li class="dropdown"><a href="#"
+   <ul class="">
+    <li class="dropdown"><a type="button"
         data-toggle="dropdown"
         class="nav-link dropdown-toggle nav-link-lg nav-link-user">
         <img alt="image"
@@ -99,7 +99,7 @@
         <div class="d-sm-none d-lg-inline-block">Hi, {{ auth()->user()->name }}</div>
     </a>
     <div class="dropdown-menu dropdown-menu-right">
-        <div class="dropdown-title">Logged in 5 min ago</div>
+        <div class="dropdown-title">Anda Sedang Login</div>
         <a href="/admin/profile"
             class="dropdown-item has-icon">
             <i class="far fa-user"></i> Profile
