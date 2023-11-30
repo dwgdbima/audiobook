@@ -4546,6 +4546,13 @@ li.suha-dropdown-menu .dropdown-trigger-btn.active i {
   border-color: #242644;
   background-color: #242644;
 }
+[theme-color=dark] .accordion{
+  --bs-accordion-bg: #242644;
+  --bs-accordion-border-color: #242644;
+}
+[theme-color=dark] .accordion-item{
+  color: #fff;
+}
 [theme-color=dark] a,
 [theme-color=dark] a:hover,
 [theme-color=dark] a:focus,

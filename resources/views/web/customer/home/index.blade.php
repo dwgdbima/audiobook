@@ -17,6 +17,14 @@
     .accordion-header{
         padding: 1rem 1.23rem;
     }
+
+    .accordion-collapse{
+        border-top:1px solid #dee2e6;
+    }
+
+    [theme-color=dark] .accordion-collapse {
+        border-top: 1px solid rgba(0, 0, 0, 0.125);
+    }
 </style>
 @endpush
 @section('content')
@@ -99,7 +107,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div id="collapse-{{$i}}" style="border-top:1px solid #dee2e6" class="accordion-collapse collapse {{$i == 0 ? 'show' : ''}}" aria-labelledby="heading-{{$i}}"
+                        <div id="collapse-{{$i}}" class="accordion-collapse collapse {{$i == 0 ? 'show' : ''}}" aria-labelledby="heading-{{$i}}"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <ul class="list-group list-group-flush">
@@ -135,7 +143,7 @@
                                     {{-- Review section --}}
                                    <div class="d-flex flex-column">
                                     <div class="d-flex">
-                                        <div class="user-thumbnail"><img src="{{ $review->user->profile_picture ? asset('storage/' . $review->user->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt=""></div>
+                                        <div class="user-thumbnail"><img src="{{ $review->user->profile_picture }}" alt=""></div>
                                     <div class="rating-comment">
                                         <span class="name-date"><strong>{{$review->user->name == auth()->user()->name ? 'Review kamu' : $review->user->name}}</strong>, {{$review->created_at->format('d M Y')}} 
                                         @if (auth()->user()->hasRole('admin') && !$review->comments)

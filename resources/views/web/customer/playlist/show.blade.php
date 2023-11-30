@@ -130,7 +130,7 @@
 }
 
 .song.active {
-  background-color: #ea4c62;
+  background-color: #ea4c62 !important;
 }
 
 .song:active {
@@ -170,6 +170,13 @@
   padding: 16px 8px;
   color: #999;
   font-size: 18px;
+}
+[theme-color=dark] .dashboard {
+  background-color: #332858;
+  border-bottom: 1px solid #332858;
+}
+[theme-color=dark] .song{
+  background-color: #332858;
 }
 </style>
 @endpush

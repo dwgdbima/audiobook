@@ -1,13 +1,13 @@
 {
-  "name": "Suha",
-  "short_name": "Suha",
-  "start_url": "https://designing-world.com/suha-v3.0/intro.html",
+  "name": "Subiakto Audiobook",
+  "short_name": "Subiakto Audiobook",
+  "start_url": "https://audiobook.test",
   "display": "standalone",
   "background_color": "#100DD1",
   "theme_color": "#100DD1",
-  "categories": ["shop", "ecommerce", "fashion"],
+  "categories": ["audiobook", "audio", "book"],
   "orientation": "portrait",
-  "description": "Suha - Multipurpose Ecommerce Mobile HTML Template",
+  "description": "Subiakto - Audio Book",
   "icons": [{
       "src": "img/icons/icon-72x72.png",
       "type": "image/png",
