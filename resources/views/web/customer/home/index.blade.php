@@ -17,6 +17,14 @@
     .accordion-header{
         padding: 1rem 1.23rem;
     }
+
+    .accordion-collapse{
+        border-top:1px solid #dee2e6;
+    }
+
+    [theme-color=dark] .accordion-collapse {
+        border-top: 1px solid rgba(0, 0, 0, 0.125);
+    }
 </style>
 @endpush
 @section('content')
@@ -101,7 +109,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div id="collapse-{{$i}}" style="border-top:1px solid #dee2e6" class="accordion-collapse collapse {{$i == 0 ? 'show' : ''}}" aria-labelledby="heading-{{$i}}"
+                        <div id="collapse-{{$i}}" class="accordion-collapse collapse {{$i == 0 ? 'show' : ''}}" aria-labelledby="heading-{{$i}}"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <ul class="list-group list-group-flush">
