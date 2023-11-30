@@ -3,7 +3,7 @@
 
 @include('web.customer.layout.head')
 
-<body style="max-width: 480px; margin:auto; height:100%; min-height:100vh; background-color: #e4eaff;">
+<body>
     <!-- Preloader-->
     <div class="preloader" id="preloader">
         <div class="spinner-grow text-secondary" role="status">

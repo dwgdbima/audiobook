@@ -37,4 +37,11 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
     {
         return $this->getQuery()->latest()->first();
     }
+
+    public function getSuccessOrPendingByUser($user_id)
+    {
+        $orders = $this->getQuery()->where('user_id', $user_id)->where('status', 0)->orWhere('status', 1)->get();
+
+        return $orders;
+    }
 }
