@@ -11,4 +11,8 @@ interface ChapterServiceInterface extends BaseServiceInterface
     public function getPlaylist($book_id);
 
     public function storeBulkChapters(array $data);
+
+    public function getOnlyUnAssignedProduct(int $bookId);
+
+    public function assignProductToChapter(array $assignedChapter, int $productId);
 }

@@ -8,4 +8,14 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 {
     protected $modelClass = \App\Models\Product::class;
 
+    public function storeBulkProduct(array $data)
+    {
+       try {
+             $this->modelClass::insert($data);
+
+            return true;
+       } catch (\Exception $e) {
+            return $e;
+       }
+    }
 }

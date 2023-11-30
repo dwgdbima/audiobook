@@ -32,6 +32,20 @@
                 <a class="nav-link"
                     href="/admin/book/create"><i class="fas fa-th"></i> <span>Posting Buku</span></a>
             </li>
+            <li class="menu-header">Chapters</li>
+            <li class="{{ request()->is('admin/chapter') ? 'active' : '' }}">
+                <a class="nav-link"
+                    href="/admin/chapter"><i class="fas fa-th"></i> <span>Assign Chapters</span></a>
+            </li>
+            <li class="menu-header">Products</li>
+            <li class="{{ request()->is('admin/product/create') ? 'active' : '' }}">
+                <a class="nav-link"
+                    href="/admin/product/create"><i class="fas fa-th"></i> <span>Posting Product</span></a>
+            </li>
+            <li class="{{ request()->is('admin/product/chapter') ? 'active' : '' }}">
+                <a class="nav-link"
+                    href="/admin/product/chapter"><i class="fas fa-th"></i> <span>Assign Chapters To Product</span></a>
+            </li>
             
         </ul>
 

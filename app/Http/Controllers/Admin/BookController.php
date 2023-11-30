@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Contract\Service\BookServiceInterface;
 use App\Contract\Service\ChapterServiceInterface;
+use App\Contract\Service\ProductServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssignChapterRequest;
+use App\Http\Requests\AssignChapterToProductRequest;
 use App\Http\Requests\CreateBookRequest;
+use App\Http\Requests\StoreProductsRequest;
 use App\Models\Book;
 use App\Models\Chapter;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -18,11 +22,13 @@ class BookController extends Controller
 {
     protected $bookServiceInterface;
     protected $chapterServiceInterface;
+    protected $productServiceInterface;
 
-    public function __construct(BookServiceInterface $bookServiceInterface, ChapterServiceInterface $chapterServiceInterface)
+    public function __construct(BookServiceInterface $bookServiceInterface, ChapterServiceInterface $chapterServiceInterface, ProductServiceInterface $productServiceInterface)
     {
         $this->bookServiceInterface = $bookServiceInterface;
         $this->chapterServiceInterface = $chapterServiceInterface;
+        $this->productServiceInterface = $productServiceInterface;
     }
 
     public function createBookView()
@@ -47,20 +53,100 @@ class BookController extends Controller
         ]);
     }
 
+
+    public function createProductView()
+    {
+        
+        return view('web.admin.pages.create-product' , [
+            'books' => $this->bookServiceInterface->getAllBook()
+        ]);
+    }
+
+
+    public function assignChapterToProductView()
+    {
+        
+        return view('web.admin.pages.assign-chapter-to-product' , [
+            'products' => $this->productServiceInterface->getAllProduct()
+        ]);
+    }
+
     public function assignChapter(AssignChapterRequest $request)
     {
         $validatedData = $request->validated();
        $result = $this->chapterServiceInterface->storeBulkChapters($validatedData);
        
-        if($result){
-          
-            Alert::success('Berhasil' , 'Chapters Berhasil Diupload');
-            return back();
-        }else{
-            Alert::info('Duplicate' , 'Terdapat Judul Chapter Duplikasi');
-            return back();
+        switch ($result) {
+            case true:
+                Alert::success('Berhasil' , 'Chapters Berhasil Diupload');
+                return back();
+                break;
+            case false:
+                Alert::info('Duplicate' , 'Terdapat Judul Chapter Duplikasi');
+                return back();
+            default:
+                Alert::error('Terjadi Kesalahan' , 'Silahkan Hubungi Developer');
+                return back();
+                break;
         }
 
+
     }
+
+    public function storeProducts(StoreProductsRequest $request)
+    {
+        $validatedData = $request->validated();
+
+        foreach($validatedData['products'] as $key => &$product){
+                $product['book_id'] = $validatedData['book_id'];
+                $product['created_at'] = now();
+                $product['updated_at'] = now();
+        }
+
+       
+       $result = $this->productServiceInterface->storeBulkProduct($validatedData['products']);
+
+       switch ($result) {
+        case true:
+            Alert::success('Berhasil' , 'Berhasil Menambah Product');
+            return back();
+            break;
+        
+        default:
+            Alert::error('Terjadi Kesalahan' , 'Silahkan Hubungi Developer');
+            return back();
+            break;
+       }
+    }
+
+    
+    public function getRelatedChapter(Request $request)
+    {
+        $product = $this->productServiceInterface->findSingleProduct($request->product_id);
+        $chapters = $this->chapterServiceInterface->getOnlyUnAssignedProduct($product->book_id);
+
+        return $chapters;
+    }
+
+
+    public function assignChapterToProduct(AssignChapterToProductRequest $request)
+    {
+        $validatedData = $request->validated();
+
+        $result = $this->chapterServiceInterface->assignProductToChapter($validatedData['selected_chapters'] , $validatedData['related_book']);
+
+        switch ($result) {
+            case true:
+                Alert::success('Berhasil' , 'Berhasil Assign Chapters');
+                return back();
+                break;
+            
+            default:
+                Alert::error('Terjadi Kesalahan' , 'Silahkan Hubungi Developer');
+                return back();
+                break;
+           }
+    }
+
     
 }

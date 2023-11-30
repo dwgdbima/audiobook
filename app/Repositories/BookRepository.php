@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Contract\Repository\BookRepositoryInterface;
+use Exception;
 
 class BookRepository extends BaseRepository implements BookRepositoryInterface
 {
@@ -10,8 +11,12 @@ class BookRepository extends BaseRepository implements BookRepositoryInterface
 
     public function storeBook(array $data)
     {
-        $result = $this->modelClass::create($data);
+        try {
+            $result = $this->modelClass::create($data);
 
-        return $result;
+            return $result;
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 }

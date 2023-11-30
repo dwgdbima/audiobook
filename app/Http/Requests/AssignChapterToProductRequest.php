@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AssignChapterRequest extends FormRequest
+class AssignChapterToProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,8 @@ class AssignChapterRequest extends FormRequest
     public function rules()
     {
         return [
-            'book_id' => 'required|numeric',
-            'chapters' => 'required|array',
-            'chapters.*' => 'required|array',
-            'chapters.*.title' => 'required|string|distinct|min:3',
-            'chapters.*.audio' => 'required|file|mimes:mp3'
+            'related_book' => 'required|numeric',
+            'selected_chapters' => 'required|array'
         ];
     }
 }

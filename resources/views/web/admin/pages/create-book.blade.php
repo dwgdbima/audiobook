@@ -72,7 +72,7 @@ href="{{ asset('dist/admin/library/selectric/public/selectric.css') }}">
                         </div>
 
                         <div class="w-25">
-                            <img id="cover-pic" src="" class="object-fit-cover mb-2" style="width: 200px; height:200px;" alt="">
+                            <img id="cover-pic" src="{{ asset('dist/img/human/default-profile.png') }}" class="object-fit-cover mb-2" style="width: 200px; height:200px;" alt="">
                         </div>
 
                         <div class="form-group mb-0">

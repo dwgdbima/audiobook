@@ -13,4 +13,10 @@ interface ProductServiceInterface extends BaseServiceInterface
     public function getProductByBookId($id);
 
     public function displayProduct($id);
+
+    public function storeBulkProduct(array $data);
+
+    public function getAllProduct();
+
+    public function findSingleProduct(int $id);
 }

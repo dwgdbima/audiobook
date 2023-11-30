@@ -49,4 +49,24 @@ class ProductService extends BaseService implements ProductServiceInterface
 
         return $products->whereNotIn('id', $notInArray);
     }
+
+
+    public function storeBulkProduct(array $data)
+    {
+        $products = $this->repository->storeBulkProduct($data);
+
+        return $products;
+        
+    }
+
+    public function getAllProduct()
+    {
+        return $this->repository->with(['book'])->getAll();
+    }
+
+
+    public function findSingleProduct(int $id)
+    {
+        return $this->repository->find($id);
+    }
 }
