@@ -30,4 +30,9 @@ interface BookServiceInterface extends BaseServiceInterface
      * Get all books
      */
     public function getAllBook();
+
+    /**
+     * Get All with relation and pagination
+     */
+    public function getAllWithRelationPagination();
 }

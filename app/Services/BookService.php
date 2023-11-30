@@ -38,7 +38,7 @@ class BookService extends BaseService implements BookServiceInterface
         if(isset($data['cover'])){
             $data['cover'] = $data['cover']->storeAs('Book/Cover/' . $data['title'] , 'cover-' . $data['title'] . '.jpg');
         }
-
+        $data['cover'] = 'storage/' . $data['cover'];
         $book = $this->repository->storeBook($data);
 
         return $book;
@@ -48,5 +48,18 @@ class BookService extends BaseService implements BookServiceInterface
     public function getAllBook()
     {
         return $this->repository->getAll();
+    }
+
+
+    public function getAllWithRelationPagination()
+    {
+        $books = $this->repository->getAllWithRelationPagination();
+
+        foreach ($books as $key => &$book) {
+            $book['review_amount'] = $book->reviews->count();
+            $book['review_point'] = $book->reviews->count() > 0 ? number_format((float) $book->reviews->sum('point') / $book->reviews->count(), 1) : 0;
+        }
+
+        return $books;
     }
 }

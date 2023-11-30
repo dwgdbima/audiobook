@@ -83,6 +83,7 @@
                     @php
                         $currentLoopProduct += 1
                     @endphp
+                   
                     <div class="accordion-item" id="each-bundle{{ $currentLoopProduct }}" style="{{ $currentLoopProduct <= 3 ? 'display: block;' : 'display: none;' }}">
                         <div class="accordion-header" id="heading-{{$product->id}}">
                             <h2 style="margin-bottom: 0;">{{$product->name}}</h2>

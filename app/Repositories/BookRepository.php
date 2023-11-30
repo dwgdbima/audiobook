@@ -19,4 +19,9 @@ class BookRepository extends BaseRepository implements BookRepositoryInterface
             return $e;
         }
     }
+
+    public function getAllWithRelationPagination()
+    {
+        return $this->modelClass::with(['reviews' , 'products.chapters' , 'chapters'])->paginate(5)->withQueryString();
+    }
 }

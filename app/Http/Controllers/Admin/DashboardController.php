@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Contract\Repository\UserRepositoryInterface;
+use App\Contract\Service\BookServiceInterface;
 use App\Contract\Service\CommentServiceInterface;
 use App\Contract\Service\OrderServiceInterface;
 use App\Http\Controllers\Controller;
@@ -14,13 +15,15 @@ class DashboardController extends Controller
 {
     protected $userRepositoryInterface;
     protected $orderServiceInterface;
-    protected $commentServiceInterface;
+    protected $commentServiceInterface; 
+    protected $bookServiceInterface; 
 
-    public function __construct(UserRepositoryInterface $userRepositoryInterface , OrderServiceInterface $orderServiceInterface, CommentServiceInterface $commentServiceInterface)
+    public function __construct(UserRepositoryInterface $userRepositoryInterface , OrderServiceInterface $orderServiceInterface, CommentServiceInterface $commentServiceInterface, BookServiceInterface $bookServiceInterface)
     {
         $this->userRepositoryInterface = $userRepositoryInterface;
         $this->orderServiceInterface = $orderServiceInterface;
         $this->commentServiceInterface = $commentServiceInterface;
+        $this->bookServiceInterface = $bookServiceInterface;
     }
 
 
@@ -46,6 +49,16 @@ class DashboardController extends Controller
        
         return view('web.admin.pages.show-order-management' , [
             'orders' => $orders
+        ]);
+    }
+
+
+    public function showBooks(Request $request)
+    {
+        //$orders = $request->ord_code ? $this->orderServiceInterface->searchByCode($request->ord_code) : $this->orderServiceInterface->getAllOrders();
+        
+        return view('web.admin.pages.show-book-management' , [
+            'books' => $this->bookServiceInterface->getAllWithRelationPagination()
         ]);
     }
 

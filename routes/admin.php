@@ -12,6 +12,7 @@ Route::controller(DashboardController::class)->group(function() {
     Route::get('/' , 'index')->name('dashboard');
     Route::get('/users' , 'showUsers')->name('show.users');
     Route::get('/orders' , 'showOrders')->name('show.orders');
+    Route::get('/books' , 'showBooks')->name('show.books');
     Route::post('/comment' , 'storeComment')->middleware('one_user_one_review')->name('admin.comment');
     Route::get('/setting' , 'setting')->name('admin.setting');
 });
