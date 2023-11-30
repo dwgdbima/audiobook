@@ -14,7 +14,7 @@
     <div class="header-area {{ auth()->user()->hasRole('customer') ? : 'd-none' }}" style="max-width: 480px; margin:auto;" id="headerArea">
         <div class="container h-100 d-flex align-items-center justify-content-between d-flex rtl-flex-d-row-r">
             <!-- Logo Wrapper -->
-            <div class="logo-wrapper"><a href="{{route('customer.index')}}"><img src="{{asset('dist/img/core-img/logo-small.png')}}" alt=""></a></div>
+            <div class="logo-wrapper"><a href="{{route('customer.index')}}"><img src="{{asset('dist/img/core-img/logo.png')}}" style="height: 40px;" alt=""></a></div>
             <div class="navbar-logo-container d-flex align-items-center">
                 <!-- Cart Icon -->
                 <div class="cart-icon-wrap"><a href="{{route('customer.carts.index')}}"><i
