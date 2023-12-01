@@ -16,7 +16,7 @@ aria-labelledby="suhaOffcanvasLabel">
             <li><a href="/customer/profile"><i class="fa-solid fa-user"></i>My Profile</a></li>
             <li><a href="{{route('customer.playlists.show', 1)}}"><i class="fas fa-headphones"></i>Playlist</a></li>
             <li><a href="{{route('customer.orders.index')}}"><i class="fas fa-file-invoice"></i>Transaksi</a></li>
-            <li><a href="settings.html"><i class="fa-solid fa-sliders"></i>Settings</a></li>
+            <li><a href="{{route('customer.setting')}}"><i class="fa-solid fa-sliders"></i>Settings</a></li>
             <li><a href="{{ route('logout') }}"
                 onclick="event.preventDefault();
                               document.getElementById('logout-form').submit();"><i class="fa-solid fa-toggle-off"></i>Sign Out</a></li>
