@@ -257,16 +257,6 @@ const app = {
   // (1/2) Uncomment the line below to use localStorage
   // config: JSON.parse(localStorage.getItem(PlAYER_STORAGE_KEY)) || {},
   songs: {{ Js::from($chapters) }},
-  setSongs: function(){
-    let songs = [];
-    axios.get(routeParam("{{route('customer.playlists.show', ':id')}}", 1)).then(function(response){
-        let data = response.data;
-        Object.keys(data).forEach(key => {
-            songs.push({name: data[key].title, singer: 'Subiakto Priosoedarsono', path: '/'+ data[key].audio, image: '/storage/bisabikinbrand.jpg'})
-        });
-    })
-    this.songs = songs;
-  },
   setConfig: function (key, value) {
     this.config[key] = value;
     // (2/2) Uncomment the line below to use localStorage
@@ -430,6 +420,7 @@ const app = {
   nextSong: function () {
     this.currentIndex++;
     if (this.currentIndex >= this.songs.length) {
+      
       this.currentIndex = 0;
     }
     this.loadCurrentSong();
@@ -453,8 +444,6 @@ const app = {
   start: function () { 
       
     this.loadConfig();
-    
-    console.log(this.songs);
 
     this.defineProperties();
 
@@ -464,7 +453,7 @@ const app = {
 
     this.render();
 
-    randomBtn.classList.toggle("active", this.isRandom);
+    // randomBtn.classList.toggle("active", this.isRandom);
     repeatBtn.classList.toggle("active", this.isRepeat);
   }
 };
