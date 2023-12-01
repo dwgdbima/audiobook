@@ -24,4 +24,10 @@ class BookRepository extends BaseRepository implements BookRepositoryInterface
     {
         return $this->modelClass::with(['reviews' , 'products.chapters' , 'chapters'])->paginate(5)->withQueryString();
     }
+
+    public function searchByTitle($title)
+    {
+        return $this->modelClass::with(['reviews' , 'products.chapters' , 'chapters'])
+        ->where('title' , 'like' , '%' . $title . '%')->paginate(5)->withQueryString();
+    }
 }

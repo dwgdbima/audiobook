@@ -9,11 +9,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AssignChapterRequest;
 use App\Http\Requests\AssignChapterToProductRequest;
 use App\Http\Requests\CreateBookRequest;
+use App\Http\Requests\ProductChapterUpdateRequest;
 use App\Http\Requests\StoreProductsRequest;
+use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
 use App\Models\Chapter;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
@@ -69,6 +72,52 @@ class BookController extends Controller
         return view('web.admin.pages.assign-chapter-to-product' , [
             'products' => $this->productServiceInterface->getAllProduct()
         ]);
+    }
+
+    public function manageBookView(Book $book)
+    {   
+        
+        $unAssignedChapter = $book->load(['chapters' => function($query) {
+            $query->where('product_id' , null);
+        }]);
+
+        return view('web.admin.pages.manage-book' , [
+            'book' => $book->load(['products.chapters']),
+            'idle_chapters' => $unAssignedChapter
+        ]);
+    }
+
+
+    public function updateBook(UpdateBookRequest $request, Book $book)
+    {
+        $validatedData = $request->validated();
+       
+        $this->bookServiceInterface->updateBook($book, $validatedData);
+        Alert::success('Berhasil' , 'Buku Berhasil Diperbarui');
+        return back();
+    }
+
+
+    public function updateProductChapter(ProductChapterUpdateRequest $request)
+    {
+        $validatedData = $request->validated();
+        
+        DB::transaction(function () use( $validatedData) {
+            foreach ($validatedData['products'] as $key => $data) {
+                //update Product
+                $data['book_id'] = $validatedData['book_id'];
+    
+                $this->productServiceInterface->updateProductDependOnBook($data);
+ 
+                if(isset($data['unselect_chapters'])){
+                    $this->chapterServiceInterface->unAssignChapterToProduct($data['unselect_chapters']);
+                }  
+    
+            }
+        }, 2);
+
+        Alert::success('Berhasil' , 'Berhasil Update Product & Chapters');
+        return back();
     }
 
     public function assignChapter(AssignChapterRequest $request)

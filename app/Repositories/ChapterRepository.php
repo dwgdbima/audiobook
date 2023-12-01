@@ -45,4 +45,15 @@ class ChapterRepository extends BaseRepository implements ChapterRepositoryInter
             return $e;
         }
     }
+
+    public function unAssignChapterToProduct(array $chapters)
+    {
+        try {
+            $this->modelClass::whereIn('id' , $chapters)->update(['product_id' => null]);
+
+            return true;
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
 }

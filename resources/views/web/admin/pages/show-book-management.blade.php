@@ -40,12 +40,12 @@
                             <div class="card-header">
                                 <h4>Any description goes here...</h4>
                                 <div class="card-header-form">
-                                    <form action="/admin/orders" method="GET">
+                                    <form action="/admin/books" method="GET">
                                         <div class="input-group">
                                             <input type="text"
                                                 class="form-control"
-                                                name="ord_code"
-                                                placeholder="Cari berdasarkan kode order...">
+                                                name="s_name"
+                                                placeholder="Cari berdasarkan judul buky...">
                                             <div class="input-group-btn">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -63,7 +63,7 @@
                                             <th>Judul</th>
                                             <th>Author</th>
                                             <th>Total Review & Rating</th>
-                                            <th>Action</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                         @foreach ($books as $data)
                                         <tr>
@@ -77,16 +77,20 @@
                                             <td>
                                                {{ $data->review_amount }} / {{ $data->review_point }}
                                             </td>
-                                            <td><a type="button"
+                                            <td class="d-flex justify-content-around" style="height: 30px"><a type="button"
                                                     data-toggle="modal"
                                                     data-target="#bookModal{{ $data->id }}"
-                                                    class="btn btn-secondary">Detail</a></td>
+                                                    class="btn btn-secondary">Detail</a>
+                                                    <a href="/admin/book/{{ $data->id }}/manage"
+                                                    class="btn btn-secondary">Manage</a>
+                                                </td>
+                                               
                                         </tr>
                                         @endforeach
                                     </table>
 
                                     <div class="p-4">
-                                        
+                                        {{ $books->links() }}
                                     </div>
                                 </div>
                             </div>
@@ -137,7 +141,9 @@ role="document">
                     </li>
 
                     <li class="list-group-item mx-auto">
+                       <div class="text-center">
                         <strong class="text-center">Detail Products & Chapters</strong>
+                       </div>
                         <div>
                          
                            @foreach ($bookDetail->products as $prodKey => $product)
@@ -164,8 +170,9 @@ role="document">
                                 </div>
                             </div>
                         @endforeach
+                       
                         <div class="d-flex justify-content-center align-items-center w-100">
-                            <button onclick="showBundles({{ $bookDetail->id }} , {{ $prodKey }})" id="load-more-bundle" class="btn btn-secondary mt-3 w-75">Show More Bundles</button>
+                            <button onclick="showBundles({{ $bookDetail->id }} , {{ $prodKey ?? 0 }})" id="load-more-bundle" class="btn btn-secondary mt-3 w-75">Show More Bundles</button>
                         </div>
                         </div>
                     </li>

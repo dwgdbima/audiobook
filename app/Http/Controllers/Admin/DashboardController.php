@@ -55,10 +55,10 @@ class DashboardController extends Controller
 
     public function showBooks(Request $request)
     {
-        //$orders = $request->ord_code ? $this->orderServiceInterface->searchByCode($request->ord_code) : $this->orderServiceInterface->getAllOrders();
+        $books = $request->s_name ? $this->bookServiceInterface->searchByTitle($request->s_name) : $this->bookServiceInterface->getAllWithRelationPagination();
         
         return view('web.admin.pages.show-book-management' , [
-            'books' => $this->bookServiceInterface->getAllWithRelationPagination()
+            'books' => $books
         ]);
     }
 

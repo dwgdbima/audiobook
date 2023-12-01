@@ -87,10 +87,10 @@ class ChapterService extends BaseService implements ChapterServiceInterface
 
         $currentChapters = $this->repository->getOrderedChapterDependOnBookId($book->id);
         
-        
+       
         $currentChaptersKey = 0;
         if(isset($currentChapters[0])){
-            $explode = explode(' ' , $currentChapters->title);
+            $explode = explode(' ' , $currentChapters[0]->title);
             $currentChaptersKey = explode('.' , implode('.' , $explode))[1];
         }      
 
@@ -151,6 +151,13 @@ class ChapterService extends BaseService implements ChapterServiceInterface
         $chapters = $this->repository->assignProductToChapter($assignedChapter , $productId);
 
         return $chapters;
+    }
+
+    public function unAssignChapterToProduct(array $chapters)
+    {
+        $chapter = $this->repository->unAssignChapterToProduct($chapters);
+
+        return $chapter;
     }
 
 }

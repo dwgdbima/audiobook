@@ -23,7 +23,7 @@ class ProductController extends Controller
      * Show single product for now
      */
     public function single_product()
-    {
+    {  
         return view('web.customer.home.index', [
             'book' => $this->bookService->findWithReviewCount(1),
             'products' => $this->productService->displayProduct(1),

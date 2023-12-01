@@ -37,6 +37,10 @@ Route::controller(BookController::class)->group(function() {
     Route::post('/product/chapter' , 'assignChapterToProduct')->name('assign.product.chapter');
 
     Route::get('/get-related-chapter' , 'getRelatedChapter')->name('get.related.chapter');
+
+    Route::get('/book/{book}/manage' , 'manageBookView')->name('manage.book');
+    Route::put('/book/{book}' , 'updateBook')->name('update.book');
+    Route::put('/book/product/chapter' , 'updateProductChapter')->name('update.everyting');
 });
 
 

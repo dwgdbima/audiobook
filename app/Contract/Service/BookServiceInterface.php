@@ -2,6 +2,8 @@
 
 namespace App\Contract\Service;
 
+use App\Models\Book;
+
 interface BookServiceInterface extends BaseServiceInterface
 {
     /**
@@ -35,4 +37,14 @@ interface BookServiceInterface extends BaseServiceInterface
      * Get All with relation and pagination
      */
     public function getAllWithRelationPagination();
+
+    /**
+     * Search by book title
+     */
+    public function searchByTitle($title);
+
+    /**
+     * Update book
+     */
+    public function updateBook(Book $book , array $data);
 }

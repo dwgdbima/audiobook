@@ -15,4 +15,6 @@ interface ChapterServiceInterface extends BaseServiceInterface
     public function getOnlyUnAssignedProduct(int $bookId);
 
     public function assignProductToChapter(array $assignedChapter, int $productId);
+
+    public function unAssignChapterToProduct(array $chapters);
 }

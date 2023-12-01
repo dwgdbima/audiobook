@@ -49,11 +49,6 @@ href="{{ asset('dist/admin/library/selectric/public/selectric.css') }}">
                                 </div>
                             @enderror
 
-                            @error('desc')
-                                <div class="text-danger">
-                                    {{ $message }}
-                                </div>
-                            @enderror
                         </div>
                 
                         <div class="form-group ">

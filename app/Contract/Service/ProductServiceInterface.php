@@ -19,4 +19,6 @@ interface ProductServiceInterface extends BaseServiceInterface
     public function getAllProduct();
 
     public function findSingleProduct(int $id);
+
+    public function updateProductDependOnBook(array $data);
 }

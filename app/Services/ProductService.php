@@ -69,4 +69,11 @@ class ProductService extends BaseService implements ProductServiceInterface
     {
         return $this->repository->find($id);
     }
+
+    public function updateProductDependOnBook(array $data)
+    {
+        $product = $this->repository->updateProductDependOnBook($data);
+
+        return $product;
+    }
 }

@@ -179,8 +179,9 @@
                                      {{-- Comment section --}}
                                     
                                     @if ($review->comments)
+                                    
                                     <div class="d-flex ms-5 mt-3">
-                                        <div class="user-thumbnail"><img src="{{ auth()->user()->profile_picture }}" alt="" style="width:40px; height:40px"></div>
+                                        <div class="user-thumbnail"><img src="{{ $review->comments->user->profile_picture }}" alt="" style="width:40px; height:40px"></div>
                                         <div class="rating-comment">
                                             <span class="name-date"><strong>Admin</strong>, {{$review->comments->created_at->format('d M Y')}}</span>
                                             
