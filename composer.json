@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.2",
         "realrashid/sweet-alert": "^7.1",
+        "silviolleite/laravelpwa": "^2.0",
         "spatie/laravel-permission": "^6.1"
     },
     "require-dev": {

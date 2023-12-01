@@ -33,7 +33,7 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{asset('dist/style.css')}}">
     <!-- Web App Manifest -->
-    <link rel="manifest" href="{{asset('dist/manifest.json')}}">
+    {{-- <link rel="manifest" href="{{asset('dist/manifest.json')}}"> --}}
   </head>
   <body>
     <!-- Preloader-->
@@ -63,7 +63,7 @@
     <script src="{{asset('dist/js/jquery.nice-select.min.js')}}"></script>
     <script src="{{asset('dist/js/theme-switching.js')}}"></script>
     <script src="{{asset('dist/js/active.js')}}"></script>
-    <script src="{{asset('dist/js/pwa.js')}}"></script>
+    {{-- <script src="{{asset('dist/js/pwa.js')}}"></script> --}}
     @include('sweetalert::alert')
   </body>
 </html>
