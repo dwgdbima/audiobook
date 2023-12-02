@@ -28,7 +28,7 @@
     <script src="{{ asset('dist/js/theme-switching.js') }}"></script>
     <script src="{{ asset('dist/js/no-internet.js') }}"></script>
     <script src="{{ asset('dist/js/active.js') }}"></script>
-    <script src="{{ asset('dist/js/pwa.js') }}"></script>
+    {{-- <script src="{{ asset('dist/js/pwa.js') }}"></script> --}}
     {{-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> --}}
     @stack('scripts')
