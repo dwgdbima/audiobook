@@ -94,8 +94,15 @@
                    
                     <div class="accordion-item" id="each-bundle{{ $currentLoopProduct }}" style="{{ $currentLoopProduct <= 3 ? 'display: block;' : 'display: none;' }}">
                         <div class="accordion-header" id="heading-{{$product->id}}">
-                            <h2 style="margin-bottom: 0;">{{$product->name}}</h2>
-                            <span class="text-success"><strong>@money($product->price, 'IDR', true)</strong></span> &minus; <span>{{$product->chapters->count()}} Chapter</span>
+                            <div class="d-flex">
+                                <div class="bg-danger me-3" style="width: 120px; height:auto">
+                                    <img src="{{ asset('dist/img/core-img/paket/p-'. $prodKey+1 .'.png') }}" alt="" style="width: 120px; height:120px;">
+                                </div>
+                                <div>
+                                    <h3 style="margin-bottom: 0;">{{$product->name}}</h3>
+                                    <span class="text-success"><strong>@money($product->price, 'IDR', true)</strong></span> &minus; <span>{{$product->chapters->count()}} Chapter</span>
+                                </div>
+                            </div>
                             <div class="d-flex justify-content-end">
                                 <button class="btn btn-info" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapse-{{$i}}" aria-expanded="true" aria-controls="collapse-{{$i}}">

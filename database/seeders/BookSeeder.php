@@ -24,7 +24,7 @@ class BookSeeder extends Seeder
         ]);
 
         $product_1 = $book->products()->create([
-            'name' => 'Bundle 1',
+            'name' => 'Paket 1',
             'price' => 50000,
             'status' => 1,
         ]);
@@ -63,7 +63,7 @@ class BookSeeder extends Seeder
         ]);
         
         $product_2 = $book->products()->create([
-            'name' => 'Bundle 2',
+            'name' => 'Paket 2',
             'price' => 50000,
             'status' => 1,
         ]);
@@ -97,7 +97,7 @@ class BookSeeder extends Seeder
         ]);
 
         $product_3 = $book->products()->create([
-            'name' => 'Bundle 3',
+            'name' => 'Paket 3',
             'price' => 50000,
             'status' => 1,
         ]);
@@ -131,7 +131,7 @@ class BookSeeder extends Seeder
         ]);
 
         $product_4 = $book->products()->create([
-            'name' => 'Bundle 4',
+            'name' => 'Paket 4',
             'price' => 50000,
             'status' => 1,
         ]);
@@ -167,7 +167,7 @@ class BookSeeder extends Seeder
 
 
         $product_5 = $book->products()->create([
-            'name' => 'Bundle 5',
+            'name' => 'Paket 5',
             'price' => 50000,
             'status' => 1,
         ]);
@@ -203,7 +203,7 @@ class BookSeeder extends Seeder
 
 
         $product_6 = $book->products()->create([
-            'name' => 'Bundle 6',
+            'name' => 'Paket 6',
             'price' => 50000,
             'status' => 1,
         ]);
@@ -238,7 +238,7 @@ class BookSeeder extends Seeder
 
 
         $product_7 = $book->products()->create([
-            'name' => 'Bundle 7',
+            'name' => 'Paket 7',
             'price' => 50000,
             'status' => 1,
         ]);
@@ -273,7 +273,7 @@ class BookSeeder extends Seeder
 
 
         $product_8 = $book->products()->create([
-            'name' => 'Bundle 8',
+            'name' => 'Paket 8',
             'price' => 50000,
             'status' => 1,
         ]);
@@ -308,7 +308,7 @@ class BookSeeder extends Seeder
 
 
         $product_9 = $book->products()->create([
-            'name' => 'Bundle 9',
+            'name' => 'Paket 9',
             'price' => 50000,
             'status' => 1,
         ]);
@@ -343,7 +343,7 @@ class BookSeeder extends Seeder
 
 
         $product_10 = $book->products()->create([
-            'name' => 'Bundle 10',
+            'name' => 'Paket 10',
             'price' => 50000,
             'status' => 1,
         ]);
@@ -378,7 +378,7 @@ class BookSeeder extends Seeder
 
 
         $product_11 = $book->products()->create([
-            'name' => 'Bundle 11',
+            'name' => 'Paket 11',
             'price' => 50000,
             'status' => 1,
         ]);
@@ -413,7 +413,7 @@ class BookSeeder extends Seeder
 
 
         $product_12 = $book->products()->create([
-            'name' => 'Bundle 12',
+            'name' => 'Paket 12',
             'price' => 50000,
             'status' => 1,
         ]);
@@ -449,7 +449,7 @@ class BookSeeder extends Seeder
 
 
         $product_13 = $book->products()->create([
-            'name' => 'Bundle 13',
+            'name' => 'Paket 13',
             'price' => 50000,
             'status' => 1,
         ]);
@@ -484,7 +484,7 @@ class BookSeeder extends Seeder
 
 
         $product_14 = $book->products()->create([
-            'name' => 'Bundle 14',
+            'name' => 'Paket 14',
             'price' => 50000,
             'status' => 1,
         ]);
