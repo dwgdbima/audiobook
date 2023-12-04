@@ -29,6 +29,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('test', function(BookServiceInterface $bookServiceInterface){
     dd(asset('dist'));
 });
-
+Route::get('/ngetes', function () {
+    return view('web.ngetes');
+});
 Route::post('webhook-ipaymu', [OrderController::class, 'webhookIpaymu'])->name('webhook.ipaymu');
 

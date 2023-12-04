@@ -89,7 +89,7 @@
             </div>
         </div>
     </form>
-   <ul class="">
+   <ul class="" style="list-style: none">
     <li class="dropdown"><a type="button"
         data-toggle="dropdown"
         class="nav-link dropdown-toggle nav-link-lg nav-link-user">

@@ -15,7 +15,7 @@ class ChapterRepository extends BaseRepository implements ChapterRepositoryInter
     public function getOrderedChapterDependOnBookId($book_id)
     {
       $orderedChapters = $this->modelClass::where('book_id' , $book_id)
-        ->orderBy(DB::raw("CAST(SUBSTRING(title FROM 8) AS UNSIGNED)"), 'DESC')
+        ->orderBy(DB::raw("CAST(SUBSTRING(title FROM 8) AS UNSIGNED)"), 'DESC') // untuk mengambil urutan chapter database, ex Chapter 1, Chapter 2 dst
         ->get();
 
         return $orderedChapters;
