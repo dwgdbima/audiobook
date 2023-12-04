@@ -89,7 +89,11 @@ class ChapterService extends BaseService implements ChapterServiceInterface
         
        
         $currentChaptersKey = 0;
+        $latestChapter = 0;
         if(isset($currentChapters[0])){
+            $explode = explode(' ' , $currentChapters[0]->title);
+            $latestChapter = explode('.' , implode('.' , $explode))[1];
+
             $currentChaptersKey = $currentChapters[0]->order_position;
         }      
 
@@ -99,25 +103,25 @@ class ChapterService extends BaseService implements ChapterServiceInterface
         $slug = Str::slug($book->title);
         $path = 'storage/' . $slug;
         foreach ($validatedData['chapters'] as $key => $data) {
-            $newOrderKey = $currentChaptersKey+1;
-
+        
             $explode = explode('.' , $data['audio']->getClientOriginalName());
-            $fileName = 'chapter-' . $newOrderKey . '.' . end($explode);
+            $fileName = 'chapter-' . $latestChapter+1 . '.' . end($explode);
 
             // aku menyesuaikan dengan format databasenya
             $fileNames[$fileName] = $data['audio'];
             $fullPath = $path . '/' . $fileName;
 
             $validData[] = [
-                'title' => $chapterName[] = 'Chapter ' . $newOrderKey . '. ' . $data['title'],
+                'title' => $chapterName[] = 'Chapter ' . $latestChapter+1 . '. ' . $data['title'],
                 'audio' => $fullPath,
                 'book_id' => $book->id,
-                'order_position' => $newOrderKey,
+                'order_position' => $currentChaptersKey+1,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
 
             $currentChaptersKey++;
+            $latestChapter++;
 
         }
 
