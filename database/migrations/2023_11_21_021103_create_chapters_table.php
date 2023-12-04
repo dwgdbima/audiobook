@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('sub_title')->nullable();
             $table->text('desc')->nullable();
             $table->string('audio');
+            $table->smallInteger('order_position' , false, true);
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ namespace App\Contract\Repository;
 
 interface ChapterRepositoryInterface extends BaseRepositoryInterface
 {
-    public function getOrderedChapterDependOnBookId($book_id);
+    public function getOrderedChapterDependOnBookId($book_id, $ascending = true);
     
     public function storeBulkChapters(array $data);
 

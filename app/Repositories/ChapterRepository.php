@@ -12,11 +12,16 @@ class ChapterRepository extends BaseRepository implements ChapterRepositoryInter
     protected $modelClass = \App\Models\Chapter::class;
 
 
-    public function getOrderedChapterDependOnBookId($book_id)
+    public function getOrderedChapterDependOnBookId($book_id, $ascending = true)
     {
-      $orderedChapters = $this->modelClass::where('book_id' , $book_id)
+     /*  $orderedChapters = $this->modelClass::where('book_id' , $book_id)
         ->orderBy(DB::raw("CAST(SUBSTRING(title FROM 8) AS UNSIGNED)"), 'DESC') // untuk mengambil urutan chapter database, ex Chapter 1, Chapter 2 dst
+        ->get(); */
+
+        $orderedChapters = $this->modelClass::where('book_id' , $book_id)
+        ->orderBy('order_position' , $ascending ? 'ASC' : 'DESC')
         ->get();
+        
 
         return $orderedChapters;
     }

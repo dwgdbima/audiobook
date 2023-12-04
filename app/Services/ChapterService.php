@@ -85,13 +85,12 @@ class ChapterService extends BaseService implements ChapterServiceInterface
         $chapterName = [];
         $book = $this->bookRepository->find($validatedData['book_id']);
 
-        $currentChapters = $this->repository->getOrderedChapterDependOnBookId($book->id);
+        $currentChapters = $this->repository->getOrderedChapterDependOnBookId($book->id, false);
         
        
         $currentChaptersKey = 0;
         if(isset($currentChapters[0])){
-            $explode = explode(' ' , $currentChapters[0]->title);
-            $currentChaptersKey = explode('.' , implode('.' , $explode))[1];
+            $currentChaptersKey = $currentChapters[0]->order_position;
         }      
 
         $validData = [];
@@ -100,17 +99,20 @@ class ChapterService extends BaseService implements ChapterServiceInterface
         $slug = Str::slug($book->title);
         $path = 'storage/' . $slug;
         foreach ($validatedData['chapters'] as $key => $data) {
+            $newOrderKey = $currentChaptersKey+1;
+
             $explode = explode('.' , $data['audio']->getClientOriginalName());
-            $fileName = 'chapter-' . $currentChaptersKey+1 . '.' . end($explode);
+            $fileName = 'chapter-' . $newOrderKey . '.' . end($explode);
 
             // aku menyesuaikan dengan format databasenya
             $fileNames[$fileName] = $data['audio'];
             $fullPath = $path . '/' . $fileName;
 
             $validData[] = [
-                'title' => $chapterName[] = 'Chapter ' . $currentChaptersKey+1 . '. ' . $data['title'],
+                'title' => $chapterName[] = 'Chapter ' . $newOrderKey . '. ' . $data['title'],
                 'audio' => $fullPath,
                 'book_id' => $book->id,
+                'order_position' => $newOrderKey,
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
