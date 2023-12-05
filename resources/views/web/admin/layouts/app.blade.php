@@ -85,7 +85,7 @@
     {{-- Pwa --}}
     <script src="{{ asset('dist/js/theme-switching.js') }}"></script>
 
-    <script src="{{ asset('dist/js/pwa.js') }}"></script>
+   {{--  <script src="{{ asset('dist/js/pwa.js') }}"></script> --}}
     @stack('scripts')
 
     <!-- Template JS File -->

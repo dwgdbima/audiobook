@@ -24,17 +24,17 @@
             </li>
             <li class="{{ request()->is('admin/books') ? 'active' : '' }}">
                 <a class="nav-link"
-                    href="/admin/books"><i class="fas fa-th"></i> <span>Book Management</span></a>
+                    href="/admin/books"><i class="fas fa-th"></i> <span>Products Management</span></a>
             </li>
-            <li class="{{ request()->is('admin/product') ? 'active' : '' }}">
+           {{--  <li class="{{ request()->is('admin/product') ? 'active' : '' }}">
                 <a class="nav-link"
                     href="/admin/product"><i class="fas fa-th"></i> <span>Single Product</span></a>
-            </li>
+            </li> --}}
             
             <li class="menu-header">Book</li>
             <li class="{{ request()->is('admin/book/create') ? 'active' : '' }}">
                 <a class="nav-link"
-                    href="/admin/book/create"><i class="fas fa-th"></i> <span>Posting Buku</span></a>
+                    href="/admin/book/create"><i class="fas fa-th"></i> <span>Post Book</span></a>
             </li>
             <li class="menu-header">Chapters</li>
             <li class="{{ request()->is('admin/chapter') ? 'active' : '' }}">

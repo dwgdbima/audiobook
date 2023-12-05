@@ -27,7 +27,7 @@ class OrderSeeder extends Seeder
                 'expired' => now()->addHour()
             ]);
 
-            for($k = 1; $k <= 2; $k++){
+            for($k = 1; $k <= rand(2,4); $k++){
                 $order->orderDetails()->create([
                     'product_id' => rand(1, 14)
                 ]);

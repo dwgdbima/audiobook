@@ -26,6 +26,17 @@ class ChapterRepository extends BaseRepository implements ChapterRepositoryInter
         return $orderedChapters;
     }
 
+
+    public function getChaptersExistsDependOnBookId($book_id, array $searchArray)
+    {
+        $chapters = $this->modelClass::where('book_id' , $book_id)
+        ->whereIn('title' , $searchArray)
+        ->get();
+
+        return $chapters;
+    }
+
+
     public function storeBulkChapters(array $data)
     {
        try {

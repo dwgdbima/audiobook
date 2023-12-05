@@ -26,6 +26,42 @@ class OrderService extends BaseService implements OrderServiceInterface
         return $this->repository->getAllOrders();
     }
 
+
+    public function takeFiveLatestOrder()
+    {
+        $fiveOrders = $this->repository->takeFiveLatestOrder();
+
+        $collection = collect();
+        
+        foreach ($fiveOrders as $order) {
+            $data = [];
+            
+            foreach ($order->orderDetails as $detail) {
+                $bookTitle = $detail->product->book->title;
+                $productName = $detail->product->name;
+                $price = $detail->product->price;
+            
+                if (!isset($data[$bookTitle])) {
+                    $data[$bookTitle] = [
+                        'product' => $productName,
+                        'price' => $price
+                    ];
+                } else {
+                    $data[$bookTitle]['product'] .= ', ' . $productName;
+                    $data[$bookTitle]['price'] += $price;
+                }
+            }
+        
+            $collection->push([
+                'name' => $order->user->name,
+                'data' => $data,
+                'created_at' => $order->created_at
+            ]);
+        }
+        
+        return $collection;
+    }
+
     public function searchByCode(string $code)
     {
         return $this->repository->searchByCode($code);

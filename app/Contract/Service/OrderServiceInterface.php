@@ -6,6 +6,8 @@ interface OrderServiceInterface extends BaseServiceInterface
 {
     public function getAllOrders();
 
+    public function takeFiveLatestOrder();
+
     public function searchByCode(string $code);
     
     public function makeOrder($products);

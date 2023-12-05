@@ -45,5 +45,5 @@ Route::controller(BookController::class)->group(function() {
 
 
 Route::controller(ProductController::class)->group(function() {
-    Route::get('/product' , 'single_product')->name('admin.single.product');
+    Route::get('/product/{id}' , 'single_product')->name('admin.single.product');
 });

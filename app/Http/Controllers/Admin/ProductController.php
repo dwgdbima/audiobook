@@ -22,12 +22,12 @@ class ProductController extends Controller
     /**
      * Show single product for now
      */
-    public function single_product()
+    public function single_product($id)
     {  
         return view('web.customer.home.index', [
-            'book' => $this->bookService->findWithReviewCount(1),
-            'products' => $this->productService->displayProduct(1),
-            'reviews' => $this->reviewService->getReviewByBookId(1)
+            'book' => $this->bookService->findWithReviewCount($id),
+            'products' => $this->productService->displayProduct($id),
+            'reviews' => $this->reviewService->getReviewByBookId($id)
         ]);
     }
 }

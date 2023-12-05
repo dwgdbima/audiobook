@@ -125,10 +125,7 @@ class ChapterService extends BaseService implements ChapterServiceInterface
 
         }
 
-          //masih belum paham menggunakan where queryable
-          $isChapterExists = Chapter::where('book_id' , $book->id)
-          ->whereIn('title' , array_column($validData , 'title'))
-          ->get();
+          $isChapterExists = $this->repository->getChaptersExistsDependOnBookId($book->id, array_column($validData , 'title'));
         
           if(!$isChapterExists->isEmpty()){
               return false;
@@ -146,7 +143,7 @@ class ChapterService extends BaseService implements ChapterServiceInterface
 
     public function getOnlyUnAssignedProduct(int $bookId)
     {
-        $chapters = Chapter::where('book_id' , $bookId)->where('product_id' , null)->get();
+        $chapters = $this->repository->findMany([['book_id' , $bookId], ['product_id' , null]]);
 
         return $chapters;
     }

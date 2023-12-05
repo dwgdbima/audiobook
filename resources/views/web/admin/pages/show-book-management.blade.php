@@ -77,12 +77,15 @@
                                             <td>
                                                {{ $data->review_amount }} / {{ $data->review_point }}
                                             </td>
-                                            <td class="d-flex justify-content-around" style="height: 30px"><a type="button"
+                                            <td class="d-flex justify-content-center" style="height: 30px">
+                                                <a type="button"
                                                     data-toggle="modal"
                                                     data-target="#bookModal{{ $data->id }}"
-                                                    class="btn btn-secondary">Detail</a>
-                                                    <a href="/admin/book/{{ $data->id }}/manage"
-                                                    class="btn btn-secondary">Manage</a>
+                                                    class="btn btn-secondary mr-2">Detail</a>
+                                                <a href="/admin/book/{{ $data->id }}/manage"
+                                                    class="btn btn-secondary mr-2">Manage</a>
+                                                <a href="/admin/product/{{ $data->id }}"
+                                                    class="btn btn-secondary">Show</a>
                                                 </td>
                                                
                                         </tr>

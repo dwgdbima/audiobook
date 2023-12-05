@@ -8,6 +8,7 @@ use App\Contract\Service\CommentServiceInterface;
 use App\Contract\Service\OrderServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -27,9 +28,16 @@ class DashboardController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('web.admin.pages.dashboard-general-dashboard');
+        $orders = $request->ord_code ? $this->orderServiceInterface->searchByCode($request->ord_code) : $this->orderServiceInterface->getAllOrders();
+
+        $fiveOrders = $this->orderServiceInterface->takeFiveLatestOrder();
+
+        return view('web.admin.pages.dashboard-general-dashboard' , [
+            'orders' => $orders,
+            'fiveOrders' => $fiveOrders
+        ]);
     }
 
 
