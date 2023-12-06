@@ -82,8 +82,10 @@
                                                     data-toggle="modal"
                                                     data-target="#bookModal{{ $data->id }}"
                                                     class="btn btn-secondary mr-2">Detail</a>
+                                                @if (auth()->user()->hasRole('super_admin'))
                                                 <a href="/admin/book/{{ $data->id }}/manage"
                                                     class="btn btn-secondary mr-2">Manage</a>
+                                                @endif
                                                 <a href="/admin/product/{{ $data->id }}"
                                                     class="btn btn-secondary">Show</a>
                                                 </td>

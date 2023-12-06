@@ -8,6 +8,8 @@ interface OrderServiceInterface extends BaseServiceInterface
 
     public function takeFiveLatestOrder();
 
+    public function getSellingPercentage();
+
     public function searchByCode(string $code);
     
     public function makeOrder($products);

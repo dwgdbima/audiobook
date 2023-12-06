@@ -8,11 +8,13 @@ use App\Contract\Service\OrderServiceInterface;
 use App\Ipaymu\Ipaymu;
 use App\Ipaymu\PaymentRedirect;
 use App\Models\Order;
+use App\Traits\HelperTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 class OrderService extends BaseService implements OrderServiceInterface
 {
+    use HelperTrait;
     protected $orderDetailRepository;
 
     public function __construct(OrderRepositoryInterface $orderRepositoryInterface, OrderDetailRepositoryInterface $orderDetailRepositoryInterface)
@@ -61,6 +63,79 @@ class OrderService extends BaseService implements OrderServiceInterface
         
         return $collection;
     }
+
+
+
+    public function getSellingPercentage()
+    {
+        $sellings = $this->repository->getSellingPercentage();
+
+        $lastMonth = $sellings['lastMonth'];
+        $currentMonth = $sellings['currentMonth'];
+
+        if($lastMonth->isEmpty() && $currentMonth->isEmpty()){
+            return $this->sellingPercentageResult([
+                [
+                    'percentage' => 0,
+                    'range' => [
+                        0,
+                        0
+                    ]
+                ],
+                [
+                    'percentage' => 0,
+                    'range' => [
+                        0,
+                        0
+                    ]
+                ]
+            ]);
+        } 
+
+        $yesterday = $currentMonth->where('created_at', '>=', now()->subDays(1)->startOfDay())
+        ->where('created_at', '<=', now()->subDays(1)->endOfDay());
+        $today = $currentMonth->where('created_at', '>=', now()->startOfDay())
+        ->where('created_at', '<=', now()->endOfDay());
+
+        // dapatkan price daily
+        $priceYesterday =  $yesterday->pluck('orderDetails.*.product.price')->flatten()->sum();
+        $priceToday = $today->pluck('orderDetails.*.product.price')->flatten()->sum();
+
+        //dapatkan price monthly
+        $priceLastMonth =  $lastMonth->pluck('orderDetails.*.product.price')->flatten()->sum();
+        $priceCurrentMonth = $currentMonth->pluck('orderDetails.*.product.price')->flatten()->sum();
+
+
+        // hitung persentasi daily
+        $rangeDaily = $priceToday - $priceYesterday;
+        $rangeDaily = $yesterday->isEmpty() ? 0 : ($rangeDaily / $priceYesterday) * 100;
+        
+        // hitung persentasi monthly
+        $rangeMonthly = $priceCurrentMonth - $priceLastMonth;
+        $rangeMonthly = $lastMonth->isEmpty() ? 0 : ($rangeMonthly / $priceLastMonth) * 100;
+
+        $result = $this->sellingPercentageResult([
+            [
+                'percentage' => round($rangeDaily),
+                'range' => [
+                    $priceYesterday,
+                    $priceToday
+                ]
+            ],
+            [
+                'percentage' => round($rangeMonthly),
+                'range' => [
+                    $priceLastMonth,
+                    $priceCurrentMonth
+                ]
+            ]
+        ]);
+
+       
+        return $result;
+
+    }
+
 
     public function searchByCode(string $code)
     {

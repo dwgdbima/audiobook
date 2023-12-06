@@ -99,16 +99,16 @@
                                 height="182"></canvas>
                             <div class="statistic-details mt-sm-4">
                                 <div class="statistic-details-item">
-                                    <span class="text-muted"><span class="text-primary"><i
-                                                class="fas fa-caret-up"></i></span> 7%</span>
-                                    <div class="detail-value">Rp 1.500.000</div>
+                                    <span class="text-muted"><span class=""><i
+                                                class="{{ $selling['daily']['percentage'] > 0 ? 'fas fa-caret-up text-primary' : 'fas fa-caret-down text-danger' }}"></i></span> {{ $selling['daily']['percentage'] }}%</span>
+                                    <div class="detail-value">@money($selling['daily']['range'][1] , 'IDR' , true)</div>
                                     <div class="detail-name">Today's Sales</div>
                                 </div>
                         
                                 <div class="statistic-details-item">
-                                    <span class="text-muted"><span class="text-primary"><i
-                                                class="fas fa-caret-up"></i></span>9%</span>
-                                    <div class="detail-value">Rp 11.000.000</div>
+                                    <span class="text-muted"><span class=""><i
+                                                class="{{ $selling['monthly']['percentage'] > 0 ? 'fas fa-caret-up text-primary' : 'fas fa-caret-down text-danger' }}"></i></span>{{ $selling['monthly']['percentage'] }}%</span>
+                                    <div class="detail-value">@money($selling['monthly']['range'][1] , 'IDR' , true)</div>
                                     <div class="detail-name">This Month's Sales</div>
                                 </div>
                               
@@ -206,7 +206,7 @@
                                     </tr>
                                     @endforeach
                                 </table>
-
+                              
                                 <div class="p-4">
                                     {{ $orders->links() }}
                                 </div>
@@ -312,33 +312,41 @@ id="orderModal{{ $orderDetail->id }}">
         })
 
         const statistikType = (type) => {
+            let labelsData = []
+            let range = []
            if(type == 'daily'){
             document.querySelector('#daily-chart').classList.add('btn-primary')
             document.querySelector('#month-chart').classList.remove('btn-primary')
-            labelsData = ["Senin", "Selasa"]
-            range = [1350000, 1500000]
+
+            labelsData = ["{{ $selling['daily']['labels'][0] }}", "{{ $selling['daily']['labels'][1] }}"];
+            range = [{{ $selling['daily']['range'][0] }} , {{ $selling['daily']['range'][1] }}]
             setTimeout(() => {
                 chart(labelsData, range)
             }, 50);
            } else {
             document.querySelector('#month-chart').classList.add('btn-primary')
             document.querySelector('#daily-chart').classList.remove('btn-primary')
-            labelsData = ["November", "Desember"]
-            range = [10900000, 11000000]
+
+            labelsData = ["{{ $selling['monthly']['labels'][0] }}", "{{ $selling['monthly']['labels'][1] }}"];
+            range = [{{ $selling['monthly']['range'][0] }} , {{ $selling['monthly']['range'][1] }}]
             setTimeout(() => {
                 chart(labelsData, range)
             }, 50);
            }
         }
 
-
+    let myChart = null
 
    const chart = (labelsData, range) => {
     "use strict";
-       
-        var statistics_chart = document.getElementById("myChart").getContext('2d');
 
-        var myChart = new Chart(statistics_chart, {
+        if(myChart instanceof Chart){
+            myChart.destroy()
+        }
+
+        const statistics_chart = document.getElementById("myChart").getContext('2d');
+        
+        myChart = new Chart(statistics_chart, {
         type: 'line',
         data: {
             //["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
@@ -378,64 +386,8 @@ id="orderModal{{ $orderDetail->id }}">
         }
         });
 
-        $('#visitorMap').vectorMap(
-        {
-        map: 'world_en',
-        backgroundColor: '#ffffff',
-        borderColor: '#f2f2f2',
-        borderOpacity: .8,
-        borderWidth: 1,
-        hoverColor: '#000',
-        hoverOpacity: .8,
-        color: '#ddd',
-        normalizeFunction: 'linear',
-        selectedRegions: false,
-        showTooltip: true,
-        pins: {
-            id: '<div class="jqvmap-circle"></div>',
-            my: '<div class="jqvmap-circle"></div>',
-            th: '<div class="jqvmap-circle"></div>',
-            sy: '<div class="jqvmap-circle"></div>',
-            eg: '<div class="jqvmap-circle"></div>',
-            ae: '<div class="jqvmap-circle"></div>',
-            nz: '<div class="jqvmap-circle"></div>',
-            tl: '<div class="jqvmap-circle"></div>',
-            ng: '<div class="jqvmap-circle"></div>',
-            si: '<div class="jqvmap-circle"></div>',
-            pa: '<div class="jqvmap-circle"></div>',
-            au: '<div class="jqvmap-circle"></div>',
-            ca: '<div class="jqvmap-circle"></div>',
-            tr: '<div class="jqvmap-circle"></div>',
-        },
-        });
-
-        // weather
-        getWeather();
-        setInterval(getWeather, 600000);
-
-        function getWeather() {
-        $.simpleWeather({
-        location: 'Bogor, Indonesia',
-        unit: 'c',
-        success: function(weather) {
-            var html = '';
-            html += '<div class="weather">';
-            html += '<div class="weather-icon text-primary"><span class="wi wi-yahoo-' + weather.code + '"></span></div>';
-            html += '<div class="weather-desc">';
-            html += '<h4>' + weather.temp + '&deg;' + weather.units.temp + '</h4>';
-            html += '<div class="weather-text">' + weather.currently + '</div>';
-            html += '<ul><li>' + weather.city + ', ' + weather.region + '</li>';
-            html += '<li> <i class="wi wi-strong-wind"></i> ' + weather.wind.speed+' '+weather.units.speed + '</li></ul>';
-            html += '</div>';
-            html += '</div>';
-
-            $("#myWeather").html(html);
-        },
-        error: function(error) {
-            $("#myWeather").html('<div class="alert alert-danger">'+error+'</div>');
-        }
-        });
-        }
+      
+        
 
    }
     </script>

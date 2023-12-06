@@ -8,6 +8,8 @@ interface OrderRepositoryInterface extends BaseRepositoryInterface
 
     public function takeFiveLatestOrder();
 
+    public function getSellingPercentage();
+
     public function searchByCode(string $code);
 
     public function getFirst();

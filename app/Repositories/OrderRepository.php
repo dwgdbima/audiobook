@@ -38,6 +38,20 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         return $fiveOrders;
     }
 
+
+    public function getSellingPercentage()
+    {
+        $month = now()->format('m');
+
+        $lastMonth = $this->modelClass::with(['orderDetails.product'])->whereMonth('created_at' , $month - 1)->get();
+        $currentMonth = $this->modelClass::with(['orderDetails.product'])->whereMonth('created_at' , $month)->get();
+
+        return [
+            'lastMonth' => $lastMonth,
+            'currentMonth' => $currentMonth
+        ];
+    }
+
     public function searchByCode(string $code)
     {
         $orders = $this->modelClass::with(['user' , 'orderDetails.product.book'])

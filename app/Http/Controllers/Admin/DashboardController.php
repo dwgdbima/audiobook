@@ -33,10 +33,12 @@ class DashboardController extends Controller
         $orders = $request->ord_code ? $this->orderServiceInterface->searchByCode($request->ord_code) : $this->orderServiceInterface->getAllOrders();
 
         $fiveOrders = $this->orderServiceInterface->takeFiveLatestOrder();
-
+        $sellingPercentage = $this->orderServiceInterface->getSellingPercentage();
+       
         return view('web.admin.pages.dashboard-general-dashboard' , [
             'orders' => $orders,
-            'fiveOrders' => $fiveOrders
+            'fiveOrders' => $fiveOrders,
+            'selling' => $sellingPercentage
         ]);
     }
 
