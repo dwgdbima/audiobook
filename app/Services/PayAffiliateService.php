@@ -16,7 +16,10 @@ class PayAffiliateService extends BaseService implements PayAffiliateServiceInte
             'virtual_account'   => env('IPAYMU_VA'),
             'api_key'           => env('IPAYMU_KEY')
         ]);
+    }
 
-        
+    public function getByUserIdAndOrderId($user_id, $order_id)
+    {
+        return $this->repository->findFirst([['user_id', $user_id], ['order_id', $order_id]]);
     }
 }
