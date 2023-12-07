@@ -12,7 +12,7 @@ class IpaymuSplitPayment
     {
         $body = [
             'sender' => $data['sender'],
-            'receiver' => $data['reciever'],
+            'receiver' => $data['receiver'],
             'amount' => $data['amount'],
             'referenceId' => $data['referenceId'],
         ];
