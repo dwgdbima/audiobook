@@ -303,7 +303,7 @@ class OrderService extends BaseService implements OrderServiceInterface
                     $this->payAffiliateService->update($payAffiliate->id, ['status' => 1]);
                 }
                 
-                dd($splitPayment);
+                return $payAffiliate;
             }
 
         }
