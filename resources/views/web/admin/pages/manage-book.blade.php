@@ -14,6 +14,45 @@ href="{{ asset('dist/admin/library/selectric/public/selectric.css') }}">
 @section('main')
 <div class="main-content">
     <section class="section">
+       
+        @if (auth()->user()->hasRole('admin'))
+        <div class="mx-auto">
+            <div class="card">
+                <form action="/admin/book/{{$book->id}}/only" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="card-header">
+                        <h4>Manage Deskripsi Buku {{ $book->title }}</h4>
+                    </div>
+                    <div class="card-body">
+                
+                        <div class="form-group ">
+                            <label>Deskripsi Buku</label>
+                            <textarea class="summernote-simple"
+                            name="desc"
+                               
+                                required="">{!! old('desc' , $book->desc) !!}</textarea>
+
+                                @error('desc')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                                
+                        </div>
+
+                    </div>
+                    <div class="card-footer text-right">
+                        <button class="btn btn-primary">Perbarui</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        @endif
+
+
+        @if (auth()->user()->hasRole('super_admin'))
         <div class="mx-auto">
             <div class="card">
                 <form action="/admin/book/{{$book->id}}" method="POST" enctype="multipart/form-data">
@@ -90,7 +129,7 @@ href="{{ asset('dist/admin/library/selectric/public/selectric.css') }}">
                         </div>
                     </div>
                     <div class="card-footer text-right">
-                        <button class="btn btn-primary">Submit</button>
+                        <button class="btn btn-primary">Perbarui</button>
                     </div>
                 </form>
             </div>
@@ -188,7 +227,7 @@ href="{{ asset('dist/admin/library/selectric/public/selectric.css') }}">
                             <hr>
                                 @endforeach
                                 <div class="card-footer text-right">
-                                    <button class="btn btn-primary">Submit</button>
+                                    <button class="btn btn-primary">Perbarui</button>
                                 </div>
                             </form>
                             </div>
@@ -233,6 +272,7 @@ href="{{ asset('dist/admin/library/selectric/public/selectric.css') }}">
               
         </div>
         </div>
+        @endif
     </section>
 </div>
 

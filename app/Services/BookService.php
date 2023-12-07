@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contract\Service\BookServiceInterface;
+use App\Models\Book;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -89,5 +90,11 @@ class BookService extends BaseService implements BookServiceInterface
         }
        
         return $this->repository->update($book , $data);
+    }
+
+
+    public function updateBookAdmin(Book $book, array $data)
+    {
+        return $this->repository->update($book, $data);
     }
 }

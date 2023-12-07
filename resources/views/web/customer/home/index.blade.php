@@ -96,7 +96,7 @@
                         <div class="accordion-header" id="heading-{{$product->id}}">
                             <div class="d-flex">
                                 <div class="bg-danger me-3" style="width: 120px; height:auto">
-                                    <img src="{{ asset('dist/img/core-img/paket/p-'. $prodKey+1 .'.png') }}" alt="" style="width: 120px; height:120px;">
+                                    <img src="{{ asset('dist/img/core-img/paket/p-'. $prodKey+1 .'.jpeg') }}" alt="" style="width: 120px; height:120px;">
                                 </div>
                                 <div>
                                     <h3 style="margin-bottom: 0;">{{$product->name}}</h3>

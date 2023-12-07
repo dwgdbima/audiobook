@@ -12,6 +12,7 @@ use App\Http\Requests\CreateBookRequest;
 use App\Http\Requests\ProductChapterUpdateRequest;
 use App\Http\Requests\StoreProductsRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Http\Requests\UpdateBookRequestAdmin;
 use App\Models\Book;
 use App\Models\Chapter;
 use App\Models\Product;
@@ -93,6 +94,16 @@ class BookController extends Controller
         $validatedData = $request->validated();
        
         $this->bookServiceInterface->updateBook($book, $validatedData);
+        Alert::success('Berhasil' , 'Buku Berhasil Diperbarui');
+        return back();
+    }
+
+
+    public function updateBookAdmin(UpdateBookRequestAdmin $request , Book $book)
+    {
+        $validatedData = $request->validated();
+        
+        $this->bookServiceInterface->updateBookAdmin($book, $validatedData);
         Alert::success('Berhasil' , 'Buku Berhasil Diperbarui');
         return back();
     }

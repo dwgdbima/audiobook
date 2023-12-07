@@ -44,7 +44,12 @@ interface BookServiceInterface extends BaseServiceInterface
     public function searchByTitle($title);
 
     /**
-     * Update book
+     * Update book only for super admin
      */
     public function updateBook(Book $book , array $data);
+
+    /**
+     * Update book only for admin
+     */
+    public function updateBookAdmin(Book $book, array $data);
 }

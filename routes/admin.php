@@ -28,6 +28,10 @@ Route::controller(ProfileController::class)->group(function() {
 
 Route::controller(BookController::class)->group(function() {
    
+    Route::get('/book/{book}/manage' , 'manageBookView')->name('manage.book');
+    
+    Route::put('/book/{book}/only' , 'updateBookAdmin')->name('update.book.admin');
+
     Route::middleware('role:super_admin')->group(function() {
 
         Route::get('/book/create' , 'createBookView')->name('create.book.view');
@@ -35,7 +39,6 @@ Route::controller(BookController::class)->group(function() {
         Route::get('/product/create' , 'createProductView')->name('create.product.view');
         Route::get('/product/chapter' , 'assignChapterToProductView')->name('assign.product.chapter.view');
         Route::get('/get-related-chapter' , 'getRelatedChapter')->name('get.related.chapter');
-        Route::get('/book/{book}/manage' , 'manageBookView')->name('manage.book');
 
         Route::post('/book' , 'storeBook')->name('store.book');
         Route::post('/chapter' , 'assignChapter')->name('assign.chapter');
