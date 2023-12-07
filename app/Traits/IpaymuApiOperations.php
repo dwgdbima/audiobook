@@ -45,22 +45,26 @@ trait IpaymuApiOperations
             'signature: '.$signature,
             'timestamp: '.$timestamp,
         ];
-        // dd($params);
+
         $jsonBody = json_encode($params, JSON_UNESCAPED_SLASHES);
 
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => $jsonBody,
+            CURLOPT_HTTPHEADER => $headers,
+        ));
 
-        curl_setopt($ch, CURLOPT_POST, count($params));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonBody);
-
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        $err = curl_error($ch);
-        $ret = curl_exec($ch);
-        curl_close($ch);
+        $err = curl_error($curl);
+        $ret = curl_exec($curl);
+        curl_close($curl);
         if ($err) {
 
             return $err;
@@ -75,5 +79,33 @@ trait IpaymuApiOperations
 
             return $ret;
         }
+
+        // $ch = curl_init($url);
+        // curl_setopt($ch, CURLOPT_HEADER, false);
+        // curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        // curl_setopt($ch, CURLOPT_POST, count($params));
+        // curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonBody);
+
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        // curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        // $err = curl_error($ch);
+        // $ret = curl_exec($ch);
+        // curl_close($ch);
+        // if ($err) {
+
+        //     return $err;
+        // } else {
+        //     $ret = json_decode($ret, true);
+        //     if (@$ret->Status === -1001 || @$ret->Status === 401) {
+        //         $msg = $ret->Status === -1001 ? $ret->Keterangan : '';
+        //         $msg = $ret->Status === 401 ? $ret->Message : $msg;
+
+        //         throw new IpaymuInvalidApiKeyException($msg);
+        //     }
+
+        //     return $ret;
+        // }
     }
 }

@@ -31,18 +31,24 @@ class IpaymuBalance
      *
      * @return mixed
      */
-    public static function getBalance(string $format = 'json')
+    public static function getBalance($va, string $format = 'json')
     {
-        $data = [];
-        $data['key'] = Ipaymu::getApiKey();
-        if (!empty($format)) {
-            self::validateFormat($format);
-            $data['format'] = $format;
-        }
-        $params = http_build_query($data);
+        // $data = [];
+        // $data['key'] = Ipaymu::getApiKey();
+        // if (!empty($format)) {
+        //     self::validateFormat($format);
+        //     $data['format'] = $format;
+        // }
+        // $params = http_build_query($data);
 
-        $url = '/api/saldo?'.$params;
+        // $url = '/api/saldo?'.$params;
 
-        return static::_request('GET', $url);
+        $body = [
+            'account' => $va
+        ];
+
+        $url = '/api/v2/balance';
+
+        return static::_request('POST', $url, $body);
     }
 }

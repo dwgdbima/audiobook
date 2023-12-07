@@ -4,10 +4,15 @@ use App\Contract\Service\BookServiceInterface;
 use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\Menu\FooterController;
 use App\Http\Controllers\Menu\SidebarController;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\Order;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,12 +33,8 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('test', function(BookServiceInterface $bookServiceInterface){
-    dd(asset('dist'));
+Route::get('test', function(){
+    dd(Str::uuid());
 });
-Route::get('/ngetes', function () {
-  echo "TEST";
-    
-});
-Route::post('webhook-ipaymu', [OrderController::class, 'webhookIpaymu'])->name('webhook.ipaymu');
 
+Route::post('webhook-ipaymu/', [OrderController::class, 'webhookIpaymu'])->name('webhook.ipaymu');

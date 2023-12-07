@@ -1,14 +1,11 @@
 <?php
 
-use App\Http\Controllers\Auth\ChangePasswordController;
-use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Affiliator\AffiliatorController;
 use App\Http\Controllers\Customer\CartController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\Customer\PlaylistController;
 use App\Http\Controllers\Customer\ProfileController;
-use App\Http\Controllers\Menu\FooterController;
-use App\Http\Controllers\Menu\SidebarController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(HomeController::class)->group(function() {
@@ -46,3 +43,5 @@ Route::prefix('playlists/')->name('playlists.')->group(function(){
     Route::get('/{id}', [PlaylistController::class, 'show'])->name('show');
 });
 
+Route::get('join-affiliator', [AffiliatorController::class, 'joinAffiliator'])->name('join-affiliator');
+Route::post('join-affiliator', [AffiliatorController::class, 'store'])->name('join-affiliator.store');

@@ -9,14 +9,22 @@ class IpaymuRegister
 {
     use IpaymuApiOperations;
 
+    public function __construct()
+    {
+        
+    }
+
     /**
      * @return mixed
      */
-    public static function create(array $user = [])
+    public static function create(array $user)
     {
-        $user = Ipaymu::getUser();
-        $user['validEmail'] = true;
-
+        Ipaymu::init([
+            'env'               => env('IPAYMU_ENV'),
+            'virtual_account'   => env('IPAYMU_VA'),
+            'api_key'           => env('IPAYMU_KEY')
+        ]);
+        
         $url = '/api/v2/register';
 
         return self::_request('POST', $url, $user);

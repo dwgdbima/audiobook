@@ -7,6 +7,7 @@
         <div class="register-form mt-5">
             <form action="{{ route('register') }}" method="POST">
                 @csrf
+                <input type="hidden" name="referral" value="{{request()->input('ref')}}">
                 <div class="form-group text-start mb-4"><span>Nama</span>
                     <label for="name"><i class="fa-solid fa-user"></i></label>
                     <input class="form-control @error('name') is-invalid @enderror" id="name" name="name" type="text"

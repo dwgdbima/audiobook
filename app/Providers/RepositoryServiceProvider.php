@@ -16,6 +16,8 @@ use App\Contract\Repository\CommentRepositoryInterface;
 use App\Contract\Repository\OrderRepositoryInterface;
 use App\Contract\Repository\OrderDetailRepositoryInterface;
 use App\Contract\Repository\ChapterRepositoryInterface;
+use App\Contract\Repository\AffiliatorRepositoryInterface;
+use App\Contract\Repository\PayAffiliateRepositoryInterface;
 
 // Implement
 use App\Repositories\BaseRepository;
@@ -28,6 +30,8 @@ use App\Repositories\CommentRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\OrderDetailRepository;
 use App\Repositories\ChapterRepository;
+use App\Repositories\AffiliatorRepository;
+use App\Repositories\PayAffiliateRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -48,6 +52,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
         $this->app->bind(OrderDetailRepositoryInterface::class, OrderDetailRepository::class);
         $this->app->bind(ChapterRepositoryInterface::class, ChapterRepository::class);
+        $this->app->bind(AffiliatorRepositoryInterface::class, AffiliatorRepository::class);
+        $this->app->bind(PayAffiliateRepositoryInterface::class, PayAffiliateRepository::class);
     }
 
     /**
