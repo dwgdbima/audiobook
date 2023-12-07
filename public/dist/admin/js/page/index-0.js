@@ -1,14 +1,15 @@
-"use strict";
+/* "use strict";
 
 var statistics_chart = document.getElementById("myChart").getContext('2d');
 
 var myChart = new Chart(statistics_chart, {
   type: 'line',
   data: {
-    labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    //["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
+    labels: ["Senin", "Selasa"],
     datasets: [{
       label: 'Statistics',
-      data: [640, 387, 530, 302, 430, 270, 488],
+      data: [1350000, 1500000],
       borderWidth: 5,
       borderColor: '#6777ef',
       backgroundColor: 'transparent',
@@ -28,7 +29,7 @@ var myChart = new Chart(statistics_chart, {
           drawBorder: false,
         },
         ticks: {
-          stepSize: 150
+          stepSize: 150000
         }
       }],
       xAxes: [{
@@ -99,3 +100,4 @@ function getWeather() {
   }
   });
 }
+ */

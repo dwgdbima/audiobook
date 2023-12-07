@@ -19,15 +19,13 @@
                 <!-- User Information-->
                 <div class="card user-info-card">
                     <div class="card-body p-4 d-flex align-items-center mx-auto">
-                     <div class="user-profile me-3">
-                      <img id="profile-pic" src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt="" style="height: 75px;">
+                     <div class="user-profile me-3 position-relative">
+                      <img id="profile-pic" src="{{ auth()->user()->profile_picture }}" class="rounded-circle" alt="" style="height: 75px;">
                       
-                        <div class="change-user-thumb">
-                          
-                            <input class="form-control-file" type="file" onchange="uploadPicture(event)" name="profile_picture">
-                            <button><i class="fa-solid fa-pen"></i></button>
-                         
-                        </div>
+                      <div class="change-user-thumb position-absolute " style="margin-top: -20px; z-index:10">
+                        <label for="prof-pic" class="rounded-circle border p-1 px-2 shadow-lg bg-secondary"><i class="fa-solid fa-pen"></i></label>
+                        <input id="prof-pic" class="form-control-file d-none" type="file" onchange="uploadPicture(event)" name="profile_picture">
+                    </div>
                       </div>
                     
                     </div>

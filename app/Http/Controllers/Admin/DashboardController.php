@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Contract\Repository\UserRepositoryInterface;
+use App\Contract\Service\BookServiceInterface;
 use App\Contract\Service\CommentServiceInterface;
 use App\Contract\Service\OrderServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,19 +16,30 @@ class DashboardController extends Controller
 {
     protected $userRepositoryInterface;
     protected $orderServiceInterface;
-    protected $commentServiceInterface;
+    protected $commentServiceInterface; 
+    protected $bookServiceInterface; 
 
-    public function __construct(UserRepositoryInterface $userRepositoryInterface , OrderServiceInterface $orderServiceInterface, CommentServiceInterface $commentServiceInterface)
+    public function __construct(UserRepositoryInterface $userRepositoryInterface , OrderServiceInterface $orderServiceInterface, CommentServiceInterface $commentServiceInterface, BookServiceInterface $bookServiceInterface)
     {
         $this->userRepositoryInterface = $userRepositoryInterface;
         $this->orderServiceInterface = $orderServiceInterface;
         $this->commentServiceInterface = $commentServiceInterface;
+        $this->bookServiceInterface = $bookServiceInterface;
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('web.admin.pages.dashboard-general-dashboard');
+        $orders = $request->ord_code ? $this->orderServiceInterface->searchByCode($request->ord_code) : $this->orderServiceInterface->getAllOrders();
+
+        $fiveOrders = $this->orderServiceInterface->takeFiveLatestOrder();
+        $sellingPercentage = $this->orderServiceInterface->getSellingPercentage();
+       
+        return view('web.admin.pages.dashboard-general-dashboard' , [
+            'orders' => $orders,
+            'fiveOrders' => $fiveOrders,
+            'selling' => $sellingPercentage
+        ]);
     }
 
 
@@ -46,6 +59,16 @@ class DashboardController extends Controller
        
         return view('web.admin.pages.show-order-management' , [
             'orders' => $orders
+        ]);
+    }
+
+
+    public function showBooks(Request $request)
+    {
+        $books = $request->s_name ? $this->bookServiceInterface->searchByTitle($request->s_name) : $this->bookServiceInterface->getAllWithRelationPagination();
+        
+        return view('web.admin.pages.show-book-management' , [
+            'books' => $books
         ]);
     }
 

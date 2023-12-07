@@ -21,11 +21,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         ->with(['orders' , 'reviews'])
         ->paginate(5)
         ->withQueryString();
-
+       
         foreach($customers as &$data){
             $data['total_orders'] = $data->orders->count();
             $data['total_reviews'] = $data->reviews->count();
         }
+        
         return $customers;
     }
 

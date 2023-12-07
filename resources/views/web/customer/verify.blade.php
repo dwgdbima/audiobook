@@ -13,6 +13,7 @@
                     </div>
                 </div>
             </div>
+           
             <!-- User Meta Data-->
             <div class="card user-data-card">
                 <div class="card-body">

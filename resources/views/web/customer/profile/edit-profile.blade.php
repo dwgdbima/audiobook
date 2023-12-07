@@ -12,7 +12,7 @@
         <div class="card user-info-card">
           <div class="card-body p-4 d-flex align-items-center">
            <div class="user-profile me-3">
-            <img id="profile-pic" src="{{ asset($user->profile_picture) }}" alt="" style="height: 75px; width:75px">
+            <img id="profile-pic" src="{{ auth()->user()->profile_picture }}" alt="" style="height: 75px; width:75px">
             
               <div class="change-user-thumb">
                 

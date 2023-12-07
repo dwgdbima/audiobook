@@ -6,7 +6,7 @@ aria-labelledby="suhaOffcanvasLabel">
     <div class="offcanvas-body">
         <!-- Sidenav Profile-->
         <div class="sidenav-profile">
-            <div class="user-profile"><img src="{{auth()->user()->profile_picture}}" alt=""></div>
+            <div class="user-profile"><img src="{{ auth()->user()->profile_picture }}" alt="" style="height: 75px; width:75px"></div>
             <div class="user-info">
                 <h5 class="user-name mb-1 text-white">{{auth()->user()->name}}</h5>
             </div>

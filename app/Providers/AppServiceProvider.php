@@ -27,6 +27,9 @@ use App\Services\OrderService;
 use App\Services\ChapterService;
 
 use Carbon\Carbon;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
@@ -59,5 +62,27 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
         config(['app.locale' => 'id']);
         Carbon::setLocale('id');
+
+        VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
+            return (new MailMessage)
+                ->subject('Verifikasi Email')
+                ->line('Terimakasih sudah mendaftar akun pada Audiobook Subiakto,')
+                ->line('Klik button berikut untuk verifikasi email kamu.')
+                ->action('Verify Email', $url)
+                ->line('Jika kamu tidak merasa membuat akun, abaikan pesan ini.');
+        });
+
+        
+
+        ResetPassword::toMailUsing(function (object $notifiable, string $token) {
+            $url = env('APP_URL') . '/password/reset/' . $token . '?email=' . str_replace("@" , '%40' , $notifiable->email);
+          
+            return (new MailMessage)
+                ->subject('Reset Password')
+                ->line('Kamu mendapat pesan ini karena kami menerima permintaan reset password dari akun kamu.')
+                ->action('Reset Password', $url)
+                ->line('link ini akan kedaluwarsa dalam ' . env('PASSWORD_RESET_EXPIRE') . ' menit.')
+                ->line('Jika kamu tidak merasa melakukan permintaan, abaikan pesan ini.');
+        });
     }
 }
