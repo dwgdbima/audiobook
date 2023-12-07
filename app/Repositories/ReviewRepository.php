@@ -14,7 +14,7 @@ class ReviewRepository extends BaseRepository implements ReviewRepositoryInterfa
         $reviews = $this->modelClass::with(['comments.user' , 'user'])->where('book_id', $id)
         ->orderByRaw('user_id = ' . auth()->user()->id . ' DESC')
         ->get();
-
+        
         return $reviews;
     }
 

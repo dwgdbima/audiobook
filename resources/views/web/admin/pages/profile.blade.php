@@ -17,7 +17,7 @@
                 <div class="card user-info-card">
                     <div class="card-body p-4 d-flex align-items-end mx-auto position-relative" style="height: 100px;">
                         <div class="user-profile me-3 ">
-                            <img id="profile-pic"  src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('dist/img/human/subiakto-intro.jpg') }}" alt="" class="border border-dark rounded-circle" style="width: 75px; height: 75px;">
+                            <img id="profile-pic"  src="{{ auth()->user()->profile_picture }}" alt="" class="border border-dark rounded-circle" style="width: 75px; height: 75px;">
                            
                         </div>
                     

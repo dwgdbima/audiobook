@@ -11,11 +11,45 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
     public function getAllOrders()
     {
         $orders = $this->modelClass::with(['user' , 'orderDetails.product.book'])
+        ->latest()
         ->paginate(5)
         ->withQueryString();
 
         return $orders;
 
+    }
+
+
+    public function takeFiveLatestOrder()
+    {
+        $fiveOrders = $this->modelClass::with(['user:name,id', 'orderDetails' => function($orderDetail) {
+            $orderDetail->select('id' , 'order_id' , 'product_id')
+            ->with(['product' => function($product) {
+                $product->select('id' , 'name' , 'book_id' , 'price')
+                ->with(['book:id,title']);
+            }]);
+        }])
+        ->select('id' , 'user_id' , 'created_at')
+        ->latest()
+        ->take(5)
+        ->get();
+        
+        
+        return $fiveOrders;
+    }
+
+
+    public function getSellingPercentage()
+    {
+        $month = now()->format('m');
+
+        $lastMonth = $this->modelClass::with(['orderDetails.product'])->whereMonth('created_at' , $month - 1)->get();
+        $currentMonth = $this->modelClass::with(['orderDetails.product'])->whereMonth('created_at' , $month)->get();
+
+        return [
+            'lastMonth' => $lastMonth,
+            'currentMonth' => $currentMonth
+        ];
     }
 
     public function searchByCode(string $code)

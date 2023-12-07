@@ -51,6 +51,7 @@ class ProfileController extends Controller
         if(isset($validatedData['profile_picture'])){
             Storage::delete(auth()->user()->profile_picture);
             $validatedData['profile_picture'] = $validatedData['profile_picture']->store('Admin/Profile');
+            $validatedData['profile_picture'] = 'storage/' . $validatedData['profile_picture'];
         }
        
         $this->userRepositoryService->update_profile($validatedData);

@@ -67,6 +67,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getProfilePictureAttribute($value)
     {
-        return $value ?? 'dist/img/human/default-profile.png';
+        return $value ? asset($value) : asset('dist/img/human/default-profile.png');
     }
 }

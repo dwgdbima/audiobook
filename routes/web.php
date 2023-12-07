@@ -4,6 +4,8 @@ use App\Contract\Service\BookServiceInterface;
 use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\Menu\FooterController;
 use App\Http\Controllers\Menu\SidebarController;
+use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +31,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('test', function(BookServiceInterface $bookServiceInterface){
     dd(asset('dist'));
 });
-
+Route::get('/ngetes', function () {
+  echo "TEST";
+    
+});
 Route::post('webhook-ipaymu', [OrderController::class, 'webhookIpaymu'])->name('webhook.ipaymu');
 

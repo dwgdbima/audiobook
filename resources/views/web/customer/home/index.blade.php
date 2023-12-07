@@ -46,6 +46,7 @@
                     <span><strong>Author</strong> &minus; {{$book->author}}</span>
                 </div>
             </div>
+            
             <!-- Ratings-->
             <div class="product-ratings">
                 <div class="container d-flex align-items-center justify-content-between rtl-flex-d-row-r">
@@ -90,10 +91,18 @@
                     @php
                         $currentLoopProduct += 1
                     @endphp
+                   
                     <div class="accordion-item" id="each-bundle{{ $currentLoopProduct }}" style="{{ $currentLoopProduct <= 3 ? 'display: block;' : 'display: none;' }}">
                         <div class="accordion-header" id="heading-{{$product->id}}">
-                            <h2 style="margin-bottom: 0;">{{$product->name}}</h2>
-                            <span class="text-success"><strong>@money($product->price, 'IDR', true)</strong></span> &minus; <span>{{$product->chapters->count()}} Chapter</span>
+                            <div class="d-flex">
+                                <div class="bg-danger me-3" style="width: 120px; height:auto">
+                                    <img src="{{ asset('dist/img/core-img/paket/p-'. $prodKey+1 .'.jpeg') }}" alt="" style="width: 120px; height:120px;">
+                                </div>
+                                <div>
+                                    <h3 style="margin-bottom: 0;">{{$product->name}}</h3>
+                                    <span class="text-success"><strong>@money($product->price, 'IDR', true)</strong></span> &minus; <span>{{$product->chapters->count()}} Chapter</span>
+                                </div>
+                            </div>
                             <div class="d-flex justify-content-end">
                                 <button class="btn btn-info" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapse-{{$i}}" aria-expanded="true" aria-controls="collapse-{{$i}}">
@@ -143,7 +152,7 @@
                                     {{-- Review section --}}
                                    <div class="d-flex flex-column">
                                     <div class="d-flex">
-                                        <div class="user-thumbnail"><img src="{{ $review->user->profile_picture }}" alt=""></div>
+                                        <div class="user-thumbnail"><img src="{{ asset($review->user->profile_picture) }}" alt="" style="width:40px; height:40px"></div>
                                     <div class="rating-comment">
                                         <span class="name-date"><strong>{{$review->user->name == auth()->user()->name ? 'Review kamu' : $review->user->name}}</strong>, {{$review->created_at->format('d M Y')}} 
                                         @if (auth()->user()->hasRole('admin') && !$review->comments)
@@ -177,8 +186,9 @@
                                      {{-- Comment section --}}
                                     
                                     @if ($review->comments)
+                                    
                                     <div class="d-flex ms-5 mt-3">
-                                        <div class="user-thumbnail"><img src="{{ $review->comments->user->profile_picture ? asset('storage/' . $review->comments->user->profile_picture) : asset('dist/img/human/default-profile.png') }}" alt=""></div>
+                                        <div class="user-thumbnail"><img src="{{ $review->comments->user->profile_picture }}" alt="" style="width:40px; height:40px"></div>
                                         <div class="rating-comment">
                                             <span class="name-date"><strong>Admin</strong>, {{$review->comments->created_at->format('d M Y')}}</span>
                                             
