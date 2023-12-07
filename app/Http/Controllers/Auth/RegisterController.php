@@ -7,7 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Traits\RedirectsAuth;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Crypt;
 
 class RegisterController extends Controller
 {
@@ -49,6 +52,9 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
+        if($ref = request()->input('ref')){
+            Cookie::queue(Cookie::make('referral', $ref, 10080));
+        }
 
         return view('web.auth.register', [
             'title' => 'Register',
@@ -64,7 +70,7 @@ class RegisterController extends Controller
      */
     public function register(StoreUserRequest $request)
     {
-        $user = $this->authService->register($request->validated());
+        $user = $this->authService->register($request->all());
 
         $this->guard()->login($user);
 

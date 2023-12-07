@@ -26,5 +26,7 @@ interface AuthServiceInterface
      */
     public function changePassword(array $data);
 
+    public function singleSignOnIpaymu($data);
+
     public function test();
 }

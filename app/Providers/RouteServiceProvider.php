@@ -45,6 +45,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('customer/')
                 ->name('customer.')
                 ->group(base_path('routes/customer.php'));
+            
+            Route::middleware(['web', 'auth', 'verified', 'role:affiliator'])
+                ->prefix('affiliator/')
+                ->name('affiliator.')
+                ->group(base_path('routes/affiliator.php'));
         });
     }
 

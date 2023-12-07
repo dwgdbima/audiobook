@@ -4,8 +4,12 @@ namespace App\Services;
 
 use App\Contract\Repository\OrderDetailRepositoryInterface;
 use App\Contract\Repository\OrderRepositoryInterface;
+use App\Contract\Repository\UserRepositoryInterface;
+use App\Contract\Service\AffiliatorServiceInterface;
 use App\Contract\Service\OrderServiceInterface;
+use App\Contract\Service\PayAffiliateServiceInterface;
 use App\Ipaymu\Ipaymu;
+use App\Ipaymu\IpaymuSplitPayment;
 use App\Ipaymu\PaymentRedirect;
 use App\Models\Order;
 use App\Traits\HelperTrait;
@@ -15,12 +19,15 @@ use Illuminate\Support\Str;
 class OrderService extends BaseService implements OrderServiceInterface
 {
     use HelperTrait;
-    protected $orderDetailRepository;
+    protected $orderDetailRepository, $payAffiliateService, $affiliatorService, $userRepository;
 
-    public function __construct(OrderRepositoryInterface $orderRepositoryInterface, OrderDetailRepositoryInterface $orderDetailRepositoryInterface)
+    public function __construct(OrderRepositoryInterface $orderRepositoryInterface, OrderDetailRepositoryInterface $orderDetailRepositoryInterface, PayAffiliateServiceInterface $payAffiliateServiceInterface, AffiliatorServiceInterface $affiliatorServiceInterface, UserRepositoryInterface $userRepositoryInterface)
     {
         $this->repository = $orderRepositoryInterface;
         $this->orderDetailRepository = $orderDetailRepositoryInterface;
+        $this->payAffiliateService = $payAffiliateServiceInterface;
+        $this->affiliatorService = $affiliatorServiceInterface;
+        $this->userRepository = $userRepositoryInterface;
     }
 
     public function getAllOrders()
@@ -264,7 +271,41 @@ class OrderService extends BaseService implements OrderServiceInterface
 
     public function updateStatusPayment($code, $status)
     {
-        $order = $this->repository->findFirst([['code', $code]]);
-        return $this->repository->update($order, ['status' => $status]);
+        $order = $this->repository->with(['orderDetails'])->findFirst([['code', $code]]);
+
+        $this->repository->update($order, ['status' => $status]);
+
+        if($status == 1){
+            $user = $this->userRepository->find($order->user_id);
+            if($user->referrer_id !== null){
+                $affiliator = $this->affiliatorService->getByUserId($user->referrer_id);
+
+                $payAffiliate = $this->payAffiliateService->create([
+                    'order_id' => $order->id,
+                    'user_id' => $user->referrer_id,
+                    'amount' => ($order->orderDetails->sum('product.price') * 10) / 100,
+                ]);
+
+                Ipaymu::init([
+                    'env'               => env('IPAYMU_ENV'),
+                    'virtual_account'   => env('IPAYMU_VA'),
+                    'api_key'           => env('IPAYMU_KEY')
+                ]);
+
+                $splitPayment = IpaymuSplitPayment::split([
+                    'sender' => env('IPAYMU_VA'),
+                    'receiver' => $affiliator->ipaymu_va,
+                    'amount' => $payAffiliate->amount,
+                    'referenceId' => $payAffiliate->id,
+                ]);
+
+                if($splitPayment['Status'] == 200){
+                    $this->payAffiliateService->update($payAffiliate->id, ['status' => 1]);
+                }
+                
+                dd($splitPayment);
+            }
+
+        }
     }
 }

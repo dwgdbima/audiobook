@@ -14,6 +14,8 @@ use App\Contract\Service\CartServiceInterface;
 use App\Contract\Service\CommentServiceInterface;
 use App\Contract\Service\OrderServiceInterface;
 use App\Contract\Service\ChapterServiceInterface;
+use App\Contract\Service\AffiliatorServiceInterface;
+use App\Contract\Service\PayAffiliateServiceInterface;
 
 // Implement
 use App\Services\BaseService;
@@ -25,6 +27,8 @@ use App\Services\CartService;
 use App\Services\CommentService;
 use App\Services\OrderService;
 use App\Services\ChapterService;
+use App\Services\AffiliatorService;
+use App\Services\PayAffiliateService;
 
 use Carbon\Carbon;
 use Illuminate\Auth\Notifications\ResetPassword;
@@ -50,6 +54,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CartServiceInterface::class, CartService::class);
         $this->app->bind(OrderServiceInterface::class, OrderService::class);
         $this->app->bind(ChapterServiceInterface::class, ChapterService::class);
+        $this->app->bind(AffiliatorServiceInterface::class, AffiliatorService::class);
+        $this->app->bind(PayAffiliateServiceInterface::class, PayAffiliateService::class);
     }
 
     /**

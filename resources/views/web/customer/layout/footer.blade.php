@@ -5,8 +5,8 @@
                 <li><a href="{{route('customer.index')}}"><i class="fa-solid fa-house"></i>Home</a></li>
                 <li><a href="{{route('customer.orders.index')}}"><i class="fas fa-file-invoice"></i>Transaksi</a></li>
                 <li><a href="{{route('customer.carts.index')}}"><i class="fa-solid fa-bag-shopping"></i>Basket</a></li>
-                <li><a href="{{route('customer.setting')}}"><i class="fa-solid fa-gear"></i>Settings</a></li>
                 <li><a href="{{route('customer.playlists.show', 1)}}"><i class="fas fa-headphones"></i>Playlist</a></li>
+                <li><a href="{{route('affiliator.index')}}"><i class="fas fa-handshake"></i>affiliator</a></li>
             </ul>
         </div>
     </div>

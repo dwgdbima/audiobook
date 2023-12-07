@@ -8,6 +8,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -28,7 +29,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone',
         'password',
         'profile_picture',
-        'address'
+        'address',
+        'referrer_id'
     ];
 
     /**
@@ -63,6 +65,26 @@ class User extends Authenticatable implements MustVerifyEmail
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function affiliator():HasOne
+    {
+        return $this->hasOne(Affiliator::class);
+    }
+
+    public function referrer()
+    {
+        return $this->belongsTo(User::class, 'referrer_id', 'id');
+    }
+
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'referrer_id', 'id');
+    }
+    
+    public function payAffiliates():HasMany
+    {
+        return $this->hasMany(PayAffiliate::class);
     }
 
     public function getProfilePictureAttribute($value)
