@@ -46,7 +46,7 @@ class AuthService implements AuthServiceInterface
         if(Cookie::has('referral')){
             $referral_code = Crypt::decrypt(Cookie::get('referral'));
             $affiliator = $this->affiliatorRepository->findFirst([['referral_code', $referral_code]]);
-            if($affiliator->exists()){
+            if($affiliator != null){
                 $fill['referrer_id'] = $affiliator->user_id;
             }
         }
@@ -54,7 +54,7 @@ class AuthService implements AuthServiceInterface
         if($data['referral']){
             $referral_code = Crypt::decrypt($data['referral']);
             $affiliator = $this->affiliatorRepository->findFirst([['referral_code', $referral_code]]);
-            if($affiliator->exists()){
+            if($affiliator != null){
                 $fill['referrer_id'] = $affiliator->user_id;
             }
         }
