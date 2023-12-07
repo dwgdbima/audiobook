@@ -280,30 +280,32 @@ class OrderService extends BaseService implements OrderServiceInterface
             if($user->referrer_id !== null){
                 $affiliator = $this->affiliatorService->getByUserId($user->referrer_id);
 
-                $payAffiliate = $this->payAffiliateService->create([
-                    'order_id' => $order->id,
-                    'user_id' => $user->referrer_id,
-                    'amount' => ($order->orderDetails->sum('product.price') * 10) / 100,
-                ]);
-
-                Ipaymu::init([
-                    'env'               => env('IPAYMU_ENV'),
-                    'virtual_account'   => env('IPAYMU_VA'),
-                    'api_key'           => env('IPAYMU_KEY')
-                ]);
-
-                $splitPayment = IpaymuSplitPayment::split([
-                    'sender' => env('IPAYMU_VA'),
-                    'receiver' => $affiliator->ipaymu_va,
-                    'amount' => $payAffiliate->amount,
-                    'referenceId' => $payAffiliate->id,
-                ]);
-
-                if($splitPayment['Status'] == 200){
-                    $this->payAffiliateService->update($payAffiliate->id, ['status' => 1]);
+                if($this->payAffiliateService->getByUserIdAndOrderId($affiliator->user_id, $order->id) == null){
+                    $payAffiliate = $this->payAffiliateService->create([
+                        'order_id' => $order->id,
+                        'user_id' => $user->referrer_id,
+                        'amount' => ($order->orderDetails->sum('product.price') * 10) / 100,
+                    ]);
+    
+                    Ipaymu::init([
+                        'env'               => env('IPAYMU_ENV'),
+                        'virtual_account'   => env('IPAYMU_VA'),
+                        'api_key'           => env('IPAYMU_KEY')
+                    ]);
+    
+                    $splitPayment = IpaymuSplitPayment::split([
+                        'sender' => env('IPAYMU_VA'),
+                        'receiver' => $affiliator->ipaymu_va,
+                        'amount' => $payAffiliate->amount,
+                        'referenceId' => $payAffiliate->id,
+                    ]);
+    
+                    if($splitPayment['Status'] == 200){
+                        $this->payAffiliateService->update($payAffiliate->id, ['status' => 1]);
+                    }
                 }
                 
-                return $payAffiliate;
+                return $order;
             }
 
         }
