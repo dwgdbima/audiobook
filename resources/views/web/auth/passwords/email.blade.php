@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-10 col-lg-8"><img class="big-logo" src="{{asset('dist/img/core-img/logo-white.png')}}" alt="">
+    <div class="col-10 col-lg-8"><img class="big-logo" src="{{asset('dist/img/human/subiakto-logo.png')}}" style="width: 200px; height:200px;" alt="">
         <!-- Login Form-->
         <div class="register-form mt-5">
             <form action="{{ route('password.email') }}" method="POST">
