@@ -11,10 +11,10 @@ class IpaymuSplitPayment
     public static function split($data)
     {
         $body = [
-            'sender' => $data['ipaymu_va'],
-            'receiver' => $data['receiver_va'],
+            'sender' => $data['sender'],
+            'receiver' => $data['receiver'],
             'amount' => $data['amount'],
-            'referenceId' => $data['pay_affiliate_id'],
+            'referenceId' => $data['referenceId'],
         ];
 
         $url = '/api/v2/transferva';
