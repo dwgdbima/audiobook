@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChangePasswordRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use App\Traits\RedirectsAuth;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ResetPasswordController extends Controller
 {
@@ -56,5 +60,36 @@ class ResetPasswordController extends Controller
                 'email' => $request->email,
             ]
         );
+    }
+
+    public function reset(Request $request)
+    {
+        $request->validate($this->rules(), $this->validationErrorMessages());
+
+        $password_reset = DB::table('password_resets')->select('*')->where('email', $request->input('email'));
+        
+        if($password_reset == null){
+            Alert::error('Gagal', 'Email tidak cocok');
+            return redirect()->back();
+        }
+
+        if(!Hash::check($request->input('token'), $password_reset->first()->token)){
+            Alert::error('Gagal', 'Token tidak cocok');
+            return redirect()->back();
+        }
+
+        $user = User::where('email', $request->input('email'))->first();
+
+        $user->update(['password' => Hash::make($request->input('password'))]);
+
+        $password_reset->delete();
+
+        $this->guard()->login($user);
+
+        if($user->hasRole('admin')){
+            return redirect()->route('admin.index');
+        }else{
+            return redirect()->route('customer.index');
+        }
     }
 }
