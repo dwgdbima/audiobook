@@ -310,4 +310,14 @@ class OrderService extends BaseService implements OrderServiceInterface
 
         }
     }
+
+    public function getUnSuccess()
+    {
+        return $this->repository->findMany([['status', '!=', 1]]);
+    }
+
+    public function getUnSuccessToday()
+    {
+        
+    }
 }
