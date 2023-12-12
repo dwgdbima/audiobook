@@ -34,7 +34,28 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('test', function(){
-    dd(Str::uuid());
+    $orders = Order::select('id')->orderBy('id', 'asc')->get()->take(20)->chunk(5);
+    $slice = collect();
+    $splice = collect();
+    
+    foreach ($orders as $key => &$value) {
+
+        if($key > 0){
+            $value->push(...$slice);
+            $splice = $value->splice(rand(0 , $value->count() - 2) , 2);
+            $slice = $splice;
+
+            $value = $value->sort();
+
+        }else{
+            $slice = $value->slice(rand(0 , $value->count() - 2) , 2);
+            
+        }
+    }
+   
+    $orders->push($slice);
+    return $orders;
+
 });
 
 Route::post('webhook-ipaymu/', [OrderController::class, 'webhookIpaymu'])->name('webhook.ipaymu');
