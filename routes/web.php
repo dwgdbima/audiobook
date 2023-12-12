@@ -7,6 +7,7 @@ use App\Http\Controllers\Menu\SidebarController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Order;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
@@ -34,28 +35,8 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('test', function(){
-    $orders = Order::select('id')->orderBy('id', 'asc')->get()->take(20)->chunk(5);
-    $slice = collect();
-    $splice = collect();
-    
-    foreach ($orders as $key => &$value) {
-
-        if($key > 0){
-            $value->push(...$slice);
-            $splice = $value->splice(rand(0 , $value->count() - 2) , 2);
-            $slice = $splice;
-
-            $value = $value->sort();
-
-        }else{
-            $slice = $value->slice(rand(0 , $value->count() - 2) , 2);
-            
-        }
-    }
-   
-    $orders->push($slice);
-    return $orders;
-
+    $user = User::find(1);
+    dd(Carbon::parse($user->created_at)->lt(Carbon::now()));
 });
 
 Route::post('webhook-ipaymu/', [OrderController::class, 'webhookIpaymu'])->name('webhook.ipaymu');

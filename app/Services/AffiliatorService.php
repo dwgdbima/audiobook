@@ -46,7 +46,6 @@ class AffiliatorService extends BaseService implements AffiliatorServiceInterfac
             'referral_code' => $this->genReferralCode(),
             'ipaymu_email' => $singleSignOnIpaymu['Email'],
             'ipaymu_va' => $singleSignOnIpaymu['Va'],
-            'ipaymu_key' => $singleSignOnIpaymu['ApiKey'],
         ]);
 
         $user = $this->userRepository->find($model->user_id);
