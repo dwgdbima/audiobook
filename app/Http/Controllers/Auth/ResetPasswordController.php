@@ -67,8 +67,8 @@ class ResetPasswordController extends Controller
         $request->validate($this->rules(), $this->validationErrorMessages());
 
         $password_reset = DB::table('password_resets')->select('*')->where('email', $request->input('email'));
-        
-        if($password_reset == null){
+      
+        if($password_reset->first() == null){
             Alert::error('Gagal', 'Email tidak cocok');
             return redirect()->back();
         }
