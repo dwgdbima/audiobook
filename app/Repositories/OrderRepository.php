@@ -78,4 +78,9 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 
         return $orders;
     }
+
+    public function getUnSuccessHoursBefore()
+    {
+        $this->getQuery()->where('status', 0)->where('expired', '<');
+    }
 }
