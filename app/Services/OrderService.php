@@ -143,6 +143,11 @@ class OrderService extends BaseService implements OrderServiceInterface
 
     }
 
+    public function countSuccessOrder()
+    {
+        return $this->repository->findMany([['status' , 1]])->count();
+    }
+
 
     public function searchByCode(string $code)
     {

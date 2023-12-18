@@ -27,7 +27,7 @@
                                 <h4>Total User</h4>
                             </div>
                             <div class="card-body">
-                                10
+                                {{ $totalCustomer }}
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                                 <h4>Total Transaksi</h4>
                             </div>
                             <div class="card-body">
-                                42
+                                {{ $successOrder }}
                             </div>
                         </div>
                     </div>
