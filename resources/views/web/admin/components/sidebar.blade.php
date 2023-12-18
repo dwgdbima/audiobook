@@ -26,6 +26,10 @@
                 <a class="nav-link"
                     href="/admin/books"><i class="fas fa-th"></i> <span>Products Management</span></a>
             </li>
+            <li class="{{ request()->is('admin/affiliate') ? 'active' : '' }}">
+                <a class="nav-link"
+                    href="/admin/affiliate"><i class="fas fa-th"></i> <span>Affiliate Management</span></a>
+            </li>
            {{--  <li class="{{ request()->is('admin/product') ? 'active' : '' }}">
                 <a class="nav-link"
                     href="/admin/product"><i class="fas fa-th"></i> <span>Single Product</span></a>
