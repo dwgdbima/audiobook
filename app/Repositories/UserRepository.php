@@ -30,6 +30,10 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return $customers;
     }
 
+    public function countCustomer()
+    {
+        return $this->modelClass::role('customer')->count();
+    }
 
     public function searchByName(string $name)
     {

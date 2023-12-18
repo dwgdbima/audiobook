@@ -8,7 +8,6 @@ use App\Contract\Service\CommentServiceInterface;
 use App\Contract\Service\OrderServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
-use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -34,11 +33,15 @@ class DashboardController extends Controller
 
         $fiveOrders = $this->orderServiceInterface->takeFiveLatestOrder();
         $sellingPercentage = $this->orderServiceInterface->getSellingPercentage();
-       
+        $successOrder = $this->orderServiceInterface->countSuccessOrder();
+        $totalCustomer = $this->userRepositoryInterface->countCustomer();
+
         return view('web.admin.pages.dashboard-general-dashboard' , [
             'orders' => $orders,
             'fiveOrders' => $fiveOrders,
-            'selling' => $sellingPercentage
+            'selling' => $sellingPercentage,
+            'successOrder' => $successOrder,
+            'totalCustomer' => $totalCustomer
         ]);
     }
 

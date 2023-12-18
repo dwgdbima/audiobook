@@ -10,6 +10,8 @@ interface OrderServiceInterface extends BaseServiceInterface
 
     public function getSellingPercentage();
 
+    public function countSuccessOrder();
+
     public function searchByCode(string $code);
     
     public function makeOrder($products);

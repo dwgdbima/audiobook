@@ -16,6 +16,8 @@ interface UserRepositoryInterface extends BaseRepositoryInterface
 
     public function getAllCustomer();
 
+    public function countCustomer();
+
     public function searchByName(string $name);
 
     public function update_profile(array $data);
