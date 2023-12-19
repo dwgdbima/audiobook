@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Contract\Repository\UserRepositoryInterface;
+use App\Contract\Service\AffiliatorServiceInterface;
 use App\Contract\Service\BookServiceInterface;
 use App\Contract\Service\CommentServiceInterface;
 use App\Contract\Service\OrderServiceInterface;
@@ -17,13 +18,15 @@ class DashboardController extends Controller
     protected $orderServiceInterface;
     protected $commentServiceInterface; 
     protected $bookServiceInterface; 
+    protected $affiliatorServiceInterface;
 
-    public function __construct(UserRepositoryInterface $userRepositoryInterface , OrderServiceInterface $orderServiceInterface, CommentServiceInterface $commentServiceInterface, BookServiceInterface $bookServiceInterface)
+    public function __construct(UserRepositoryInterface $userRepositoryInterface , OrderServiceInterface $orderServiceInterface, CommentServiceInterface $commentServiceInterface, BookServiceInterface $bookServiceInterface, AffiliatorServiceInterface $affiliatorServiceInterface)
     {
         $this->userRepositoryInterface = $userRepositoryInterface;
         $this->orderServiceInterface = $orderServiceInterface;
         $this->commentServiceInterface = $commentServiceInterface;
         $this->bookServiceInterface = $bookServiceInterface;
+        $this->affiliatorServiceInterface = $affiliatorServiceInterface;
     }
 
 
@@ -35,13 +38,17 @@ class DashboardController extends Controller
         $sellingPercentage = $this->orderServiceInterface->getSellingPercentage();
         $successOrder = $this->orderServiceInterface->countSuccessOrder();
         $totalCustomer = $this->userRepositoryInterface->countCustomer();
+        $totalAffiliator = $this->affiliatorServiceInterface->countAffiliator();
+        $activeUsers = $this->userRepositoryInterface->activeUser();
 
         return view('web.admin.pages.dashboard-general-dashboard' , [
             'orders' => $orders,
             'fiveOrders' => $fiveOrders,
             'selling' => $sellingPercentage,
             'successOrder' => $successOrder,
-            'totalCustomer' => $totalCustomer
+            'totalCustomer' => $totalCustomer,
+            'totalAffiliator' => $totalAffiliator,
+            'activeUsers' => $activeUsers
         ]);
     }
 
@@ -72,6 +79,16 @@ class DashboardController extends Controller
         
         return view('web.admin.pages.show-book-management' , [
             'books' => $books
+        ]);
+    }
+
+
+    public function showAffiliate(Request $request)
+    {
+        $affiliators = $request->s_name ? $this->affiliatorServiceInterface->searchByName($request->s_name) : $this->affiliatorServiceInterface->getAffiliators();
+        
+        return view('web.admin.pages.show-affiliate-management' , [
+            'affiliators' => $affiliators
         ]);
     }
 

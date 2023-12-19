@@ -59,4 +59,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return true;
         
     }
+
+    public function activeUser()
+    {
+        $active = $this->modelClass::role('customer')->whereHas('orders')->count();
+
+        return $active;
+    }
 }

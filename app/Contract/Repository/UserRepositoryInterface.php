@@ -21,4 +21,6 @@ interface UserRepositoryInterface extends BaseRepositoryInterface
     public function searchByName(string $name);
 
     public function update_profile(array $data);
+
+    public function activeUser();
 }

@@ -1,6 +1,6 @@
 @extends('web.admin.layouts.app')
 
-@section('title', 'Lihat semua pelanggan')
+@section('title', 'Lihat semua affiliator')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -10,7 +10,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Data seluruh pengguna Suha</h1>
+                <h1>Data seluruh affiliator</h1>
                
             </div>
 
@@ -21,14 +21,14 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Berikut data-data user......</h4>
+                                <h4>Berikut data-data affiliator...</h4>
                                 <div class="card-header-form">
-                                    <form action="/admin/users" method="GET">
+                                    <form action="/admin/affiliate" method="GET">
                                         <div class="input-group">
                                             <input type="text"
                                                 class="form-control"
                                                 name="s_name"
-                                                placeholder="Cari berdasarkan nama...">
+                                                placeholder="Cari berdasarkan nama affiliator...">
                                             <div class="input-group-btn">
                                                 <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                                             </div>
@@ -46,36 +46,29 @@
                                             <th>Nama</th>
                                             <th>Email</th>
                                             <th>No.Handphone</th>
-                                            <th>Total Review</th>
-                                            <th>Total Order</th>
+                                            
                                            
                                         </tr>
-                                        @foreach ($customers as $data)
+                                        @foreach ($affiliators as $data)
                                         <tr>
                                             <td class="p-0 text-center">
                                                {{ $loop->iteration }}
                                             </td>
-                                            <td>{{ $data->name }}</td>
+                                            <td>{{ $data->user->name }}</td>
                                             <td class="align-middle">
-                                                {{ $data->email }}
+                                                {{ $data->user->email }}
                                             </td>
                                             <td>
-                                               {{ $data->phone }}
+                                               {{ $data->user->phone }}
                                             </td>
-                                            <td>
-                                                {{ $data->total_reviews }}
-                                            
-                                            </td>
-                                            <td>
-                                                {{ $data->total_orders }}
-                                            </td>
+                                           
                                            
                                         </tr>
                                         @endforeach
                                     </table>
 
                                     <div class="p-4">
-                                        {{ $customers->links() }}
+                                        {{ $affiliators->links() }}
                                     </div>
                                 </div>
                             </div>

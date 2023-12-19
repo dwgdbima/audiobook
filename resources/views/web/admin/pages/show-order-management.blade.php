@@ -21,7 +21,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Any description goes here...</h4>
+                                <h4>Berikut data-data order......</h4>
                                 <div class="card-header-form">
                                     <form action="/admin/orders" method="GET">
                                         <div class="input-group">
