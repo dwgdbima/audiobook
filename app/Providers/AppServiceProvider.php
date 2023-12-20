@@ -15,6 +15,7 @@ use App\Contract\Service\CommentServiceInterface;
 use App\Contract\Service\OrderServiceInterface;
 use App\Contract\Service\ChapterServiceInterface;
 use App\Contract\Service\AffiliatorServiceInterface;
+use App\Contract\Service\OrderDetailServiceInterface;
 use App\Contract\Service\PayAffiliateServiceInterface;
 
 // Implement
@@ -28,6 +29,7 @@ use App\Services\CommentService;
 use App\Services\OrderService;
 use App\Services\ChapterService;
 use App\Services\AffiliatorService;
+use App\Services\OrderDetailService;
 use App\Services\PayAffiliateService;
 
 use Carbon\Carbon;
@@ -54,6 +56,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ProductServiceInterface::class, ProductService::class);
         $this->app->bind(CartServiceInterface::class, CartService::class);
         $this->app->bind(OrderServiceInterface::class, OrderService::class);
+        $this->app->bind(OrderDetailServiceInterface::class, OrderDetailService::class);
         $this->app->bind(ChapterServiceInterface::class, ChapterService::class);
         $this->app->bind(AffiliatorServiceInterface::class, AffiliatorService::class);
         $this->app->bind(PayAffiliateServiceInterface::class, PayAffiliateService::class);

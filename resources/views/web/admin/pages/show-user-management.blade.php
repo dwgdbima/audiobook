@@ -10,7 +10,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Data seluruh pengguna Suha</h1>
+                <h1>Data seluruh pengguna</h1>
                
             </div>
 
@@ -22,7 +22,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4>Berikut data-data user......</h4>
-                                <div class="card-header-form">
+                                <div class="card-header-form d-flex">
+                                    
+                                    <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                                        <a href="/admin/user/export?mimeType=xlsx" class="btn btn-primary"  data-mdb-ripple-init>XLSX</a>
+
+                                        <a href="/admin/user/export?mimeType=csv" class="btn btn-success"  data-mdb-ripple-init>CSV</a>
+                                      </div>
+
                                     <form action="/admin/users" method="GET">
                                         <div class="input-group">
                                             <input type="text"

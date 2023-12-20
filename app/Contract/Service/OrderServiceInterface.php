@@ -6,13 +6,17 @@ interface OrderServiceInterface extends BaseServiceInterface
 {
     public function getAllOrders();
 
+    public function getSpecifiecOrderProduct(int $productId);
+
     public function takeFiveLatestOrder();
 
     public function getSellingPercentage();
 
     public function countSuccessOrder();
 
-    public function searchByCode(string $code);
+    public function sumSuccessOrder();
+
+    public function searchByCode(string $code, $withProduct = null);
     
     public function makeOrder($products);
 

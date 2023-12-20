@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ExportController;
 use App\Http\Controllers\Admin\Menu\NavbarController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 
 Route::controller(DashboardController::class)->group(function() {
     Route::get('/' , 'index')->name('dashboard');
@@ -16,6 +18,12 @@ Route::controller(DashboardController::class)->group(function() {
     Route::get('/affiliate' , 'showAffiliate')->name('show.affiliate');
     Route::post('/comment' , 'storeComment')->middleware('one_user_one_review')->name('admin.comment');
     Route::get('/setting' , 'setting')->name('admin.setting');
+});
+
+
+Route::controller(ExportController::class)->group(function(){
+    Route::get('/user/export' , 'exportUser')->name('user.export');
+    Route::get('/affiliate/export' , 'exportAffiliate')->name('affiliate.export');
 });
 
 Route::controller(ProfileController::class)->group(function() {
