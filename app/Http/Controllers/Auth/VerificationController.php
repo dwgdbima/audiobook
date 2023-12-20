@@ -71,11 +71,8 @@ class VerificationController extends Controller
 
     public function verify(Request $request)
     {
-        $this->authService->verifyEmail($request->route('id'), $request->route('hash'));
+        $verifyEmail = $this->authService->verifyEmail($request->route('id'), $request->route('hash'));
 
-        if ($request->user()->hasVerifiedEmail()) {
-          
-            return redirect($this->redirectByRole($request->user()));
-        }
+        return redirect($this->redirectByRole($verifyEmail));
     }
 }

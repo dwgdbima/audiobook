@@ -1,0 +1,18 @@
+body{
+    background-color: #ffffff;
+}
+
+.login-wrapper{
+    background: #000;
+}
+
+.custom-card{
+    box-shadow: 0 0 5px rgba(15, 15, 15, 0.15);
+    margin: 10px;
+    border-radius: 10px;
+    padding: 0 10px;
+}
+
+.page-content-wrapper{
+    margin-bottom: 70px;
+}

@@ -1104,7 +1104,7 @@ textarea:invalid {
   padding: 2px;
 }
 .user-profile-icon a img {
-  max-width: 1.5rem;
+  /* max-width: 1.5rem; */
   border-radius: 50%;
 }
 
@@ -1309,7 +1309,7 @@ textarea:invalid {
   text-align: center;
   text-transform: capitalize;
   line-height: 1;
-  color: #ffffff;
+  color: #747794;
   z-index: 1;
 }
 .suha-footer-nav ul li a i {
@@ -1318,7 +1318,15 @@ textarea:invalid {
   margin-bottom: 4px;
 }
 .suha-footer-nav ul li a:hover, .suha-footer-nav ul li a:focus {
-  color: #ffffff;
+  color: #000000;
+}
+.suha-footer-nav ul li a.active{
+  background-color: #c40001;
+    margin: 10px;
+    border-radius: 24px;;
+    color: #fff;
+    line-height: 1;
+    padding: 5px;
 }
 .suha-footer-nav ul li a img {
   max-height: 1.5rem;
@@ -2871,10 +2879,10 @@ li.suha-dropdown-menu .dropdown-trigger-btn.active i {
 }
 
 .product-title-meta-data {
-  border-top-left-radius: 2rem;
+  /* border-top-left-radius: 2rem; */
   padding-top: 1.5rem !important;
 }
-.product-title-meta-data::after {
+/* .product-title-meta-data::after {
   position: absolute;
   content: "";
   background-image: url(img/core-img/curve.png);
@@ -2884,7 +2892,7 @@ li.suha-dropdown-menu .dropdown-trigger-btn.active i {
   background-repeat: no-repeat;
   right: 0;
   z-index: auto;
-}
+} */
 .product-title-meta-data .p-wishlist-share {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 80px;
@@ -3237,7 +3245,7 @@ li.suha-dropdown-menu .dropdown-trigger-btn.active i {
 @media only screen and (min-width:1200px) {
   .single-product-slide,
 .blog-details-post-thumbnail {
-    height: 600px;
+    height: 520px;
   }
 }
 

@@ -16,7 +16,7 @@ interface AuthServiceInterface
      * Update a model
      * @param string $id
      * @param string $hash
-     * @return void
+     * @return object
      */
     public function verifyEmail($id, $hash);
 

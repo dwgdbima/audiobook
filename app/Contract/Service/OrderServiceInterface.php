@@ -31,4 +31,6 @@ interface OrderServiceInterface extends BaseServiceInterface
     public function updateStatusPayment($order_id, $status);
 
     public function getUnSuccess();
+
+    public function getUnSuccessHoursBefore();
 }

@@ -6,6 +6,7 @@ use App\Contract\Repository\AffiliatorRepositoryInterface;
 use App\Contract\Repository\UserRepositoryInterface;
 use App\Contract\Service\AffiliatorServiceInterface;
 use App\Contract\Service\AuthServiceInterface;
+use App\Contract\Service\PayAffiliateServiceInterface;
 use App\Exceptions\Service\ServiceException;
 use App\Ipaymu\Ipaymu;
 use App\Ipaymu\IpaymuBalance;
@@ -17,13 +18,14 @@ use RealRashid\SweetAlert\Facades\Alert;
 class AffiliatorService extends BaseService implements AffiliatorServiceInterface
 {
     // protected $repository = \App\Contract\Repository\AffiliatorRepositoryInterface::class;
-    protected $authService, $userRepository;
+    protected $authService, $userRepository, $payAffiliateService;
 
-    public function __construct(AffiliatorRepositoryInterface $affiliatorRepositoryInterface, AuthServiceInterface $authServiceInterface, UserRepositoryInterface $userRepository)
+    public function __construct(AffiliatorRepositoryInterface $affiliatorRepositoryInterface, AuthServiceInterface $authServiceInterface, UserRepositoryInterface $userRepository, PayAffiliateServiceInterface $payAffiliateServiceInterface)
     {
         $this->repository = $affiliatorRepositoryInterface;
         $this->authService = $authServiceInterface;
         $this->userRepository = $userRepository;
+        $this->payAffiliateService = $payAffiliateServiceInterface;
     }
 
     /**
@@ -88,6 +90,17 @@ class AffiliatorService extends BaseService implements AffiliatorServiceInterfac
     public function getByUserId($user_id)
     {
         return $this->repository->findFirst([['user_id', $user_id]]);
+    }
+
+    public function getMember($user_id)
+    {
+        return $this->userRepository->findMany([['referrer_id', $user_id]]);
+    }
+
+    public function getBalance($user_id)
+    {
+        $transactions = $this->payAffiliateService->getSuccessByUserId($user_id);
+        return $transactions->sum('amount');
     }
 
     public function getBalanceIpaymu($user_id)
