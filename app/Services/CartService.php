@@ -36,7 +36,15 @@ class CartService extends BaseService implements CartServiceInterface
 
     public function checkOut()
     {
+        $data = ['status' => 200];
+
         $carts = $this->getAllWithUserId(auth()->id());
+        
+        if($carts->isEmpty()){
+            $data = ['status' => 204, 'data' => $carts];
+            return $data;
+        }
+
         $products = [];
         foreach($carts as $cart){
             array_push($products, ['id' => $cart->product_id]);
@@ -48,6 +56,8 @@ class CartService extends BaseService implements CartServiceInterface
             $this->delete($cart);
         }
 
-        return $makeOrder;
+        $data['data'] = $makeOrder;
+        
+        return $data;
     }
 }

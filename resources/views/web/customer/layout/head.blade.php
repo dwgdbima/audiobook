@@ -36,6 +36,7 @@
     <link rel="stylesheet" href="{{ asset('dist/css/nice-select.css') }}">
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{ asset('dist/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/custom.css') }}">
     <!-- Web App Manifest -->
     {{-- <link rel="manifest" href="{{ asset('dist/manifest.json') }}"> --}}
     {{-- @laravelPWA --}}

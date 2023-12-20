@@ -1,6 +1,9 @@
 @extends('web.customer.layout.main')
 @push('styles')
 <style>
+    body{
+        background-color: #ffffff;
+    }
     .accordion-item{
         margin-bottom: 15px;
         border-radius: 0.375rem;
@@ -25,20 +28,25 @@
     [theme-color=dark] .accordion-collapse {
         border-top: 1px solid rgba(0, 0, 0, 0.125);
     }
+    
 </style>
 @endpush
 @section('content')
 <div class="page-content-wrapper">
-    <div class="product-slide-wrapper">
+    {{-- <div class="product-slide-wrapper">
         <!-- Product Slides-->
         <div class="product-slides owl-carousel">
             <!-- Single Hero Slide-->
             <div class="single-product-slide" style="background-image: url({{$book->cover}})"></div>
         </div>
+    </div> --}}
+    <div class="product-banner p-4 bg-white">
+        {{-- <img src="{{$book->cover}}" class="img-fluid" alt=""> --}}
+        <div class="single-product-slide" style="background-image: url({{$book->cover}}); border-radius:20px;"></div>
     </div>
     <div class="product-description">
         <!-- Product Title & Meta Data-->
-        <div class="product-title-meta-data bg-white mb-3 py-3">
+        <div class="product-title-meta-data bg-white mb-3 py-3 custom-card">
             <div class="container d-flex justify-content-between rtl-flex-d-row-r">
                 <div class="p-title-price">
                     <h5 class="mb-1">{{$book->title}}</h5>
@@ -48,7 +56,7 @@
             </div>
             
             <!-- Ratings-->
-            <div class="product-ratings">
+            <div class="product-ratings mb-3">
                 <div class="container d-flex align-items-center justify-content-between rtl-flex-d-row-r">
                     <div class="ratings">
                         @for ($i = 1; $i <= 5; $i++)
@@ -71,14 +79,22 @@
                     <div class="total-result-of-ratings"><span>{{$book->review_point}}</span><span>Very Good </span></div>
                 </div>
             </div>
+            <div class="product-description">
+                <div class="container">
+                    <h6>Deskripsi</h6>
+                    {{-- {!! $book->desc !!} --}}
+                    <div id="excerpt-desc">{!! Str::limit($book->desc, 200, '....') !!}<br><a type="button" id="read-more-desc" class="text-decoration-none" onclick="showExcerpt()">Selengkapnya...</a></div>
+                    <div id="show-desc" class="d-none">{!! $book->desc !!}<a type="button" id="read-more-desc" class="text-decoration-none" onclick="hideExcerpt()">Lebih sedikit...</a></div>
+                </div>
+            </div>
         </div>
         <!-- Product Specification-->
-        <div class="p-specification bg-white mb-3 py-3">
+        {{-- <div class="p-specification bg-white mb-3 py-3">
             <div class="container">
                 <h6>Deskripsi</h6>
                 {!! $book->desc !!}
             </div>
-        </div>
+        </div> --}}
         
         <div class="p-specification bg-white mb-3 py-3">
             <div class="container">
@@ -287,6 +303,18 @@
 @endsection
 @push('scripts')
     <script>
+
+        function showExcerpt()
+        {
+            $('#excerpt-desc').addClass('d-none');
+            $('#show-desc').removeClass('d-none');
+        }
+
+        function hideExcerpt()
+        {
+            $('#excerpt-desc').removeClass('d-none');
+            $('#show-desc').addClass('d-none');
+        }
 
         function addToCart(product_id)
         {

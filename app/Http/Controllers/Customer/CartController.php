@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Contract\Service\CartServiceInterface;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CartController extends Controller
 {
@@ -40,6 +41,11 @@ class CartController extends Controller
     {
         $order = $this->cartService->checkOut();
 
-        return redirect()->route('customer.orders.show', $order->id);
+        if($order['status'] != 200){
+            Alert::error('Keranjang Kosong', 'Silahkan masukan produk ke keranjang untuk checkout');
+            return redirect()->back();
+        }
+
+        return redirect()->route('customer.orders.show', $order['data']->id);
     }
 }

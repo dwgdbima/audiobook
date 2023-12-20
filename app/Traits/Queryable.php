@@ -93,6 +93,18 @@ trait Queryable
     }
 
     /**
+     * Get Filtered paginated data
+     *
+     * @param array $attributes
+     * @param int $pageSize
+     * @return LengthAwarePaginator
+     */
+    public function getFilteredPaginated(array $attributes, int $pageSize = 15): LengthAwarePaginator
+    {
+        return $this->filterQueryByAttributes($attributes)->paginate($pageSize);
+    }
+
+    /**
      * Find all models by params
      *
      * @param array $attributes

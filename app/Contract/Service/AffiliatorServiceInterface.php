@@ -10,6 +10,10 @@ interface AffiliatorServiceInterface extends BaseServiceInterface
 
     public function getBalanceIpaymu($user_id);
 
+    public function getMember($user_id);
+
+    public function getBalance($user_id);
+    
     public function getAffiliators();
 
     public function searchByName(string $name);

@@ -97,6 +97,15 @@ interface BaseRepositoryInterface
     public function getAllPaginated(array $search = [], int $pageSize = 15): LengthAwarePaginator;
 
     /**
+     * Get paginated data
+     *
+     * @param array $attributes
+     * @param int $pageSize
+     * @return LengthAwarePaginator
+     */
+    public function getFilteredPaginated(array $attributes, int $pageSize = 15): LengthAwarePaginator;
+
+    /**
      * Find first model
      *
      * @param array $attributes
