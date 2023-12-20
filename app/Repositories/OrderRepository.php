@@ -19,6 +19,19 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 
     }
 
+    public function getSpecifiecOrderProduct(int $productId)
+    {
+        $orders = $this->modelClass::with(['user' , 'orderDetails.product.book'])->whereHas('orderDetails' , function($details) use($productId){
+            $details->where('product_id' , $productId);
+          })
+          ->latest()
+        ->paginate(5)
+        ->withQueryString();
+
+       return $orders;
+
+    }
+
 
     public function takeFiveLatestOrder()
     {
@@ -54,12 +67,23 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
     }
     
 
-    public function searchByCode(string $code)
+    public function searchByCode(string $code, $withProduct = null)
     {
-        $orders = $this->modelClass::with(['user' , 'orderDetails.product.book'])
-        ->where('code' , 'like' , '%' . $code . '%')
-        ->paginate(5)
-        ->withQueryString();
+        $query = $this->modelClass::with(['user' , 'orderDetails.product.book']);
+
+        if($withProduct){
+          $orders =  $query->whereHas('orderDetails' , function($details) use($withProduct) {
+                $details->where('product_id' , $withProduct);
+            })
+            ->where('code' , 'like' , '%' . $code . '%')
+            ->paginate(5)
+            ->withQueryString(); 
+        }else{
+            $orders = $query ->where('code' , 'like' , '%' . $code . '%')
+            ->paginate(5)
+            ->withQueryString();
+        }
+      
 
         return $orders;
     }

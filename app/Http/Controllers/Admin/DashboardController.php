@@ -6,7 +6,9 @@ use App\Contract\Repository\UserRepositoryInterface;
 use App\Contract\Service\AffiliatorServiceInterface;
 use App\Contract\Service\BookServiceInterface;
 use App\Contract\Service\CommentServiceInterface;
+use App\Contract\Service\OrderDetailServiceInterface;
 use App\Contract\Service\OrderServiceInterface;
+use App\Contract\Service\ProductServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
 use App\Models\User;
@@ -19,14 +21,18 @@ class DashboardController extends Controller
     protected $commentServiceInterface; 
     protected $bookServiceInterface; 
     protected $affiliatorServiceInterface;
+    protected $productServiceInterface;
+    protected $orderDetailServiceInterface;
 
-    public function __construct(UserRepositoryInterface $userRepositoryInterface , OrderServiceInterface $orderServiceInterface, CommentServiceInterface $commentServiceInterface, BookServiceInterface $bookServiceInterface, AffiliatorServiceInterface $affiliatorServiceInterface)
+    public function __construct(UserRepositoryInterface $userRepositoryInterface , OrderServiceInterface $orderServiceInterface, CommentServiceInterface $commentServiceInterface, BookServiceInterface $bookServiceInterface, AffiliatorServiceInterface $affiliatorServiceInterface, ProductServiceInterface $productServiceInterface, OrderDetailServiceInterface $orderDetailServiceInterface)
     {
         $this->userRepositoryInterface = $userRepositoryInterface;
         $this->orderServiceInterface = $orderServiceInterface;
         $this->commentServiceInterface = $commentServiceInterface;
         $this->bookServiceInterface = $bookServiceInterface;
         $this->affiliatorServiceInterface = $affiliatorServiceInterface;
+        $this->productServiceInterface = $productServiceInterface;
+        $this->orderDetailServiceInterface = $orderDetailServiceInterface;
     }
 
 
@@ -40,6 +46,7 @@ class DashboardController extends Controller
         $totalCustomer = $this->userRepositoryInterface->countCustomer();
         $totalAffiliator = $this->affiliatorServiceInterface->countAffiliator();
         $activeUsers = $this->userRepositoryInterface->activeUser();
+        $sumSuccessOrders = $this->orderServiceInterface->sumSuccessOrder();
 
         return view('web.admin.pages.dashboard-general-dashboard' , [
             'orders' => $orders,
@@ -48,7 +55,8 @@ class DashboardController extends Controller
             'successOrder' => $successOrder,
             'totalCustomer' => $totalCustomer,
             'totalAffiliator' => $totalAffiliator,
-            'activeUsers' => $activeUsers
+            'activeUsers' => $activeUsers,
+            'sumSuccessOrders' => $sumSuccessOrders
         ]);
     }
 
@@ -65,10 +73,31 @@ class DashboardController extends Controller
 
     public function showOrders(Request $request)
     {
-        $orders = $request->ord_code ? $this->orderServiceInterface->searchByCode($request->ord_code) : $this->orderServiceInterface->getAllOrders();
+        $orders = $this->orderServiceInterface->getAllOrders();
+        $soldProduct = null;
+
+        if($request->ord_code && !is_numeric($request->product_select)){
+            $orders = $this->orderServiceInterface->searchByCode($request->ord_code);
+        }
+
+        if($request->product_select && is_numeric($request->product_select)){
+            $orders = $this->orderServiceInterface->getSpecifiecOrderProduct($request->product_select);
+
+            $soldProduct = $this->orderDetailServiceInterface->countSoldProduct($request->product_select);
+
+            if($request->ord_code){
+                $orders = $this->orderServiceInterface->searchByCode($request->ord_code, $request->product_select); 
+            }
+        }
+
+    
+        $products = $this->productServiceInterface->getProductByBookId(1);
        
+        
         return view('web.admin.pages.show-order-management' , [
-            'orders' => $orders
+            'orders' => $orders,
+            'products' => $products,
+            'soldProduct' => $soldProduct
         ]);
     }
 

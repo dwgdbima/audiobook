@@ -6,11 +6,13 @@ interface OrderRepositoryInterface extends BaseRepositoryInterface
 {
     public function getAllOrders();
 
+    public function getSpecifiecOrderProduct(int $productId);
+
     public function takeFiveLatestOrder();
 
     public function getSellingPercentage();
 
-    public function searchByCode(string $code);
+    public function searchByCode(string $code, $withProduct = null);
 
     public function getFirst();
 

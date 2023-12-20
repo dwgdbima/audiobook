@@ -36,6 +36,11 @@ class OrderService extends BaseService implements OrderServiceInterface
     }
 
 
+    public function getSpecifiecOrderProduct(int $productId)
+    {
+        return $this->repository->getSpecifiecOrderProduct($productId);
+    }
+
     public function takeFiveLatestOrder()
     {
         $fiveOrders = $this->repository->takeFiveLatestOrder();
@@ -70,7 +75,6 @@ class OrderService extends BaseService implements OrderServiceInterface
         
         return $collection;
     }
-
 
 
     public function getSellingPercentage()
@@ -148,10 +152,21 @@ class OrderService extends BaseService implements OrderServiceInterface
         return $this->repository->findMany([['status' , 1]])->count();
     }
 
-
-    public function searchByCode(string $code)
+    public function sumSuccessOrder()
     {
-        return $this->repository->searchByCode($code);
+        $orders = $this->repository->with(['user' , 'orderDetails.product:price,id'])->findMany([['status' , 1]]);
+
+        $orders = $orders->pluck('orderDetails.*.product.price')->flatten()->sum();
+
+        return $orders;
+    }
+
+
+    public function searchByCode(string $code, $withProduct = null)
+    {
+        
+
+        return $this->repository->searchByCode($code, $withProduct);
     }
 
     public function makeOrder($products)

@@ -73,6 +73,7 @@
                             </div>
                             <div class="card-body">
                                 {{ $activeUsers }}
+                              
                             </div>
                         </div>
                     </div>
@@ -93,7 +94,13 @@
                                         class="btn">Month</a>
                                 </div>
                             </div>
+                            <br>
                         </div>
+                         
+                        <div class="text-center mt-2">
+                           <h4 style="color: rgb(81, 169, 169);">Total penjualan keseluruhan <span style="color: rgb(24, 28, 47)">@money($sumSuccessOrders, 'IDR' , true)</span> </h4>
+                        </div>
+
                         <div class="card-body">
                             <canvas id="myChart"
                                 height="182"></canvas>

@@ -1,12 +1,14 @@
 <?php
 
 use App\Contract\Service\BookServiceInterface;
+use App\Export\Excel as ExportExcel;
 use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\Menu\FooterController;
 use App\Http\Controllers\Menu\SidebarController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +40,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('test', function(){
     $user = User::find(1);
     dd(Carbon::parse($user->created_at)->lt(Carbon::now()));
+});
+
+Route::get('/testing' , function(){
+
+    return Excel::download(new ExportExcel, 'daaa.csv', \Maatwebsite\Excel\Excel::CSV);
+  
+
 });
 
 Route::post('webhook-ipaymu/', [OrderController::class, 'webhookIpaymu'])->name('webhook.ipaymu');

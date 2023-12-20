@@ -22,7 +22,14 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4>Berikut data-data affiliator...</h4>
-                                <div class="card-header-form">
+                                <div class="card-header-form d-flex">
+                                       
+                                    <div class="btn-group mr-2" role="group" aria-label="Basic example">
+                                        <a href="/admin/affiliate/export?mimeType=xlsx" class="btn btn-primary"  data-mdb-ripple-init>XLSX</a>
+
+                                        <a href="/admin/affiliate/export?mimeType=csv" class="btn btn-success"  data-mdb-ripple-init>CSV</a>
+                                      </div>
+
                                     <form action="/admin/affiliate" method="GET">
                                         <div class="input-group">
                                             <input type="text"
