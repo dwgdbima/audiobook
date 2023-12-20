@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Contract\Repository\OrderRepositoryInterface;
+use Carbon\Carbon;
 
 class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 {
@@ -77,10 +78,5 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         $orders = $this->getQuery()->where('user_id', $user_id)->where('status', 0)->orWhere('status', 1)->get();
 
         return $orders;
-    }
-
-    public function getUnSuccessHoursBefore()
-    {
-        $this->getQuery()->where('status', 0)->where('expired', '<');
     }
 }

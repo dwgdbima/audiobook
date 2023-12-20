@@ -287,22 +287,7 @@ class OrderService extends BaseService implements OrderServiceInterface
                         'amount' => ($order->orderDetails->sum('product.price') * 10) / 100,
                     ]);
     
-                    Ipaymu::init([
-                        'env'               => env('IPAYMU_ENV'),
-                        'virtual_account'   => env('IPAYMU_VA'),
-                        'api_key'           => env('IPAYMU_KEY')
-                    ]);
-    
-                    $splitPayment = IpaymuSplitPayment::split([
-                        'sender' => env('IPAYMU_VA'),
-                        'receiver' => $affiliator->ipaymu_va,
-                        'amount' => $payAffiliate->amount,
-                        'referenceId' => $payAffiliate->id,
-                    ]);
-    
-                    if($splitPayment['Status'] == 200){
-                        $this->payAffiliateService->update($payAffiliate->id, ['status' => 1]);
-                    }
+                    $this->payAffiliateService->payAffiliate($affiliator, $payAffiliate);
                 }
                 
                 return $order;
@@ -316,8 +301,8 @@ class OrderService extends BaseService implements OrderServiceInterface
         return $this->repository->findMany([['status', '!=', 1]]);
     }
 
-    public function getUnSuccessToday()
+    public function getUnSuccessHoursBefore()
     {
-        
+        return $this->repository->findMany([['expired', 'between', [Carbon::now()->subHours(2), Carbon::now()]], ['status', 0]]);
     }
 }

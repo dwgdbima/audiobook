@@ -3,27 +3,33 @@
 namespace App\Http\Controllers\Affiliator;
 
 use App\Contract\Service\AffiliatorServiceInterface;
+use App\Contract\Service\PayAffiliateServiceInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JoinAffiliateRequest;
 use Illuminate\Http\Request;
 
 class AffiliatorController extends Controller
 {
-    protected $affiliatorService;
+    protected $affiliatorService, $payAffiliateService;
 
-    public function __construct(AffiliatorServiceInterface $affiliatorServiceInterface)
+    public function __construct(AffiliatorServiceInterface $affiliatorServiceInterface, PayAffiliateServiceInterface $payAffiliateServiceInterface)
     {
         $this->affiliatorService = $affiliatorServiceInterface;
+        $this->payAffiliateService = $payAffiliateServiceInterface;
     }
 
     public function index()
     {
         $user = auth()->user();
-    
+
+        // dd($this->payAffiliateService->getSuccessByUserIdPaginated(auth()->id(), 5));
+        
         $affiliator = $this->affiliatorService->getByUserId($user->id);
         return view('web.customer.affiliator.index', [
+            'affiliates' => $this->affiliatorService->getMember($user->id),
             'referral_link' => $affiliator->referral_link,
-            'balance' => $this->affiliatorService->getBalanceIpaymu($user->id)
+            'balance' => $this->affiliatorService->getBalance($user->id),
+            'transactions' => $this->payAffiliateService->getSuccessByUserIdPaginated(auth()->id(), 5) 
         ]);
     }
 

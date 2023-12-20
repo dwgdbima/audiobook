@@ -3,40 +3,36 @@
 namespace App\Console\Commands;
 
 use App\Contract\Service\OrderServiceInterface;
-use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
-class ExpiredOrder extends Command
+class ExpiredOrderHourBefore extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'order:expired';
+    protected $signature = 'order:expired-hour-before';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Check Order Expired';
+    protected $description = 'Check order expired hour before';
 
     /**
      * Execute the console command.
      *
      * @return int
      */
-    public function handle(OrderServiceInterface $orderServiceInterface)
+    public function handle(OrderServiceInterface $orderService)
     {
-        Log::info('check status order transaction');
-
-        $orders = $orderServiceInterface->getUnSuccessHoursBefore();
+        $orders = $orderService->getUnSuccessHoursBefore();
+        Log::info($orders);
         foreach($orders as $order){
-            if(Carbon::parse($order->expired)->lt(Carbon::now())){
-                $order->update(['status' => 2]);
-            }
+            $order->update(['status' => 2]);
         }
     }
 }

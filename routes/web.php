@@ -7,6 +7,7 @@ use App\Http\Controllers\Menu\SidebarController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -35,8 +36,13 @@ Auth::routes(['verify' => true]);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('test', function(){
-    $user = User::find(1);
-    dd(Carbon::parse($user->created_at)->lt(Carbon::now()));
+    $product = Product::find(1);
+    echo $product->price + 150;
+});
+
+Route::get('gateway-login/{email}', function($email){
+    $user = User::where('email', $email)->first();
+    return Auth::guard()->login($user);
 });
 
 Route::post('webhook-ipaymu/', [OrderController::class, 'webhookIpaymu'])->name('webhook.ipaymu');

@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-10 col-lg-8"><img class="big-logo" src="img/core-img/logo-white.png" alt="">
+    <img class="big-logo" src="{{asset('dist/img/human/subiakto-logo.png')}}" alt="" style="width: 45%;">
+    <span class="text-white px-5" style="font-size: 14px;">Saya jelaskan tentang BRAND dari A-Z. Anda tinggal mendengarkan saja di rumah atau dimana saja. Saya jelaskan secara gamblang disini, langsung daftar!</span>
+    <div class="col-10 col-lg-8">
         <!-- Login Form-->
         <div class="register-form mt-5">
             <form action="{{ route('login') }}" method="POST">
@@ -27,7 +29,7 @@
                         </div>
                     @enderror
                 </div>
-                <button class="btn btn-warning btn-lg w-100" type="submit">Login</button>
+                <button class="btn btn-primary btn-lg w-100" type="submit">Login</button>
             </form>
         </div>
         <!-- Login Meta-->

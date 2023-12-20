@@ -3,6 +3,7 @@ namespace App\Traits;
 
 use App\Ipaymu\Ipaymu;
 use App\Exceptions\IpaymuInvalidApiKeyException;
+use Illuminate\Support\Facades\Log;
 
 trait IpaymuApiOperations
 {
@@ -66,7 +67,7 @@ trait IpaymuApiOperations
         $ret = curl_exec($curl);
         curl_close($curl);
         if ($err) {
-
+            Log::error($err);
             return $err;
         } else {
             $ret = json_decode($ret, true);
@@ -76,7 +77,7 @@ trait IpaymuApiOperations
 
                 throw new IpaymuInvalidApiKeyException($msg);
             }
-
+            Log::info($ret);
             return $ret;
         }
 
