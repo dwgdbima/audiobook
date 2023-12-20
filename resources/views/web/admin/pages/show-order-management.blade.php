@@ -21,9 +21,18 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Berikut data-data order......</h4>
+                                <h4>Berikut data-data order...... </h4>
                                 <div class="card-header-form">
-                                    <form action="/admin/orders" method="GET">
+                                    <form action="/admin/orders" id="search-form" method="GET" class="d-flex">
+                                        <div class="w-50 mr-2">
+                                            <select style="height: 30px; padding:5px" name="product_select" id="product-select" class="form-control" >
+                                                 <option value="default" style="font-size: 12px">Pilih Paket</option>
+                                                @foreach ($products as $product)
+                                                    <option value="{{ $product->id }}" {{ $product->id != request('product_select') ? : 'selected' }} style="font-size: 12px">{{ $product->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
                                         <div class="input-group">
                                             <input type="text"
                                                 class="form-control"
@@ -37,6 +46,13 @@
                                 </div>
                             </div>
                             <div class="card-body p-0">
+                            
+                                @if ($soldProduct !== null)
+                                <div class="sold-product text-center">
+                                    <h5 style="color:gray">Total paket {{ request('product_select') }} terjual sebanyak {{ $soldProduct }}</h5>
+                                </div>
+                                @endif
+
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
@@ -155,5 +171,16 @@ id="orderModal{{ $orderDetail->id }}">
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('dist/admin/js/page/bootstrap-modal.js') }}"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#product-select').change(function() {
+                var selectedOption = $(this).val();
+                console.log('Nilai opsi yang dipilih: ' + selectedOption);
+                $('#search-form').submit(); // Ganti 'form-id' dengan ID formulir yang sesuai
+            });
+        });
+    </script>
 
 @endpush

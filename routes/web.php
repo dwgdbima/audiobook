@@ -1,6 +1,7 @@
 <?php
 
 use App\Contract\Service\BookServiceInterface;
+use App\Export\Excel as ExportExcel;
 use App\Http\Controllers\Customer\OrderController;
 use App\Http\Controllers\Menu\FooterController;
 use App\Http\Controllers\Menu\SidebarController;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,12 @@ Route::get('test', function(){
 Route::get('gateway-login/{email}', function($email){
     $user = User::where('email', $email)->first();
     return Auth::guard()->login($user);
+});
+
+Route::get('/testing' , function(){
+
+  
+
 });
 
 Route::post('webhook-ipaymu/', [OrderController::class, 'webhookIpaymu'])->name('webhook.ipaymu');
