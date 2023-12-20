@@ -30,7 +30,8 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
                 ->with(['book:id,title']);
             }]);
         }])
-        ->select('id' , 'user_id' , 'created_at')
+        ->select('id' , 'user_id' , 'created_at', 'status')
+        ->where('status' , 1)
         ->latest()
         ->take(5)
         ->get();
@@ -44,14 +45,15 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
     {
         $month = now()->format('m');
 
-        $lastMonth = $this->modelClass::with(['orderDetails.product'])->whereMonth('created_at' , $month - 1)->get();
-        $currentMonth = $this->modelClass::with(['orderDetails.product'])->whereMonth('created_at' , $month)->get();
+        $lastMonth = $this->modelClass::with(['orderDetails.product'])->where('status' , 1)->whereMonth('created_at' , $month - 1)->get();
+        $currentMonth = $this->modelClass::with(['orderDetails.product'])->where('status' , 1)->whereMonth('created_at' , $month)->get();
 
         return [
             'lastMonth' => $lastMonth,
             'currentMonth' => $currentMonth
         ];
     }
+    
 
     public function searchByCode(string $code)
     {

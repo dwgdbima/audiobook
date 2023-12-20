@@ -116,7 +116,9 @@
                                 </div>
                                 <div>
                                     <h3 style="margin-bottom: 0;">{{$product->name}}</h3>
-                                    <span class="text-success"><strong>@money($product->price, 'IDR', true)</strong></span> &minus; <span>{{$product->chapters->count()}} Chapter</span>
+                                    <span class="text-success"><strong>@money($product->price, 'IDR', true)</strong></span> &minus; <span>{{$product->chapters->pluck('title')->filter(function ($item) {
+                                        return strpos($item, "Chapter ") === 0;
+                                    })->count()}} Chapter</span>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">

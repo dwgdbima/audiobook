@@ -30,6 +30,10 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return $customers;
     }
 
+    public function countCustomer()
+    {
+        return $this->modelClass::role('customer')->count();
+    }
 
     public function searchByName(string $name)
     {
@@ -54,5 +58,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
         return true;
         
+    }
+
+    public function activeUser()
+    {
+        $active = $this->modelClass::role('customer')->whereHas('orders')->count();
+
+        return $active;
     }
 }

@@ -10,6 +10,7 @@ use App\Contract\Service\PayAffiliateServiceInterface;
 use App\Exceptions\Service\ServiceException;
 use App\Ipaymu\Ipaymu;
 use App\Ipaymu\IpaymuBalance;
+use App\Models\Affiliator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -112,5 +113,22 @@ class AffiliatorService extends BaseService implements AffiliatorServiceInterfac
         ]);
 
         return IpaymuBalance::getBalance($affiliator->ipaymu_va);
+    }
+
+
+    public function countAffiliator()
+    {
+        return $this->repository->getAll()->count();
+    }
+
+
+    public function getAffiliators()
+    {
+        return $this->repository->with(['user'])->getAllPaginated([] , 5);
+    }
+
+    public function searchByName(string $name)
+    {
+        return $this->repository->searchByName($name);
     }
 }

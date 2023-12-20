@@ -27,7 +27,7 @@
                                 <h4>Total User</h4>
                             </div>
                             <div class="card-body">
-                                10
+                                {{ $totalCustomer }}
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                                 <h4>Total Transaksi</h4>
                             </div>
                             <div class="card-body">
-                                42
+                                {{ $successOrder }}
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                                 <h4>Total Affiliator</h4>
                             </div>
                             <div class="card-body">
-                                1,201
+                               {{ $totalAffiliator }}
                             </div>
                         </div>
                     </div>
@@ -69,10 +69,10 @@
                         </div>
                         <div class="card-wrap">
                             <div class="card-header">
-                                <h4>User Online</h4>
+                                <h4>User Aktif</h4>
                             </div>
                             <div class="card-body">
-                                47
+                                {{ $activeUsers }}
                             </div>
                         </div>
                     </div>

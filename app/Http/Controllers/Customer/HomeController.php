@@ -23,6 +23,7 @@ class HomeController extends Controller
 
     public function index()
     {
+     
         return view('web.customer.home.index', [
             'book' => $this->bookService->findWithReviewCount(1),
             'products' => $this->productService->displayProduct(1),
