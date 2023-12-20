@@ -29,15 +29,15 @@
                         </div>
                     @enderror
                 </div>
-                <button class="btn btn-primary btn-lg w-100" type="submit">Login</button>
+                <button class="btn btn-success btn-lg w-100" style="background-color: #146c43;" type="submit">Login</button>
             </form>
         </div>
         <!-- Login Meta-->
-        <div class="login-meta-data">
+        <div class="login-meta-data" style="font-size: 14px;">
             <p class="mt-3 mb-0">Belum punya akun?<a class="mx-1"
                     href="{{ route('register') }}">daftar disini</a></p>
         </div>
-        <div class="login-meta-data">
+        <div class="login-meta-data" style="font-size: 14px;">
             <p class="mb-0"><a class="mx-1"
                     href="{{ route('password.request') }}">Lupa password?</a></p>
         </div>

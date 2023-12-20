@@ -17,11 +17,11 @@
                         </div>
                     @enderror
                 </div>
-                <button class="btn btn-warning btn-lg w-100" type="submit">Kirim link reset password</button>
+                <button class="btn btn-success btn-lg w-100" style="background-color: #146c43;" type="submit">Kirim link reset password</button>
             </form>
         </div>
         <!-- Login Meta-->
-        <div class="login-meta-data">
+        <div class="login-meta-data" style="font-size: 14px;">
             <p class="mt-3 mb-0">Balik ke halaman <a class="mx-1"
                     href="{{ route('login') }}">login</a></p>
         </div>
