@@ -84,6 +84,43 @@
       .player.playing .icon-play {
         display: none;
       }
+
+      #rssBlock{
+        left:0px;
+        width:100%;
+        overflow: hidden;
+      }
+
+      /*remove p*/
+      .cnnContents {
+        width: 70%;
+        overflow: hidden;
+        padding-top: 20px;
+        margin:0 auto;
+        font-size: 13px;
+        white-space: nowrap;
+      }
+
+      .marqueeStyle {
+        display:inline-block;
+        /* Apply animation to this element */
+        -webkit-animation: scrolling-left1 20s linear infinite;
+        animation: scrolling-left1 20s linear infinite;
+      }
+      /* scrolling-left is continuous/repeatly text */
+      @keyframes scrolling-left1 {
+          0% {transform: translateX(100%);
+              -webkit-transform: translateX(100%);}
+            100% {transform: translateX(-100%);
+                -webkit-transform: translateX(-100%);}
+      }
+
+      @-webkit-keyframes scrolling-left1 {
+          0% {-webkit-transform: translateX(100%);}
+            100% {-webkit-transform: translateX(-100%);}
+      }
+
+
     </style>
   </head>
   <body>
@@ -98,18 +135,26 @@
       <!-- Background Shape-->
       <div class="background-shape"></div>
       <div class="container">
-        <div class="container mb-5">
+        <div class="container">
           <div class="d-flex justify-content-end">
             <a style="color: #747794 !important; font-size: 13px;" href="{{route('login')}}" class="text-white">Login</a><span style="color: #747794 !important; font-size: 13px;" class="text-white mx-1">|</span><a style="color: #747794 !important; font-size: 13px;" href="{{route('login')}}" class="text-white">Affiliate</a>
           </div>
         </div>
-        <div class="intro-wrapper-2 align-items-center justify-content-center text-center mb-5">
-          <div class="container">
-            <img class="big-logo rounded" style="width: 90%;" src="{{ asset('dist/img/human/subiakto-intro-bg-black.png') }}" alt="subiakto-image">
+        <div>
+          <img src="{{asset('dist/img/icons/logobisabikinbrand.jpeg')}}" class="img-fluid" style="width:30%; width:20%; margin-left:2rem;transform:rotate(-5deg); margin-top:-15px;" alt="">
+        </div>
+        <div class="intro-wrapper-2 align-items-center justify-content-center text-center mb-3">
+          <div class="container mt-3">
+            <img class="big-logo rounded" style="width: 100%;" src="{{ asset('dist/img/human/subiakto-intro-bg-black.png') }}" alt="subiakto-image">
           </div>
         </div> 
 
         <div class="container mb-5 player" style="width: 350px; margin: auto;">
+          <div id="rssBlock">
+            <p class="cnnContents">
+                <span class="marqueeStyle">kenapa kita harus paham membuat brand</span>
+            </p>
+          </div>
           <div class="d-flex align-items-center">
             <div class="btn btn-toggle-play">
               <i class="fas fa-pause icon-pause"></i>
@@ -121,7 +166,7 @@
           <audio id="audio" src=""></audio></div> 
         <div class="container text-center">
           <a class="btn btn-success btn-lg w-100 mb-2" style="display: block; margin:auto; width: 50% !important; background-color: #146c43;" href="{{route('login')}}">Mulai Diajarin Pak Bi</a>
-          <span style="font-size: 13px;">Hanya Rp. 50rb mulai di ajarin langsung Pak Bi sepuasnya</span>  
+          <span style="font-size: 13px;">Hanya Rp.50.000,- belajar BRAND dari A-Z sampe pinter, diimana saja & kapan saja!</span>  
         </div>  
       </div>
     </div>
@@ -199,10 +244,12 @@ const app = {
 
     audio.ontimeupdate = function () {
       if (audio.duration) {
+        console.log(audio.duration)
         const progressPercent = Math.floor(
           (audio.currentTime / audio.duration) * 100
         );
         progress.value = progressPercent;
+        // console.log(progressPercent)
       }
     };
 

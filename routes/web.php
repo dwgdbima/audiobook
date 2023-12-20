@@ -49,7 +49,7 @@ Route::get('gateway-login/{email}', function($email){
 
 Route::get('/testing' , function(){
 
-  
+    return Excel::download(new ExportExcel, 'daaa.csv', \Maatwebsite\Excel\Excel::CSV);
 
 });
 
