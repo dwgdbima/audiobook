@@ -2,7 +2,8 @@
     <meta charset="utf-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, shrink-to-fit=no">
-    <meta name="description" content="Audio Book - Subiakto Priosoedarsono">
+    <meta name="description" content="Dengarkan audio book belajar membuat brand oleh Pak Bi. Dapatkan wawasan lebih luas dalam strategi branding melalui format audio yang praktis">
+    <meta name="keyword" content="belajar bikin brand, buku belajar branding, buku strategi branding, buku bisa bikin brand subiakto, buku bisa bikin brand, belajar membuat brand, belajar membangun brand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#100DD1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- The above tags *must* come first in the head, any other head content must come *after* these tags -->
     <!-- Title -->
-    <title>Audio Book - Subiakto Priosoedarsono</title>
+    <title>Pakbibaca.in: - Buku Bikin branding Terbaik</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&amp;display=swap"
