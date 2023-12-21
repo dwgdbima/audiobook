@@ -349,7 +349,7 @@
 
     //show more
       let showedChunk = {{ $chunkId }}
-      const totalChunk = {{ $chunkKey }}
+      const totalChunk = {{ isset($chunkKey) ? : 0 }}
     
     $('#load-more').on('click', async function() {
        
@@ -357,15 +357,14 @@
         if(showedChunk <= totalChunk){
             for (let i = 1; i <= showedChunk; i++) {
                 setTimeout(() => {
-                console.log(showedChunk)
-                console.log({{ $chunkKey }})
+                
                     document.querySelector('#each-review-chunk' + i).style.display = 'block';
                 }, 100);
              }
         }
         
         if(showedChunk == totalChunk){
-            console.log(showedChunk)
+            
                 console.log(totalChunk)
             document.querySelector('#load-more').style.display = 'none';
         }

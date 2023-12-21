@@ -22,9 +22,7 @@ class ReviewSeeder extends Seeder
             Review::factory()->create(['user_id' => $user->id]);
         } */
 
-        for($i = 1; $i <= 6; $i++){
-            Review::factory()->create(['user_id' => $i]);
-        }
+       
         
     }
 }
