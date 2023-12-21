@@ -159,14 +159,16 @@
                 <h6>Rating &amp; Reviews</h6>
                 <div class="rating-review-content">
                     <ul class="ps-0">
-                        @foreach ($reviews as $key => $reviewChunk)
+                    
+                        @foreach ($reviews as $chunkKey => $reviewChunk)
                         <!-- Single User Review -->
 
-                            <div class="single-user-review" id="each-review-chunk{{ $key }}" style="{{ $key == 0 ? 'display: block;' : 'display: none;' }}">
+                            <div class="single-user-review" id="each-review-chunk{{ $chunkKey }}" style="{{ $chunkKey == 0 ? 'display: block;' : 'display: none;' }}">
                                 {{-- Each chunked review --}}
 
                                 @foreach ($reviewChunk as $key => $review)
                                 <li class="single-user-review d-flex flex-column justify-content-between">
+                                
                                     {{-- Review section --}}
                                    <div class="d-flex flex-column">
                                     <div class="d-flex">
@@ -239,12 +241,14 @@
                             $eachBundles = 3;
                             $totalBundles = $currentLoopProduct
                         @endphp
-
+        
                     </ul>
                    
+                    @if ($reviews->count() > 1)
                     <div class="d-flex justify-content-center align-items-center w-100">
                         <button id="load-more" class="btn btn-secondary mt-3 w-75">Show More</button>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -345,15 +349,27 @@
 
     //show more
       let showedChunk = {{ $chunkId }}
+      const totalChunk = {{ $chunkKey }}
     
     $('#load-more').on('click', async function() {
        
         showedChunk += 1;
-        for (let i = 1; i <= showedChunk; i++) {
-           setTimeout(() => {
-            document.querySelector('#each-review-chunk' + i).style.display = 'block';
-           }, 100);
+        if(showedChunk <= totalChunk){
+            for (let i = 1; i <= showedChunk; i++) {
+                setTimeout(() => {
+                console.log(showedChunk)
+                console.log({{ $chunkKey }})
+                    document.querySelector('#each-review-chunk' + i).style.display = 'block';
+                }, 100);
+             }
         }
+        
+        if(showedChunk == totalChunk){
+            console.log(showedChunk)
+                console.log(totalChunk)
+            document.querySelector('#load-more').style.display = 'none';
+        }
+
 
         
     });
