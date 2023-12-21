@@ -124,7 +124,7 @@
                             <div class="d-flex justify-content-end">
                                 <button class="btn btn-info" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapse-{{$i}}" aria-expanded="true" aria-controls="collapse-{{$i}}">
-                                    Detail</button>
+                                    Dengarkan</button>
                                 @if (auth()->user()->hasRole('customer'))
                                 <form action="{{route('customer.carts.store')}}" method="post">
                                     @csrf
