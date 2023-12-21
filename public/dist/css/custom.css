@@ -16,3 +16,11 @@ body{
 .page-content-wrapper{
     margin-bottom: 70px;
 }
+
+.suha-footer-nav ul li a {
+    font-size: 11px;
+}
+
+.suha-footer-nav ul li a i {
+    font-size: 13px;
+}
