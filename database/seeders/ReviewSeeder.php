@@ -18,8 +18,13 @@ class ReviewSeeder extends Seeder
     public function run()
     {
         $users = User::role('customer')->get();
-        foreach($users as $user){
+        /* foreach($users as $user){
             Review::factory()->create(['user_id' => $user->id]);
+        } */
+
+        for($i = 1; $i <= 6; $i++){
+            Review::factory()->create(['user_id' => $i]);
         }
+        
     }
 }
