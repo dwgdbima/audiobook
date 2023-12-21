@@ -3,7 +3,7 @@
 @section('content')
 <div class="row justify-content-center">
     <img class="big-logo" src="{{asset('dist/img/human/subiakto-logo.png')}}" alt="" style="width: 45%;">
-    <span class="text-white px-5" style="font-size: 14px;">Saya jelaskan tentang BRAND dari A-Z. Anda tinggal mendengarkan saja di rumah atau dimana saja. Saya jelaskan secara gamblang disini, langsung daftar!</span>
+    <span class="text-white px-5" style="font-size: 14px; color:#dfe0e3 !important;">Saya jelaskan tentang BRAND dari A-Z. Anda tinggal mendengarkan saja di rumah atau dimana saja. Saya jelaskan secara gamblang disini, langsung daftar!</span>
     <div class="col-10 col-lg-8">
         <!-- Login Form-->
         <div class="register-form mt-5">
