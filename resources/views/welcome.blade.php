@@ -3,14 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, shrink-to-fit=no">
-    <meta name="description" content="Audio Book - Subiakto Priosoedarsono">
+    <meta name="description" content="Dengarkan audio book belajar membuat brand oleh Pak Bi. Dapatkan wawasan lebih luas dalam strategi branding melalui format audio yang praktis">
+    <meta name="keyword" content="belajar bikin brand, buku belajar branding, buku strategi branding, buku bisa bikin brand subiakto, buku bisa bikin brand, belajar membuat brand, belajar membangun brand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#100DD1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <!-- The above tags *must* come first in the head, any other head content must come *after* these tags -->
     <!-- Title -->
-    <title>Audio Book - Subiakto Priosoedarsono</title>
+    <title>Pakbibaca.in: - Buku Bikin branding Terbaik</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -124,6 +125,7 @@
     </style>
   </head>
   <body>
+    <h1 class="d-none">Belajar Bisa Bikin Brand</h1>
     <!-- Preloader-->
     <div class="preloader" id="preloader">
       <div class="spinner-grow text-secondary" role="status">
@@ -143,13 +145,13 @@
         <div>
           <img src="{{asset('dist/img/icons/logobisabikinbrand.jpeg')}}" class="img-fluid" style="width:30%; width:20%; margin-left:2rem;transform:rotate(-5deg); margin-top:-15px;" alt="">
         </div>
-        <div class="intro-wrapper-2 align-items-center justify-content-center text-center mb-3">
+        <div class="intro-wrapper-2 align-items-center justify-content-center text-center mb-1">
           <div class="container mt-3">
             <img class="big-logo rounded" style="width: 100%;" src="{{ asset('dist/img/human/subiakto-intro-bg-black.png') }}" alt="subiakto-image">
           </div>
-        </div> 
+        </div>
 
-        <div class="container mb-5 player" style="width: 350px; margin: auto;">
+        <div class="container mb-4 player" style="width: 350px; margin: auto;">
           <div id="rssBlock">
             <p class="cnnContents">
                 <span class="marqueeStyle">kenapa kita harus paham membuat brand</span>
@@ -165,8 +167,8 @@
 
           <audio id="audio" src=""></audio></div> 
         <div class="container text-center">
-          <a class="btn btn-success btn-lg w-100 mb-2" style="display: block; margin:auto; width: 50% !important; background-color: #146c43;" href="{{route('login')}}">Mulai Diajarin Pak Bi</a>
-          <span style="font-size: 13px;">Hanya Rp.50.000,- belajar BRAND dari A-Z sampe pinter, diimana saja & kapan saja!</span>  
+          <a class="btn btn-success btn-lg w-100 mb-2" style="display: block; margin:auto; width: 75% !important; background-color: #146c43;" href="{{route('login')}}">Mulai Diajarin, Mulai Dibacain</a>
+          <span style="font-size: 13px;">Mulai Rp.10.000,- belajar BRAND dari A-Z sampe pinter, dimana saja & kapan saja!</span>  
         </div>  
       </div>
     </div>

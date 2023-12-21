@@ -1366,7 +1366,7 @@ textarea:invalid {
   z-index: 1;
 }
 .register-form span {
-  color: #ffffff;
+  color: #dfe0e3;
   font-size: 14px;
   display: block;
 }
@@ -1378,7 +1378,7 @@ textarea:invalid {
   left: 0;
   font-size: 16px;
   margin-bottom: 0;
-  color: #ffffff;
+  color: #dfe0e3;
   top: 28px;
 }
 .register-form .form-control {
