@@ -9,7 +9,7 @@ const dynamicCacheName = 'runtimecache-v3.0.1';
 
 // Pre Caching Assets
 const precacheAssets = [
-    '/',
+    // '/',
     'img/core-img/logo-small.png',
     'img/core-img/logo-white.png',
     'img/bg-img/no-internet.png',

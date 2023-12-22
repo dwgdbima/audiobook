@@ -34,13 +34,17 @@
         @include('web.customer.layout.sidebar')
     </div>
     <!-- PWA Install Alert -->
-    <div class="toast pwa-install-alert shadow bg-white" role="alert" aria-live="assertive" aria-atomic="true"
-        data-bs-delay="5000" data-bs-autohide="true">
+    <div class="toast pwa-install-alert shadow bg-white d-none" id="pwa-install-alert" role="alert" aria-live="assertive" aria-atomic="true"
+        data-bs-delay="10000" data-bs-autohide="true">
         <div class="toast-body">
             <div class="content d-flex align-items-center mb-2"><img src="{{asset('dist/img/icons/icon-72x72.png')}}" alt="">
                 <h6 class="mb-0">Tambahkan ke layar utama</h6>
                 <button class="btn-close ms-auto" type="button" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div><span class="mb-0 d-block">Tambahkan Subiakto Audio Book ke halaman utaman ponsel anda. klik tombol <strong class="mx-1">Tambahkan ke layar utama</strong> di pengaturan.</span>
+            </div>
+            <span class="mb-0 d-block">Tambahkan Subiakto Audio Book ke halaman utaman ponsel anda. klik tombol <strong class="mx-1">Tambahkan ke layar utama</strong> di pengaturan.</span>
+            <div style="text-align: end;">
+                <button class="btn btn-primary" id="installPWA">install</button>
+            </div>
         </div>
     </div>
     @yield('content')
