@@ -13,7 +13,8 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
 Route::controller(DashboardController::class)->group(function() {
     Route::get('/' , 'index')->name('dashboard');
     Route::get('/users' , 'showUsers')->name('show.users');
-    Route::get('/orders' , 'showOrders')->name('show.orders');
+    Route::get('/orders/paid' , 'showOrdersPaid')->name('show.orders.paid');
+    Route::get('/orders/unpaid' , 'showOrdersUnpaid')->name('show.orders.unpaid');
     Route::get('/books' , 'showBooks')->name('show.books');
     Route::get('/affiliate' , 'showAffiliate')->name('show.affiliate');
     Route::post('/comment' , 'storeComment')->middleware('one_user_one_review')->name('admin.comment');
@@ -24,6 +25,8 @@ Route::controller(DashboardController::class)->group(function() {
 Route::controller(ExportController::class)->group(function(){
     Route::get('/user/export' , 'exportUser')->name('user.export');
     Route::get('/affiliate/export' , 'exportAffiliate')->name('affiliate.export');
+    Route::get('/order/export' , 'exportOrder')->name('order.export');
+    Route::get('/order-product/export' , 'exportOrderProduct')->name('order.product.export');
 });
 
 Route::controller(ProfileController::class)->group(function() {

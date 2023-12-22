@@ -9,22 +9,31 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 {
     protected $modelClass = \App\Models\Order::class;
 
-    public function getAllOrders()
+    public function getAllOrders(int $status = 1, bool $withPaginate = true)
     {
-        $orders = $this->modelClass::with(['user' , 'orderDetails.product.book'])
-        ->latest()
-        ->paginate(5)
-        ->withQueryString();
+        $query = $this->modelClass::with(['user' , 'orderDetails.product.book'])
+        ->where('status' , $status)
+        ->latest();
+       
+        if($withPaginate){
+           $orders = $query
+            ->paginate(5)
+            ->withQueryString();
+        }else{
+            $orders = $query
+                ->get();
+        }
 
         return $orders;
 
     }
 
-    public function getSpecifiecOrderProduct(int $productId)
+    public function getSpecifiecOrderProduct(int $productId, int $status = 1, bool $withPaginate = true)
     {
         $orders = $this->modelClass::with(['user' , 'orderDetails.product.book'])->whereHas('orderDetails' , function($details) use($productId){
             $details->where('product_id' , $productId);
           })
+          ->where('status' , $status)
           ->latest()
         ->paginate(5)
         ->withQueryString();
@@ -68,7 +77,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
     }
     
 
-    public function searchByCode(string $code, $withProduct = null)
+    public function searchByCode(string $code, $withProduct = null, int $status = 1)
     {
         $query = $this->modelClass::with(['user' , 'orderDetails.product.book']);
 
@@ -77,10 +86,12 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
                 $details->where('product_id' , $withProduct);
             })
             ->where('code' , 'like' , '%' . $code . '%')
+            ->where('status' , $status)
             ->paginate(5)
             ->withQueryString(); 
         }else{
             $orders = $query ->where('code' , 'like' , '%' . $code . '%')
+            ->where('status' , $status)
             ->paginate(5)
             ->withQueryString();
         }
@@ -104,5 +115,12 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         $orders = $this->getQuery()->where('user_id', $user_id)->where('status', 0)->orWhere('status', 1)->get();
 
         return $orders;
+    }
+
+    public function countSoldProduct(int $productId, int $status = 1)
+    {
+        return $this->modelClass::with(['orderDetails'])->whereHas('orderDetails' ,  function($details) use($productId){
+            $details->where('product_id' , $productId);
+        })->where('status' , $status)->count();
     }
 }

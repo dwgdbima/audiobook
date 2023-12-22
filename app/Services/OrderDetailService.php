@@ -14,8 +14,8 @@ class OrderDetailService extends BaseService implements OrderDetailServiceInterf
         $this->repository = $orderDetailRepositoryInterface;
     }
 
-    public function countSoldProduct(int $productId)
+    public function countSoldProduct(int $productId, int $status = 1)
     {
-        return $this->repository->findMany([['product_id' , $productId]])->count();
+        return $this->repository->countSoldProduct($productId , $status);
     }
 }

@@ -16,9 +16,14 @@ class UserExport implements FromView
 
     public function view(): View
     {
-        $customers = User::role('customer')->orderBy('created_at' , 'ASC')->get();
-        return view('web.admin.export.user-export' , [
-            'customers' => $customers
-           ]);
+        $customers = User::role('customer')->with(['orders.orderDetails.product'])->orderBy('created_at' , 'ASC')->get();
+
+        foreach($customers as &$data){
+            $data['total_orders'] = $data->orders->count();
+            $data['total_reviews'] = $data->reviews->count();
+        }
+            return view('web.admin.export.user-export' , [
+                'customers' => $customers
+               ]);
     }
 }
