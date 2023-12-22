@@ -30,15 +30,15 @@ class OrderService extends BaseService implements OrderServiceInterface
         $this->userRepository = $userRepositoryInterface;
     }
 
-    public function getAllOrders()
+    public function getAllOrders(int $status = 1, bool $withPaginate = true)
     {
-        return $this->repository->getAllOrders();
+        return $this->repository->getAllOrders($status, $withPaginate);
     }
 
 
-    public function getSpecifiecOrderProduct(int $productId)
+    public function getSpecifiecOrderProduct(int $productId, int $status = 1, bool $withPaginate = true)
     {
-        return $this->repository->getSpecifiecOrderProduct($productId);
+        return $this->repository->getSpecifiecOrderProduct($productId , $status, $withPaginate);
     }
 
     public function takeFiveLatestOrder()
@@ -162,11 +162,11 @@ class OrderService extends BaseService implements OrderServiceInterface
     }
 
 
-    public function searchByCode(string $code, $withProduct = null)
+    public function searchByCode(string $code, $withProduct = null, int $status = 1)
     {
         
 
-        return $this->repository->searchByCode($code, $withProduct);
+        return $this->repository->searchByCode($code, $withProduct, $status);
     }
 
     public function makeOrder($products)
@@ -324,5 +324,10 @@ class OrderService extends BaseService implements OrderServiceInterface
     public function getUnSuccessHoursBefore()
     {
         return $this->repository->findMany([['expired', 'between', [Carbon::now()->subHours(2), Carbon::now()]], ['status', 0]]);
+    }
+
+    public function countSoldProduct(int $productId, int $status = 1)
+    {
+        return $this->repository->countSoldProduct($productId , $status);
     }
 }

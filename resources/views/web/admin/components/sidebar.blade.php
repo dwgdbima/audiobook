@@ -18,9 +18,22 @@
                 <a class="nav-link"
                     href="/admin/users"><i class="fas fa-th"></i> <span>User Management</span></a>
             </li>
-            <li class="{{ request()->is('admin/orders') ? 'active' : '' }}">
-                <a class="nav-link"
-                    href="/admin/orders"><i class="fas fa-th"></i> <span>Order Management</span></a>
+          
+            <li class="nav-item dropdown">
+                <a href="#"
+                    class="nav-link has-dropdown"
+                    data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Order Management</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ request()->is('admin/orders/paid') ? 'active' : '' }}">
+                        <a class="nav-link"
+                            href="/admin/orders/paid"><i class="fas fa-th"></i> <span>Order Paid</span></a>
+                    </li>
+                    <li class="{{ request()->is('admin/orders/unpaid') ? 'active' : '' }}">
+                        <a class="nav-link"
+                            href="/admin/orders/unpaid"><i class="fas fa-th"></i> <span>Order Unpaid</span></a>
+                    </li>
+                   
+                </ul>
             </li>
             <li class="{{ request()->is('admin/books') ? 'active' : '' }}">
                 <a class="nav-link"

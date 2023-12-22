@@ -53,8 +53,18 @@ Route::get('gateway-login/{email}', function($email){
 
 Route::get('/testing' , function(){
 
-    return Excel::download(new ExportExcel, 'daaa.csv', \Maatwebsite\Excel\Excel::CSV);
+    $orders = Order::with(['user' , 'orderDetails.product.book'])->whereHas('orderDetails' , function($details) {
+        $details->where('product_id' , 1);
+      })
+      ->where('status' , 1)
+      ->latest()
+   ->get();
 
+  
+        return view('web.admin.export.order-export-product' , [
+            'orders' => $orders
+           ]);
+    
 });
 
 Route::post('webhook-ipaymu/', [OrderController::class, 'webhookIpaymu'])->name('webhook.ipaymu');

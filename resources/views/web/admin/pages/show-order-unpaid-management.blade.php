@@ -21,15 +21,15 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Berikut data-data order lunas...... </h4>
+                                <h4>Berikut data-data order belum lunas...... </h4>
                                 <div class="card-header-form">
-                                    <form action="/admin/orders/paid" id="search-form" method="GET" class="d-flex">
-                                           
+                                    <form action="/admin/orders/unpaid" id="search-form" method="GET" class="d-flex">
                                         <div class="btn-group mr-2" role="group" aria-label="Basic example">
-                                            <a href="{{ request('product_select') && request('product_select') != 'default' ? '/admin/order-product/export?mimeType=xlsx&status=1&product=' . request('product_select') : '/admin/order/export?mimeType=xlsx&status=1' }}" class="btn btn-primary"  data-mdb-ripple-init>XLSX</a>
+                                            <a href="{{ request('product_select') && request('product_select') != 'default' ? '/admin/order-product/export?mimeType=xlsx&status=0&product=' . request('product_select') : '/admin/order/export?mimeType=xlsx&status=0' }}" class="btn btn-primary"  data-mdb-ripple-init>XLSX</a>
     
-                                            <a href="{{ request('product_select') && request('product_select') != 'default' ? '/admin/order-product/export?mimeType=csv&status=1&product=' . request('product_select') : '/admin/order/export?mimeType=csv&status=1' }}" class="btn btn-success"  data-mdb-ripple-init>CSV</a>
+                                            <a href="{{ request('product_select') && request('product_select') != 'default' ? '/admin/order-product/export?mimeType=csv&status=0&product=' . request('product_select') : '/admin/order/export?mimeType=csv&status=0' }}" class="btn btn-success"  data-mdb-ripple-init>CSV</a>
                                           </div>
+
 
                                         <div class="w-50 mr-2">
                                             <select style="height: 30px; padding:5px" name="product_select" id="product-select" class="form-control" >
@@ -56,7 +56,7 @@
                             
                                 @if ($soldProduct !== null)
                                 <div class="sold-product text-center">
-                                    <h5 style="color:gray">Total paket {{ request('product_select') }} terjual sebanyak {{ $soldProduct }}</h5>
+                                    <h5 style="color:gray">Total paket {{ request('product_select') }} belum dibayar sebanyak {{ $soldProduct }}</h5>
                                 </div>
                                 @endif
 

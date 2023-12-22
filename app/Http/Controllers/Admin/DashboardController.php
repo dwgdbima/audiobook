@@ -71,7 +71,7 @@ class DashboardController extends Controller
     }
 
 
-    public function showOrders(Request $request)
+    public function showOrdersPaid(Request $request)
     {
         $orders = $this->orderServiceInterface->getAllOrders();
         $soldProduct = null;
@@ -83,7 +83,7 @@ class DashboardController extends Controller
         if($request->product_select && is_numeric($request->product_select)){
             $orders = $this->orderServiceInterface->getSpecifiecOrderProduct($request->product_select);
 
-            $soldProduct = $this->orderDetailServiceInterface->countSoldProduct($request->product_select);
+            $soldProduct = $this->orderServiceInterface->countSoldProduct($request->product_select);
 
             if($request->ord_code){
                 $orders = $this->orderServiceInterface->searchByCode($request->ord_code, $request->product_select); 
@@ -95,6 +95,37 @@ class DashboardController extends Controller
        
         
         return view('web.admin.pages.show-order-management' , [
+            'orders' => $orders,
+            'products' => $products,
+            'soldProduct' => $soldProduct
+        ]);
+    }
+
+
+    public function showOrdersUnpaid(Request $request)
+    {
+        $orders = $this->orderServiceInterface->getAllOrders(0);
+        $soldProduct = null;
+
+        if($request->ord_code && !is_numeric($request->product_select)){
+            $orders = $this->orderServiceInterface->searchByCode($request->ord_code);
+        }
+
+        if($request->product_select && is_numeric($request->product_select)){
+            $orders = $this->orderServiceInterface->getSpecifiecOrderProduct($request->product_select, 0);
+
+            $soldProduct = $this->orderServiceInterface->countSoldProduct($request->product_select, 0);
+
+            if($request->ord_code){
+                $orders = $this->orderServiceInterface->searchByCode($request->ord_code, $request->product_select, 0); 
+            }
+        }
+
+    
+        $products = $this->productServiceInterface->getProductByBookId(1);
+       
+        
+        return view('web.admin.pages.show-order-unpaid-management' , [
             'orders' => $orders,
             'products' => $products,
             'soldProduct' => $soldProduct
