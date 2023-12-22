@@ -40,17 +40,21 @@ self.addEventListener('activate', function (event) {
 
 // Fetch Event
 self.addEventListener('fetch', function (event) {
-    event.respondWith(
-        caches.match(event.request).then(cacheRes => {
-            return cacheRes || fetch(event.request).then(response => {
-                return caches.open(dynamicCacheName).then(function (cache) {
-                    cache.put(event.request, response.clone());
-                    return response;
-                })
-            });
-        }).catch(function() {
+    if (event.request.url.includes('/login') || event.request.url.includes('/logout')) {
+        event.respondWith(fetch(event.request));
+    }else{
+        event.respondWith(
+            caches.match(event.request).then(cacheRes => {
+                return cacheRes || fetch(event.request).then(response => {
+                    return caches.open(dynamicCacheName).then(function (cache) {
+                        cache.put(event.request, response.clone());
+                        return response;
+                    })
+                });
+            }).catch(function() {
             // Fallback Page, When No Internet Connection
             return caches.match('offline.html');
-          })
-    );
+            })
+        );
+    }
 });
