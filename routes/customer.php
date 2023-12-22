@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Affiliator\AffiliatorController;
+use App\Http\Controllers\Customer\AboutController;
 use App\Http\Controllers\Customer\CartController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\Customer\OrderController;
@@ -41,6 +42,10 @@ Route::prefix('orders/')->name('orders.')->group(function(){
 
 Route::prefix('playlists/')->name('playlists.')->group(function(){
     Route::get('/{id}', [PlaylistController::class, 'show'])->name('show');
+});
+
+Route::prefix('about/')->name('about.')->group(function(){
+    Route::get('/', [AboutController::class, 'index'])->name('index');
 });
 
 Route::get('join-affiliator', [AffiliatorController::class, 'joinAffiliator'])->name('join-affiliator');

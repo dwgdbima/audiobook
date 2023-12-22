@@ -168,7 +168,10 @@
           <audio id="audio" src=""></audio></div> 
         <div class="container text-center">
           <a class="btn btn-success btn-lg w-100 mb-2" style="display: block; margin:auto; width: 75% !important; background-color: #146c43;" href="{{route('login')}}">Mulai Diajarin, Mulai Dibacain</a>
-          <span style="font-size: 13px;">Mulai Rp.10.000,- belajar BRAND dari A-Z sampe pinter, dimana saja & kapan saja!</span>  
+          <p class="mt-3" style="font-size: 13px;">Mulai Rp.10.000,- belajar BRAND dari A-Z sampe pinter, dimana saja & kapan saja!</p> 
+          <div class="login-meta-data" style="font-size: 14px;">
+            <p class="mt-3 mb-0" style="font-size: 16px;"><a class="mx-1" href="{{route('about')}}">Tentang Pak Bi</a></p>
+          </div>
         </div>  
       </div>
     </div>

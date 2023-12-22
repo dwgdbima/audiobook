@@ -45,14 +45,16 @@
       </div>
     </div>
     <!-- Login Wrapper Area-->
-    <div class="login-wrapper d-flex align-items-center justify-content-center text-center">
-      <!-- Background Shape-->
-      <div class="background-shape"></div>
-      <div class="container">
-        <div style="text-align: left;">
-          <img src="{{asset('dist/img/icons/logobisabikinbrand.jpeg')}}" class="img-fluid" style="width:30%; width:20%; margin-left:2rem;transform:rotate(-5deg); margin-top:-15px;" alt="">
+    <div class="login-wrapper">
+      <div style="text-align: left;">
+        <img src="{{asset('dist/img/icons/logobisabikinbrand.jpeg')}}" class="img-fluid" style="width:30%; width:20%; margin-left:2rem;transform:rotate(-5deg); margin-top:-15px;" alt="">
+      </div>
+      <div class="d-flex align-items-center justify-content-center text-center">
+        <!-- Background Shape-->
+        <div class="background-shape"></div>
+        <div class="container">
+          @yield('content')
         </div>
-        @yield('content')
       </div>
     </div>
     <!-- All JavaScript Files-->

@@ -3,7 +3,7 @@
         <div class="suha-footer-nav" style="height: 60px;">
             <ul class="h-100 d-flex align-items-center justify-content-between ps-0 d-flex rtl-flex-d-row-r">
                 <li><a class="{{request()->routeIs('customer.index') ? 'active' : ''}}" class="active" href="{{route('customer.index')}}"><i class="fa-solid fa-house"></i>Home</a></li>
-                {{-- <li><a class="{{request()->routeIs('customer.orders.*') ? 'active' : ''}}" href="{{route('customer.orders.index')}}"><i class="fas fa-file-invoice"></i>Transaksi</a></li> --}}
+                <li><a class="{{request()->routeIs('customer.about.*') ? 'active' : ''}}" href="{{route('customer.about.index')}}"><i class="fas fa-user"></i>Pak Bi</a></li>
                 <li><a class="{{request()->routeIs('customer.carts.*') ? 'active' : ''}}" href="{{route('customer.carts.index')}}"><i class="fa-solid fa-bag-shopping"></i>Basket</a></li>
                 <li><a class="{{request()->routeIs('customer.playlists.*') ? 'active' : ''}}" href="{{route('customer.playlists.show', 1)}}"><i class="fas fa-headphones"></i>Playlist</a></li>
                 <li><a class="{{request()->routeIs('affiliator.*') ? 'active' : ''}}" href="{{route('affiliator.index')}}"><i class="fas fa-handshake"></i>affiliator</a></li>
