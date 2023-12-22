@@ -350,7 +350,7 @@
 
     //show more
       let showedChunk = {{ $chunkId }}
-      const totalChunk = {{ isset($chunkKey) ? : 0 }}
+      const totalChunk = {{ isset($chunkKey) ? $chunkKey : 0 }}
     
     $('#load-more').on('click', async function() {
        
