@@ -44,6 +44,7 @@
         {{-- <img src="{{$book->cover}}" class="img-fluid" alt=""> --}}
         <div class="single-product-slide" style="background-image: url({{$book->cover}}); border-radius:20px;"></div>
     </div>
+
     <div class="product-description">
         <!-- Product Title & Meta Data-->
         <div class="product-title-meta-data bg-white mb-3 py-3 custom-card">

@@ -139,19 +139,23 @@
       <div class="container">
         <div class="container">
           <div class="d-flex justify-content-end">
-            <a style="color: #747794 !important; font-size: 13px;" href="{{route('login')}}" class="text-white">Login</a><span style="color: #747794 !important; font-size: 13px;" class="text-white mx-1">|</span><a style="color: #747794 !important; font-size: 13px;" href="{{route('login')}}" class="text-white">Affiliate</a>
+            <a style="color: #747794 !important; font-size: 13px;" href="{{route('about')}}" class="text-white">Tentang Pak Bi</a>
+            <span style="color: #747794 !important; font-size: 13px;" class="text-white mx-1">|</span>
+            <a style="color: #747794 !important; font-size: 13px;" href="{{route('login')}}" class="text-white">Affiliate</a>
+            <span style="color: #747794 !important; font-size: 13px;" class="text-white mx-1">|</span>
+            <a style="color: #747794 !important; font-size: 13px;" href="{{route('login')}}" class="text-white">Login</a>
           </div>
         </div>
         <div>
           <img src="{{asset('dist/img/icons/logobisabikinbrand.jpeg')}}" class="img-fluid" style="width:30%; width:20%; margin-left:2rem;transform:rotate(-5deg); margin-top:-15px;" alt="">
         </div>
-        <div class="intro-wrapper-2 align-items-center justify-content-center text-center mb-1">
+        <div class="intro-wrapper-2 align-items-center justify-content-center text-center" style="margin-bottom: 1rem;">
           <div class="container mt-3">
             <img class="big-logo rounded" style="width: 100%;" src="{{ asset('dist/img/human/subiakto-intro-bg-black.png') }}" alt="subiakto-image">
           </div>
         </div>
 
-        <div class="container mb-4 player" style="width: 350px; margin: auto;">
+        <div class="container player" style="width: 350px; margin: auto; margin-bottom: 2rem;">
           <div id="rssBlock">
             <p class="cnnContents">
                 <span class="marqueeStyle">kenapa kita harus paham membuat brand</span>
@@ -168,10 +172,7 @@
           <audio id="audio" src=""></audio></div> 
         <div class="container text-center">
           <a class="btn btn-success btn-lg w-100 mb-2" style="display: block; margin:auto; width: 75% !important; background-color: #146c43;" href="{{route('login')}}">Mulai Diajarin, Mulai Dibacain</a>
-          <p class="mt-3" style="font-size: 13px;">Mulai Rp.10.000,- belajar BRAND dari A-Z sampe pinter, dimana saja & kapan saja!</p> 
-          <div class="login-meta-data" style="font-size: 14px;">
-            <p class="mt-3 mb-0" style="font-size: 16px;"><a class="mx-1" href="{{route('about')}}">Tentang Pak Bi</a></p>
-          </div>
+          <p class="mt-3" style="font-size: 13px; margin-bottom:0px;">Mulai Rp.10.000,- belajar BRAND dari A-Z sampe pinter, dimana saja & kapan saja!</p> 
         </div>  
       </div>
     </div>
@@ -191,7 +192,7 @@
     {{-- <script src="{{asset('dist/js/pwa.js')}}"></script> --}}
     @include('sweetalert::alert')
     <script>
-      $(document).ready(function(){
+    $(document).ready(function(){
 
 const $ = document.querySelector.bind(document);
 
@@ -287,6 +288,9 @@ const app = {
 
 app.start();
 })
+    </script>
+    <script>
+
     </script>
   </body>
 </html>
